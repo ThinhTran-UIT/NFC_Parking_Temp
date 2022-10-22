@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_card"
+        android:icon="@drawable/icon_card"
+        android:title="Card" />
+    <item
+        android:id="@+id/nav_vehicle"
+        android:icon="@drawable/icon_car"
+        android:title="Vehicle" />
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/icon_history"
+        android:title="History" />
+    <item
+        android:id="@+id/nav_staff"
+        android:icon="@drawable/icon_staff"
+        android:title="Staff" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/icon_profile"
+        android:title="Profile" />
+</menu>
