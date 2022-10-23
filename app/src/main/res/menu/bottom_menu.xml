@@ -5,10 +5,7 @@
         android:id="@+id/nav_card"
         android:icon="@drawable/icon_card"
         android:title="Card" />
-    <item
-        android:id="@+id/nav_vehicle"
-        android:icon="@drawable/icon_car"
-        android:title="Vehicle" />
+
     <item
         android:id="@+id/nav_history"
         android:icon="@drawable/icon_history"

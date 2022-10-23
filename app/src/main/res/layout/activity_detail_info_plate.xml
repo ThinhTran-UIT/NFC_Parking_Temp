@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Detail_Info_Plate">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_title_detail_info_page"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/orange_main"
+            android:text="Detail Information License Plate"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:paddingTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_plateId_result"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title_detail_info_page"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="50dp"
+            android:text="77C1-08172"
+            android:textColor="@color/blue"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner2"/>
+
+        <RelativeLayout
+            android:id="@+id/rlt_layout_detail_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_plateId_result"
+            android:layout_alignParentStart="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_marginTop="83dp"
+            android:background="@drawable/rounded_corner2">
+
+            <ImageView
+                android:id="@+id/img_watch_in"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/icon_watch_green" />
+
+            <TextView
+                android:id="@+id/tv_time_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/img_watch_in"
+                android:text="Time in: 11:23"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/img_watch_out"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/img_watch_in"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/icon_watch_red" />
+
+            <TextView
+                android:id="@+id/tv_time_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time_in"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@id/img_watch_out"
+                android:text="Time out: 12:34"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/img_card"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/img_watch_out"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/icon_card_black" />
+
+            <TextView
+                android:id="@+id/tv_card_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time_out"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@id/img_card"
+                android:text="Card ID: 13658749632"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/img_badge_in"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/img_card"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/icon_badge_black" />
+
+            <TextView
+                android:id="@+id/tv_staff_confirm_getin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_card_id"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/img_badge_in"
+                android:text="Confirm Get-In: Tran Duc Thinh"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/img_badge_out"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/img_badge_in"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/icon_badge_black" />
+
+            <TextView
+                android:id="@+id/tv_staff_confirm_getout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_staff_confirm_getin"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/img_badge_out"
+                android:text="Confirm Get-Out: Tran Duc Thinh"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_below="@id/rlt_layout_detail_info"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="65dp"
+            android:text="EXIT"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/button"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/rlt_layout_detail_info"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="65dp"
+            android:text="CONFIRM"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

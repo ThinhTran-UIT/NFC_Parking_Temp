@@ -14,10 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/orange_main"
-            android:text="SCAN LICENSE PLATE"
+            android:text="Scan License PLate"
             android:textColor="@color/white"
-            android:textSize="23sp"
-            android:textAlignment="center"/>
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:paddingTop="5dp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -25,12 +26,11 @@
             android:id="@+id/camera_preview"
             android:background="@color/black"
             android:layout_below="@+id/tv_title_scan_page">
-
         </FrameLayout>
 
         <TextView
-            android:id="@+id/tv_result"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_plateId_result"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/camera_preview"
             android:layout_centerHorizontal="true"
@@ -38,33 +38,37 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:text="ABC-123"
+            android:background="@drawable/rounded_corner2"
+            android:text="77C1-08172"
             android:textSize="35sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="170dp"
-            android:layout_height="60dp"
-            android:layout_alignBottom="@+id/tv_result"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="-70dp"
-            android:layout_marginBottom="-90dp"
-            android:layout_toStartOf="@+id/tv_result"
+            android:id="@+id/btn_exit"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/tv_plateId_result"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button"
             android:text="EXIT"
             android:textSize="20sp"
-            android:background="@drawable/button"/>
+            android:textColor="@color/black"/>
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="170dp"
-            android:layout_height="60dp"
-            android:layout_alignBottom="@+id/tv_result"
-            android:layout_marginStart="-70dp"
-            android:layout_marginBottom="-90dp"
-            android:layout_toEndOf="@+id/tv_result"
+            android:id="@+id/btn_confirm"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/tv_plateId_result"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button"
             android:text="CONFIRM"
             android:textSize="20sp"
-            android:background="@drawable/button"/>
+            android:textColor="@color/black"/>
+
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,18 +16,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-    public Button button;
+    public Button buttonScan;
+    public Button buttonDetailInfo;
     BottomNavigationView bottomNavigationView;
     private RecyclerView rcvVehicle;
     private VehicleAdapter vehicleAdapter;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.btn_redirect_scan_activity);
-        button.setOnClickListener(new View.OnClickListener() {
+        //Start button redirect scan activity
+        buttonScan = (Button) findViewById(R.id.btn_redirect_scan_activity);
+        buttonScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ScanActivity.class);
@@ -36,8 +39,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Start button redirect detail in4 activity
+        buttonDetailInfo  =(Button) findViewById(R.id.btn_redirect_detail_info_activity);
+        buttonDetailInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Detail_Info_Plate.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-
+        //Bottom Navigation Bar
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HistoryFragment()).commit();
         bottomNavigationView.setSelectedItemId(R.id.nav_history);
@@ -51,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_card:
                         fragment = new CardFragment();
-                        break;
-                    case R.id.nav_vehicle:
-                        fragment = new VehicleFragment();
                         break;
                     case R.id.nav_staff:
                         fragment = new StaffFragment();
