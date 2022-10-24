@@ -7,21 +7,32 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint; //insert for button redirect
+import android.app.PendingIntent;
+import android.content.IntentFilter;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends FragmentActivity {
+    public static final String ERROR_DETECTED = "No NFC Detected";
     public Button buttonScan;
     public Button buttonDetailInfo;
     BottomNavigationView bottomNavigationView;
     private RecyclerView rcvVehicle;
     private VehicleAdapter vehicleAdapter;
+    private PendingIntent pendingIntent;
+    private IntentFilter[] writeTagFilters;
+    private NfcAdapter nfcAdapter;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,9 +50,8 @@ public class MainActivity extends FragmentActivity {
                 finish();
             }
         });
-
         //Start button redirect detail in4 activity
-        buttonDetailInfo  =(Button) findViewById(R.id.btn_redirect_detail_info_activity);
+        buttonDetailInfo = (Button) findViewById(R.id.btn_redirect_detail_info_activity);
         buttonDetailInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +60,17 @@ public class MainActivity extends FragmentActivity {
                 finish();
             }
         });
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (nfcAdapter == null) {
+            Toast.makeText(this, "NO NFC Capabilities",
+                    Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        Intent intentScan = new Intent(MainActivity.this, ScanActivity.class);
+        pendingIntent = PendingIntent.getActivity(this, 0, intentScan, PendingIntent.FLAG_IMMUTABLE);
+        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
+        writeTagFilters = new IntentFilter[]{tagDetected};
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -59,7 +80,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_history:
                         fragment = new HistoryFragment();
                         break;
@@ -77,5 +98,40 @@ public class MainActivity extends FragmentActivity {
                 return true;
             }
         });
+
+
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        assert nfcAdapter != null;
+        //nfcAdapter.enableForegroundDispatch(context,pendingIntent,
+        //                                    intentFilterArray,
+        //                                    techListsArray)
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        //Onpause stop listening
+        if (nfcAdapter != null) {
+            nfcAdapter.disableForegroundDispatch(this);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String action = intent.getAction();
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+            Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
