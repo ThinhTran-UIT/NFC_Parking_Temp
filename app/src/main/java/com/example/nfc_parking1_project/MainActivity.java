@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
     public Button buttonScan;
     public Button buttonDetailInfo;
+    public Button buttonRegisterStaff;
     BottomNavigationView bottomNavigationView;
     private RecyclerView rcvVehicle;
     private VehicleAdapter vehicleAdapter;
@@ -45,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Detail_Info_Plate.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //Start button redirect register staff
+        buttonRegisterStaff  =(Button) findViewById(R.id.btn_redirect_register_staff);
+        buttonRegisterStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterStaff.class);
                 startActivity(intent);
                 finish();
             }

@@ -26,9 +26,9 @@
             android:layout_marginBottom="10dp"
             android:layout_below="@+id/btn_add_user"
             android:background="@drawable/search_view_bg"
-            android:paddingTop="10dp"
             app:iconifiedByDefault="false"
-            app:queryHint="Search Licence Plate/Card ID" />
+            app:queryHint="Search Licence Plate/Card ID"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_staff"

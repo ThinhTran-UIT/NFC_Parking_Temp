@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scan_activity"
     tools:context=".ScanActivity">
 
     <RelativeLayout
@@ -18,23 +19,24 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:fontFamily="@font/quicksand_medium"/>
 
-        <FrameLayout
+
+        <SurfaceView
+            android:id="@+id/camerapreview"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/camera_preview"
-            android:background="@color/black"
+            android:layout_height="350dp"
             android:layout_below="@+id/tv_title_scan_page">
-        </FrameLayout>
 
+        </SurfaceView>
         <TextView
             android:id="@+id/tv_plateId_result"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/camera_preview"
+            android:layout_below="@+id/camerapreview"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
@@ -42,7 +44,8 @@
             android:text="77C1-08172"
             android:textSize="35sp"
             android:textStyle="bold"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <Button
             android:id="@+id/btn_exit"
@@ -55,7 +58,8 @@
             android:background="@drawable/button"
             android:text="EXIT"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <Button
             android:id="@+id/btn_confirm"
@@ -68,7 +72,8 @@
             android:background="@drawable/button"
             android:text="CONFIRM"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/quicksand_medium"/>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

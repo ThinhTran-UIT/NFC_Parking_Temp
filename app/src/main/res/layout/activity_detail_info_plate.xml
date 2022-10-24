@@ -19,7 +19,8 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <TextView
             android:id="@+id/tv_plateId_result"
@@ -34,7 +35,8 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/rounded_corner2"/>
+            android:background="@drawable/rounded_corner2"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <RelativeLayout
             android:id="@+id/rlt_layout_detail_info"
@@ -44,7 +46,9 @@
             android:layout_alignParentStart="true"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:layout_marginTop="83dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/rounded_corner2">
 
             <ImageView
@@ -59,11 +63,14 @@
                 android:id="@+id/tv_time_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/img_watch_in"
+                android:fontFamily="@font/quicksand_medium"
                 android:text="Time in: 11:23"
                 android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/img_watch_out"
@@ -79,11 +86,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time_in"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/img_watch_out"
                 android:text="Time out: 12:34"
                 android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:fontFamily="@font/quicksand_medium"/>
 
             <ImageView
                 android:id="@+id/img_card"
@@ -99,11 +107,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time_out"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/img_card"
                 android:text="Card ID: 13658749632"
                 android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:fontFamily="@font/quicksand_medium"/>
 
             <ImageView
                 android:id="@+id/img_badge_in"
@@ -119,11 +128,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_card_id"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:layout_toEndOf="@+id/img_badge_in"
                 android:text="Confirm Get-In: Tran Duc Thinh"
                 android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:fontFamily="@font/quicksand_medium"/>
 
             <ImageView
                 android:id="@+id/img_badge_out"
@@ -139,24 +149,26 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_staff_confirm_getin"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="11dp"
                 android:layout_toEndOf="@+id/img_badge_out"
                 android:text="Confirm Get-Out: Tran Duc Thinh"
                 android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:fontFamily="@font/quicksand_medium"/>
         </RelativeLayout>
-
+1
         <Button
             android:layout_width="150dp"
             android:layout_height="55dp"
             android:layout_below="@id/rlt_layout_detail_info"
             android:layout_alignParentStart="true"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="50dp"
             android:text="EXIT"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:background="@drawable/button"/>
+            android:background="@drawable/button"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <Button
             android:layout_width="150dp"
@@ -164,11 +176,12 @@
             android:layout_below="@+id/rlt_layout_detail_info"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="25dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="50dp"
             android:text="CONFIRM"
             android:textSize="20sp"
             android:background="@drawable/button"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/quicksand_medium"/>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
