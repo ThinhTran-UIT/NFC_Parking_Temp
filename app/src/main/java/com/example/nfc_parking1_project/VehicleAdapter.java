@@ -1,5 +1,6 @@
 package com.example.nfc_parking1_project;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -18,6 +18,11 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
     private Context mContext;
     private List<Vehicle> mListVehicle;
+
+    public VehicleAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
     @NonNull
     @Override
     public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -25,6 +30,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
         return new VehicleViewHolder(view);
     }
 
+    @SuppressLint("Data set changed")
     public void setData(List<Vehicle> list){
         this.mListVehicle = list;
         notifyDataSetChanged();
@@ -36,8 +42,6 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
         if(vehicle == null){
             return;
         }
-
-        holder.imgVehicle.setImageResource(vehicle.getResourceId());
         holder.tvCardId.setText(vehicle.getCardId());
         holder.tvPlateId.setText(vehicle.getPlateId());
     }

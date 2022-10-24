@@ -3,6 +3,7 @@ package com.example.nfc_parking1_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint; //insert for button redirect
@@ -15,7 +16,7 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
     public Button buttonScan;
     public Button buttonDetailInfo;
     BottomNavigationView bottomNavigationView;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Bottom Navigation Bar
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HistoryFragment()).commit();
         bottomNavigationView.setSelectedItemId(R.id.nav_history);
