@@ -27,6 +27,7 @@ public class MainActivity extends FragmentActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
     public Button buttonScan;
     public Button buttonDetailInfo;
+    public Button buttonRegisterStaff;
     BottomNavigationView bottomNavigationView;
     private RecyclerView rcvVehicle;
     private VehicleAdapter vehicleAdapter;
@@ -50,8 +51,9 @@ public class MainActivity extends FragmentActivity {
                 finish();
             }
         });
+
         //Start button redirect detail in4 activity
-        buttonDetailInfo = (Button) findViewById(R.id.btn_redirect_detail_info_activity);
+        buttonDetailInfo  =(Button) findViewById(R.id.btn_redirect_detail_info_activity);
         buttonDetailInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +74,18 @@ public class MainActivity extends FragmentActivity {
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[]{tagDetected};
 
+        //Start button redirect register staff
+        buttonRegisterStaff  =(Button) findViewById(R.id.btn_redirect_register_staff);
+        buttonRegisterStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterStaff.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
+        //Bottom Navigation Bar
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HistoryFragment()).commit();
         bottomNavigationView.setSelectedItemId(R.id.nav_history);
@@ -80,7 +93,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
-                switch (item.getItemId()) {
+                switch (item.getItemId()){
                     case R.id.nav_history:
                         fragment = new HistoryFragment();
                         break;
