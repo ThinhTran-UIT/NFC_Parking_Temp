@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:paddingVertical="5dp"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner2">
+
+        <ImageView
+            android:id="@+id/img_location"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon_location_green"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_card_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/img_location"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:text="Card ID: 1237498592"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand_medium"/>
+
+        <TextView
+            android:id="@+id/tv_card_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/img_location"
+            android:layout_below="@+id/tv_card_id"
+            android:layout_marginStart="0dp"
+            android:text="Report Lost at: 15/9/2022 15:09:02"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand_medium"/>
+
+        <Button
+            android:id="@+id/btn_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="Restore"
+            android:textSize="10dp"
+            android:fontFamily="@font/quicksand_medium"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

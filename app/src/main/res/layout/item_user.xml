@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:paddingVertical="5dp"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner2">
+
+        <ImageView
+            android:id="@+id/img_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_user"/>
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/img_user"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:text="Tran Duc Thinh"
+            android:fontFamily="@font/quicksand_medium"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
+
+        <ImageView
+            android:id="@+id/img_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/img_user"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/icon_phone" />
+
+        <ImageView
+            android:id="@+id/img_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_location"
+            android:layout_toEndOf="@id/img_user"
+            android:layout_below="@id/img_phone"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:id="@+id/tv_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/img_phone"
+            android:layout_below="@id/tv_username"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            android:text="0973583485"
+            android:fontFamily="@font/quicksand_medium"/>
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/img_location"
+            android:layout_below="@+id/tv_phone_number"
+            android:text="Testing Parking Lot"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="8dp"/>
+
+        <Button
+            android:id="@+id/img_edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_edit"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

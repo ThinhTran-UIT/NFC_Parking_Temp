@@ -40,6 +40,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
     public void onBindViewHolder(@NonNull VehicleViewHolder holder, int position) {
         Vehicle vehicle = mListVehicle.get(position);
         if(vehicle == null){
+            System.out.print("Car Null");
             return;
         }
         holder.tvCardId.setText(vehicle.getCardId());

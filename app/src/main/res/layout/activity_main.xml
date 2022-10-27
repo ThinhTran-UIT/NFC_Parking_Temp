@@ -12,39 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_redirect_scan_activity"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="235dp"
-            android:layout_marginEnd="35dp"
-            android:background="@drawable/icon_camera"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_redirect_detail_info_activity"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/btn_redirect_scan_activity"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="35dp"
-            android:background="@drawable/icon_info" />
-
-        <Button
-            android:id="@+id/btn_redirect_register_staff"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/btn_redirect_detail_info_activity"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/icon_add_user" />
     </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

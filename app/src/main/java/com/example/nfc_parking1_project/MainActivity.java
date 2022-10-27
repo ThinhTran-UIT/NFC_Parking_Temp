@@ -25,12 +25,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends FragmentActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
-    public Button buttonScan;
-    public Button buttonDetailInfo;
-    public Button buttonRegisterStaff;
     BottomNavigationView bottomNavigationView;
-    private RecyclerView rcvVehicle;
-    private VehicleAdapter vehicleAdapter;
     private PendingIntent pendingIntent;
     private IntentFilter[] writeTagFilters;
     private NfcAdapter nfcAdapter;
@@ -41,49 +36,17 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Start button redirect scan activity
-        buttonScan = (Button) findViewById(R.id.btn_redirect_scan_activity);
-        buttonScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ScanActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        //Start button redirect detail in4 activity
-        buttonDetailInfo  =(Button) findViewById(R.id.btn_redirect_detail_info_activity);
-        buttonDetailInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Detail_Info_Plate.class);
-                startActivity(intent);
-                finish();
-            }
-        });
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             Toast.makeText(this, "NO NFC Capabilities",
                     Toast.LENGTH_SHORT).show();
-            finish();
+            /*finish();*/
         }
         Intent intentScan = new Intent(MainActivity.this, ScanActivity.class);
         pendingIntent = PendingIntent.getActivity(this, 0, intentScan, PendingIntent.FLAG_IMMUTABLE);
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[]{tagDetected};
-
-        //Start button redirect register staff
-        buttonRegisterStaff  =(Button) findViewById(R.id.btn_redirect_register_staff);
-        buttonRegisterStaff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegisterStaff.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         //Bottom Navigation Bar
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -116,7 +79,7 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         assert nfcAdapter != null;
@@ -144,7 +107,7 @@ public class MainActivity extends FragmentActivity {
                 || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
 
 }
