@@ -4,11 +4,9 @@ public class Card {
     private String cardId;
     private String status;
 
-
     public Card(String cardId, String status) {
         this.cardId = cardId;
         this.status = status;
-        //this.resourceId = resourceId;
     }
 
     public String getCardId() {
@@ -26,12 +24,4 @@ public class Card {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    /*public int getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
-    }*/
 }

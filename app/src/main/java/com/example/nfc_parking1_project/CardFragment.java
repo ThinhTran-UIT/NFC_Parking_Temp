@@ -38,17 +38,19 @@ public class CardFragment extends Fragment {
     private List<Card> getListData()
     {
         List<Card> cardList = new ArrayList<>();
-
         cardList.add(new Card("123456789","Report Lost"));
         cardList.add(new Card("123456789","Report Lost"));
         cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
-        cardList.add(new Card("123456789","Report Lost"));
+        cardList.add(new Card("123456789","Active"));
+        cardList.add(new Card("123456789","Active"));
+        cardList.add(new Card("123456789","Active"));
+        cardList.add(new Card("123456789","Active"));
+        cardList.add(new Card("123456789","Active"));
+        cardList.add(new Card("123456789","Active"));
+        cardList.add(new Card("123456789","Available"));
+        cardList.add(new Card("123456789","Available"));
+        cardList.add(new Card("123456789","Available"));
+        cardList.add(new Card("123456789","Available"));
         return cardList;
     }
 }

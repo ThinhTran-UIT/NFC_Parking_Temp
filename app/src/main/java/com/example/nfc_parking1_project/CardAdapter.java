@@ -2,9 +2,7 @@ package com.example.nfc_parking1_project;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +26,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @NonNull
     @Override
     public CardAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vehicle, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
         return new CardAdapter.CardViewHolder(view);
     }
 
@@ -41,12 +39,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         Card card = mListCard.get(position);
         if(card == null){
-            Log.d("CARD", "onBindViewHolder: "+card.getStatus());
             return;
         }
-        //holder.imgLocation.setImageResource(card.getResourceId());
-   /*     holder.tvCardId.setText(card.getCardId());
-        holder.tvStatus.setText(card.getStatus());*/
+        if(card.getStatus().equals("Report Lost"))
+        {
+            holder.imgLocation.setImageResource(R.drawable.icon_location_red);
+        }else {
+            holder.imgLocation.setImageResource(R.drawable.icon_location_green);
+        }
+        holder.tvCardId.setText(card.getCardId());
+        holder.tvStatus.setText(card.getStatus());
     }
 
     @Override
@@ -58,14 +60,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     }
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
-       // private ImageView imgLocation;
+        private ImageView imgLocation;
         private TextView tvCardId;
         private TextView tvStatus;
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            //imgLocation = itemView.findViewById(R.id.img_location);
+            imgLocation = itemView.findViewById(R.id.img_location);
             tvCardId = itemView.findViewById(R.id.tv_card_id);
             tvStatus = itemView.findViewById(R.id.tv_card_status);
         }
