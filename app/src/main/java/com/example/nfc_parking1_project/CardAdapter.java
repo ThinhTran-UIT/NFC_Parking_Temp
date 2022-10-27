@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,11 +45,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         if(card.getStatus().equals("Report Lost"))
         {
             holder.imgLocation.setImageResource(R.drawable.icon_location_red);
+            holder.actionButton.setText("RESTORE");
         }else {
             holder.imgLocation.setImageResource(R.drawable.icon_location_green);
+            holder.actionButton.setText("REPORT LOST");
         }
         holder.tvCardId.setText(card.getCardId());
         holder.tvStatus.setText(card.getStatus());
+
     }
 
     @Override
@@ -63,12 +67,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         private ImageView imgLocation;
         private TextView tvCardId;
         private TextView tvStatus;
-
+        private Button actionButton;
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             imgLocation = itemView.findViewById(R.id.img_location);
             tvCardId = itemView.findViewById(R.id.tv_card_id);
             tvStatus = itemView.findViewById(R.id.tv_card_status);
+            actionButton = itemView.findViewById(R.id.btn_status);
         }
     }
 }

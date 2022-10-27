@@ -140,7 +140,7 @@
             android:layout_below="@+id/edt_confirm_password"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:background="@drawable/rounded_corner3"
+            android:background="@drawable/rounded_corner2"
             android:fontFamily="@font/quicksand_medium"
             android:text="Register Now" />
     </RelativeLayout>

@@ -79,7 +79,7 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
         assert nfcAdapter != null;
@@ -107,7 +107,7 @@ public class MainActivity extends FragmentActivity {
                 || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 
 
 }

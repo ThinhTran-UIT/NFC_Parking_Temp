@@ -7,8 +7,11 @@
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/drawable/icon_badge_black.xml" value="0.26" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/drawable/rounded_corner.xml" value="0.26" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/drawable/rounded_corner2.xml" value="0.26" />
+        <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/drawable/rounded_corner3.xml" value="0.191" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/activity_detail_info_plate.xml" value="0.358695652173913" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/activity_main.xml" value="0.2546875" />
+        <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/activity_register_staff.xml" value="0.284375" />
+        <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/activity_scan.xml" value="0.2290909090909091" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/fragment_card.xml" value="0.358695652173913" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/fragment_history.xml" value="0.34814814814814815" />
         <entry key="..\:/Users/tanlo/AndroidStudioProjects/NFC_Parking_Temp/app/src/main/res/layout/fragment_staff.xml" value="0.246875" />
