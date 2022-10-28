@@ -1,5 +1,6 @@
 package com.example.nfc_parking1_project;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -17,7 +18,10 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class ScanActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+    private static final int CAMERA_REQUEST_CODE = 1;
     public Button buttonExit;
     public Button buttonConfirm;
     Mat mRGBA, mRGBAT;
@@ -116,5 +120,13 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+    private void askAboutCamera(){
+
+        EasyPermissions.requestPermissions(
+                this,
+                "A partir deste ponto a permissão de câmera é necessária.",
+                CAMERA_REQUEST_CODE,
+                Manifest.permission.CAMERA );
     }
 }

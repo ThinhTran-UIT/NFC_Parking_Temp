@@ -1,9 +1,11 @@
 package com.example.nfc_parking1_project;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -25,6 +29,8 @@ public class MainActivity extends FragmentActivity {
     private PendingIntent pendingIntent;
     private IntentFilter[] writeTagFilters;
     private NfcAdapter nfcAdapter;
+    private static final int CAMERA_PERMISSION_CODE = 100;
+    private static final int STORAGE_PERMISSION_CODE = 101;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,7 +39,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         Log.d("OPENCV", "Loading OPENCV status" + OpenCVLoader.initDebug());
-
+        checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             Toast.makeText(this, "NO NFC Capabilities",
@@ -75,7 +81,44 @@ public class MainActivity extends FragmentActivity {
 
 
     }
+    public void checkPermission(String permission, int requestCode)
+    {
+        // Checking if permission is not granted
+        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] { permission }, requestCode);
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode,
+                permissions,
+                grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this, "Camera Permission Granted", Toast.LENGTH_SHORT) .show();
+            }
+            else {
+                Toast.makeText(MainActivity.this, "Camera Permission Denied", Toast.LENGTH_SHORT) .show();
+            }
+        }
+        else if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Storage Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+/*
 
     @Override
     protected void onResume() {
@@ -106,6 +149,7 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
     }
+*/
 
 
 }
