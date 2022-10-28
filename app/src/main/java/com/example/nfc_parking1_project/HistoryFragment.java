@@ -29,7 +29,7 @@ public class HistoryFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_history, null);
         rcvVehicle = (RecyclerView) root.findViewById(R.id.rcv_vehicle);
         vehicleAdapter = new VehicleAdapter(this.getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
         rcvVehicle.setLayoutManager(linearLayoutManager);
         vehicleAdapter.setData(getListData());
         rcvVehicle.setAdapter(vehicleAdapter);
@@ -37,22 +37,21 @@ public class HistoryFragment extends Fragment {
         return root;
     }
 
-    private List<Vehicle> getListData()
-    {
+    private List<Vehicle> getListData() {
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        vehicleList.add(new Vehicle("1","71B2-12312"));
-        vehicleList.add(new Vehicle("2","71B2-12312"));
-        vehicleList.add(new Vehicle("3","71B2-12312"));
-        vehicleList.add(new Vehicle("1","71B2-12312"));
-        vehicleList.add(new Vehicle("2","71B2-12312"));
-        vehicleList.add(new Vehicle("3","71B2-12312"));
-        vehicleList.add(new Vehicle("1","71B2-12312"));
-        vehicleList.add(new Vehicle("2","71B2-12312"));
-        vehicleList.add(new Vehicle("3","71B2-12312"));
-        vehicleList.add(new Vehicle("1","71B2-12312"));
-        vehicleList.add(new Vehicle("2","71B2-12312"));
-        vehicleList.add(new Vehicle("3","71B2-12312"));
+        vehicleList.add(new Vehicle("1", "71B2-12312"));
+        vehicleList.add(new Vehicle("2", "71B2-12312"));
+        vehicleList.add(new Vehicle("3", "71B2-12312"));
+        vehicleList.add(new Vehicle("1", "71B2-12312"));
+        vehicleList.add(new Vehicle("2", "71B2-12312"));
+        vehicleList.add(new Vehicle("3", "71B2-12312"));
+        vehicleList.add(new Vehicle("1", "71B2-12312"));
+        vehicleList.add(new Vehicle("2", "71B2-12312"));
+        vehicleList.add(new Vehicle("3", "71B2-12312"));
+        vehicleList.add(new Vehicle("1", "71B2-12312"));
+        vehicleList.add(new Vehicle("2", "71B2-12312"));
+        vehicleList.add(new Vehicle("3", "71B2-12312"));
 
         return vehicleList;
     }

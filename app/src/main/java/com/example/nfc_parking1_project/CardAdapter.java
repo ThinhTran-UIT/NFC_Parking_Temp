@@ -2,7 +2,6 @@ package com.example.nfc_parking1_project;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -32,21 +30,21 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     }
 
     @SuppressLint("Data set changed")
-    public void setData(List<Card> list){
+    public void setData(List<Card> list) {
         this.mListCard = list;
         notifyDataSetChanged();
     }
+
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         Card card = mListCard.get(position);
-        if(card == null){
+        if (card == null) {
             return;
         }
-        if(card.getStatus().equals("Report Lost"))
-        {
+        if (card.getStatus().equals("Report Lost")) {
             holder.imgLocation.setImageResource(R.drawable.icon_location_red);
             holder.actionButton.setText("RESTORE");
-        }else {
+        } else {
             holder.imgLocation.setImageResource(R.drawable.icon_location_green);
             holder.actionButton.setText("REPORT LOST");
         }
@@ -57,7 +55,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public int getItemCount() {
-        if (mListCard != null){
+        if (mListCard != null) {
             return mListCard.size();
         }
         return 0;
@@ -68,6 +66,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         private TextView tvCardId;
         private TextView tvStatus;
         private Button actionButton;
+
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             imgLocation = itemView.findViewById(R.id.img_location);

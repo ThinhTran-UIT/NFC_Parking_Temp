@@ -11,10 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.List;
 
-public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder>{
+public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleViewHolder> {
 
     private Context mContext;
     private List<Vehicle> mListVehicle;
@@ -31,7 +30,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
     }
 
     @SuppressLint("Data set changed")
-    public void setData(List<Vehicle> list){
+    public void setData(List<Vehicle> list) {
         this.mListVehicle = list;
         notifyDataSetChanged();
     }
@@ -39,7 +38,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
     @Override
     public void onBindViewHolder(@NonNull VehicleViewHolder holder, int position) {
         Vehicle vehicle = mListVehicle.get(position);
-        if(vehicle == null){
+        if (vehicle == null) {
             System.out.print("Car Null");
             return;
         }
@@ -49,17 +48,18 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
     @Override
     public int getItemCount() {
-        if (mListVehicle != null){
+        if (mListVehicle != null) {
             return mListVehicle.size();
         }
         return 0;
     }
 
-    public class VehicleViewHolder extends RecyclerView.ViewHolder{
+    public class VehicleViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgVehicle;
         private TextView tvCardId;
         private TextView tvPlateId;
+
         public VehicleViewHolder(@NonNull View itemView) {
             super(itemView);
 

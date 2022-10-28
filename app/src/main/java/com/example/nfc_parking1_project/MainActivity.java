@@ -1,27 +1,23 @@
 package com.example.nfc_parking1_project;
 
+import android.annotation.SuppressLint;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.NfcAdapter;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint; //insert for button redirect
-import android.app.PendingIntent;
-import android.content.IntentFilter;
-import android.nfc.NdefMessage;
-import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.content.Intent;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import org.opencv.android.OpenCVLoader;
 
 public class MainActivity extends FragmentActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
@@ -35,6 +31,8 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.d("OPENCV", "Loading OPENCV status" + OpenCVLoader.initDebug());
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
@@ -56,7 +54,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_history:
                         fragment = new HistoryFragment();
                         break;

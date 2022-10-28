@@ -1,17 +1,18 @@
 package com.example.nfc_parking1_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Detail_Info_Plate extends AppCompatActivity {
 
     public Button buttonExit;
     public Button buttonConfirm;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class Detail_Info_Plate extends AppCompatActivity {
         setContentView(R.layout.activity_detail_info_plate);
 
         //Start button Exit
-        buttonExit  =(Button) findViewById(R.id.btn_exit);
+        buttonExit = (Button) findViewById(R.id.btn_exit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,7 +31,7 @@ public class Detail_Info_Plate extends AppCompatActivity {
         });
 
         //Start button Confirm
-        buttonConfirm  =(Button) findViewById(R.id.btn_confirm);
+        buttonConfirm = (Button) findViewById(R.id.btn_confirm);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

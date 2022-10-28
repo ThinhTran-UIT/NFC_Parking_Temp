@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,17 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_title_detail_info_page"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/orange_main"
-            android:text="Detail Information License Plate"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:fontFamily="@font/quicksand_medium"
             android:paddingTop="5dp"
-            android:fontFamily="@font/quicksand_medium"/>
+            android:text="Detail Information License Plate"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_plateId_result"
@@ -30,13 +30,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="96dp"
             android:layout_marginTop="50dp"
+            android:background="@drawable/rounded_corner2"
+            android:fontFamily="@font/quicksand_medium"
+            android:gravity="center"
             android:text="77C1-08172"
             android:textColor="@color/blue"
             android:textSize="40sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:background="@drawable/rounded_corner2"
-            android:fontFamily="@font/quicksand_medium"/>
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:id="@+id/rlt_layout_detail_info"
@@ -44,12 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_plateId_result"
             android:layout_alignParentStart="true"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:layout_marginTop="65dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="65dp"
             android:layout_marginRight="5dp"
-            android:background="@drawable/rounded_corner2">
+            android:background="@drawable/rounded_corner2"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
 
             <ImageView
                 android:id="@+id/img_watch_in"
@@ -88,10 +88,10 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/img_watch_out"
+                android:fontFamily="@font/quicksand_medium"
                 android:text="Time out: 12:34"
                 android:textColor="@color/blue"
-                android:textSize="17sp"
-                android:fontFamily="@font/quicksand_medium"/>
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/img_card"
@@ -109,10 +109,10 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/img_card"
+                android:fontFamily="@font/quicksand_medium"
                 android:text="Card ID: 13658749632"
                 android:textColor="@color/blue"
-                android:textSize="17sp"
-                android:fontFamily="@font/quicksand_medium"/>
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/img_badge_in"
@@ -130,10 +130,10 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="12dp"
                 android:layout_toEndOf="@+id/img_badge_in"
+                android:fontFamily="@font/quicksand_medium"
                 android:text="Confirm Get-In: Tran Duc Thinh"
                 android:textColor="@color/blue"
-                android:textSize="17sp"
-                android:fontFamily="@font/quicksand_medium"/>
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/img_badge_out"
@@ -151,12 +151,13 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="11dp"
                 android:layout_toEndOf="@+id/img_badge_out"
+                android:fontFamily="@font/quicksand_medium"
                 android:text="Confirm Get-Out: Tran Duc Thinh"
                 android:textColor="@color/blue"
-                android:textSize="17sp"
-                android:fontFamily="@font/quicksand_medium"/>
+                android:textSize="17sp" />
         </RelativeLayout>
-1
+        1
+
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="150dp"
@@ -165,11 +166,11 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
-            android:text="EXIT"
-            android:textSize="20sp"
-            android:textColor="@color/black"
             android:background="@drawable/button"
-            android:fontFamily="@font/quicksand_medium"/>
+            android:fontFamily="@font/quicksand_medium"
+            android:text="EXIT"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_confirm"
@@ -177,13 +178,13 @@
             android:layout_height="55dp"
             android:layout_below="@+id/rlt_layout_detail_info"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="25dp"
             android:layout_marginTop="50dp"
-            android:text="CONFIRM"
-            android:textSize="20sp"
+            android:layout_marginEnd="25dp"
             android:background="@drawable/button"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="CONFIRM"
             android:textColor="@color/black"
-            android:fontFamily="@font/quicksand_medium"/>
+            android:textSize="20sp" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

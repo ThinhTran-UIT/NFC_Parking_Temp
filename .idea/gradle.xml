@@ -10,6 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/OpenCV" />
+            <option value="$PROJECT_DIR$/OpenCV460" />
+            <option value="$PROJECT_DIR$/OpenCVLibrary460" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

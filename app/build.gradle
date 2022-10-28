@@ -12,7 +12,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        applicationId "opencv.org"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -27,8 +27,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 def work_version = "2.7.0"
 dependencies {
+    implementation 'com.quickbirdstudios:opencv-contrib:4.5.0'
     //implementation "androidx.work:work-runtime:$work_version"
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

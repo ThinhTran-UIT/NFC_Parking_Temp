@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "NFC_Parking1_Project"
 include ':app'
+include ':OpenCVLibrary460'
+include ':OpenCV'
+include ':OpenCV460'
+include ':OpenCV460'
