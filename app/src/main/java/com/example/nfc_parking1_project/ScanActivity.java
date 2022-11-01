@@ -6,19 +6,7 @@ import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.JavaCameraView;
-import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class ScanActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -129,4 +117,5 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
                 CAMERA_REQUEST_CODE,
                 Manifest.permission.CAMERA );
     }
+
 }

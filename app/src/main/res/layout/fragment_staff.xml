@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StaffFragment">
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="72dp">
 
         <Button
             android:id="@+id/btn_add_user"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/icon_add_user" />
+            android:background="@drawable/icon_add_user"
+            android:backgroundTint="@color/orange_main"
+            android:layout_marginStart="10dp"/>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
@@ -36,7 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/searchView"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:padding="5dp"/>
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

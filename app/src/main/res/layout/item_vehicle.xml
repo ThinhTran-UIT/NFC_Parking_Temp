@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:paddingVertical="5dp"
-    app:cardCornerRadius="15dp">
+    app:cardCornerRadius="20dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:background="@drawable/bg_recyclerview_vehicle">
+        android:background="@drawable/rounded_corner2">
 
         <ImageView
             android:id="@+id/img_vehicle"
@@ -73,8 +73,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="170dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="61dp"
-
             android:layout_toEndOf="@+id/img_vehicle"
             android:fontFamily="@font/quicksand_medium"
             android:text="1325202"

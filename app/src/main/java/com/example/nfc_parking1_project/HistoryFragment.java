@@ -29,7 +29,7 @@ public class HistoryFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_history, null);
         rcvVehicle = (RecyclerView) root.findViewById(R.id.rcv_vehicle);
         vehicleAdapter = new VehicleAdapter(this.getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),RecyclerView.VERTICAL,false);
         rcvVehicle.setLayoutManager(linearLayoutManager);
         vehicleAdapter.setData(getListData());
         rcvVehicle.setAdapter(vehicleAdapter);
@@ -37,21 +37,22 @@ public class HistoryFragment extends Fragment {
         return root;
     }
 
-    private List<Vehicle> getListData() {
+    private List<Vehicle> getListData()
+    {
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        vehicleList.add(new Vehicle("1", "71B2-12312"));
-        vehicleList.add(new Vehicle("2", "71B2-12312"));
-        vehicleList.add(new Vehicle("3", "71B2-12312"));
-        vehicleList.add(new Vehicle("1", "71B2-12312"));
-        vehicleList.add(new Vehicle("2", "71B2-12312"));
-        vehicleList.add(new Vehicle("3", "71B2-12312"));
-        vehicleList.add(new Vehicle("1", "71B2-12312"));
-        vehicleList.add(new Vehicle("2", "71B2-12312"));
-        vehicleList.add(new Vehicle("3", "71B2-12312"));
-        vehicleList.add(new Vehicle("1", "71B2-12312"));
-        vehicleList.add(new Vehicle("2", "71B2-12312"));
-        vehicleList.add(new Vehicle("3", "71B2-12312"));
+        vehicleList.add(new Vehicle("134245234","71B2-12312"));
+        vehicleList.add(new Vehicle("212423433","71B2-12312"));
+        vehicleList.add(new Vehicle("235345633","71B2-12312"));
+        vehicleList.add(new Vehicle("142354654","71B2-12312"));
+        vehicleList.add(new Vehicle("223454363","71B2-12312"));
+        vehicleList.add(new Vehicle("323453215","71B2-12312"));
+        vehicleList.add(new Vehicle("114235362","71B2-12312"));
+        vehicleList.add(new Vehicle("223534621","71B2-12312"));
+        vehicleList.add(new Vehicle("324235672","71B2-12312"));
+        vehicleList.add(new Vehicle("123534625","71B2-12312"));
+        vehicleList.add(new Vehicle("242354563","71B2-12312"));
+        vehicleList.add(new Vehicle("323453643","71B2-12312"));
 
         return vehicleList;
     }

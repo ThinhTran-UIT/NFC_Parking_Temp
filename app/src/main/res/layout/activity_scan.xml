@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scan_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scan_activity"
     tools:context=".ScanActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:id="@+id/tv_title_scan_page"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/orange_main"
-            android:fontFamily="@font/quicksand_medium"
-            android:paddingTop="5dp"
             android:text="Scan License PLate"
-            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:paddingTop="5dp"
+            android:fontFamily="@font/quicksand_medium"/>
 
 
         <org.opencv.android.JavaCameraView
             android:id="@+id/camerapreview"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_below="@+id/tv_title_scan_page"></org.opencv.android.JavaCameraView>
-
+            android:layout_below="@+id/tv_title_scan_page"
+            android:layout_marginTop="-3dp" />
         <TextView
             android:id="@+id/tv_plateId_result"
             android:layout_width="250dp"
@@ -68,10 +68,10 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/button"
-            android:fontFamily="@font/quicksand_medium"
             android:text="CONFIRM"
+            android:textSize="20sp"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:fontFamily="@font/quicksand_medium"/>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
