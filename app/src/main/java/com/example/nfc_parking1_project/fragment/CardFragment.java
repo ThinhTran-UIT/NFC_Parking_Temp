@@ -55,7 +55,6 @@ public class CardFragment extends Fragment {
                 cardAdapter.setData(cardList);
                 cardNumber.setText(String.format("Number of parking card: %s",cardAdapter.getItemCount()));
                 rcvCard.setAdapter(cardAdapter);
-
            }
            @Override
            public void onFailure(Call<List<Card>> call, Throwable t) {
