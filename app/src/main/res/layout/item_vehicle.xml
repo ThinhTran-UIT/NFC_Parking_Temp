@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:paddingVertical="5dp"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:background="@drawable/rounded_corner2">
+        android:background="@drawable/rounded_corner3">
 
         <ImageView
             android:id="@+id/img_vehicle"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="170dp"
+            android:layout_marginStart="160dp"
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/img_vehicle"
             android:fontFamily="@font/quicksand_medium"
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="170dp"
+            android:layout_marginStart="160dp"
             android:layout_marginBottom="13dp"
             android:layout_toEndOf="@+id/img_vehicle"
             android:fontFamily="@font/quicksand_medium"

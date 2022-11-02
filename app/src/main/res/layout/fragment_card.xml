@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_bg">
     tools:context=".fragment.CardFragment">
 
     <RelativeLayout
@@ -16,20 +17,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textColor="@color/orange_main"
+            android:text="Number of parking card: 50"
+            android:textColor="@color/primary_color"
             android:textSize="15dp"
             android:textStyle="bold"
             android:fontFamily="@font/quicksand_medium"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"/>
 
-        <ImageView
-            android:id="@+id/img_filter"
+        <Button
+            android:id="@+id/img_add_card"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/icon_filter" />
+            android:src="@drawable/icon_filter"
+            android:background="@drawable/icon_add_card"
+            android:backgroundTint="@color/blue"/>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"

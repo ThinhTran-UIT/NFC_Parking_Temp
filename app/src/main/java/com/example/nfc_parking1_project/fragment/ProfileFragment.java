@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Button btnScan = view.findViewById(R.id.btn_redirect_scan_activity);
+        /*Button btnScan = view.findViewById(R.id.btn_redirect_scan_activity);
         Button btnDetail = view.findViewById(R.id.btn_redirect_detail_info_activity);
 
         mainActivity = (MainActivity) getActivity();
@@ -47,6 +47,8 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        return view;*/
+
         return view;
     }
 

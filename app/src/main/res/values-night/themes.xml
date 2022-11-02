@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.NFC_Parking1_Project" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange_main</item>
-        <item name="colorPrimaryVariant">@color/orange_main</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_color</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/orange_main</item>
-        <item name="colorSecondaryVariant">@color/orange_main</item>
+        <item name="colorSecondary">@color/primary_color</item>
+        <item name="colorSecondaryVariant">@color/primary_color</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
