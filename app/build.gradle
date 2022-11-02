@@ -31,7 +31,7 @@ android {
 
 def work_version = "2.7.0"
 dependencies {
-    implementation 'com.quickbirdstudios:opencv-contrib:4.5.0'
+    implementation 'com.quickbirdstudios:opencv-contrib:3.4.15'
     //implementation "androidx.work:work-runtime:$work_version"
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
@@ -45,7 +45,5 @@ dependencies {
     // For developers using AndroidX in their applications
     implementation 'pub.devrel:easypermissions:3.0.0'
 
-    // For developers using the Android Support Library
-    implementation 'pub.devrel:easypermissions:2.0.1'
 
 }

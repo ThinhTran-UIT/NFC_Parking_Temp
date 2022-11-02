@@ -8,8 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.android.JavaCameraView;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class ScanActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final int CAMERA_REQUEST_CODE = 1;
+    private CameraBridgeViewBase cameraBridgeViewBase;
     public Button buttonExit;
     public Button buttonConfirm;
     Mat mRGBA, mRGBAT;
@@ -46,6 +58,7 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
         camera2View.setVisibility(SurfaceView.VISIBLE);
         camera2View.setCvCameraViewListener(ScanActivity.this);
 
+
         //Start button Confirm
         buttonConfirm = (Button) findViewById(R.id.btn_confirm);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
@@ -63,11 +76,9 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
         mRGBA = new Mat(height, width, CvType.CV_8UC4);
 
     }
-
     @Override
     public void onCameraViewStopped() {
         mRGBA.release();
-
     }
 
     @Override
