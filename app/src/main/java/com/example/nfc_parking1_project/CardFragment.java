@@ -1,9 +1,11 @@
 package com.example.nfc_parking1_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardFragment extends Fragment {
-
+    AddCardActivity addCardActivity;
+    MainActivity mainActivity;
     private RecyclerView rcvCard;
     private CardAdapter cardAdapter;
 
@@ -22,17 +25,28 @@ public class CardFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_card, null);
-        rcvCard = (RecyclerView) root.findViewById(R.id.rcv_card);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_card, null);
+
+        //Button Register user(staff)
+        Button btnAddCard = view.findViewById(R.id.img_add_card);
+        mainActivity = (MainActivity)getActivity();
+        btnAddCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddCardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        rcvCard = (RecyclerView) view.findViewById(R.id.rcv_card);
         cardAdapter = new CardAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
         rcvCard.setLayoutManager(linearLayoutManager);
         cardAdapter.setData(getListData());
         rcvCard.setAdapter(cardAdapter);
-        return root;
+        return view;
     }
 
     private List<Card> getListData() {

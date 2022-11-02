@@ -5,12 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     android:paddingVertical="5dp"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner2">
+        android:background="@drawable/rounded_corner3">
 
         <ImageView
             android:id="@+id/img_location"

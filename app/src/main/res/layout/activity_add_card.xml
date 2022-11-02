@@ -4,46 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scan_activity"
-    tools:context=".ScanActivity">
-
+    tools:context=".AddCardActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
-            android:id="@+id/tv_title_scan_page"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/primary_color"
-            android:text="Scan License PLate"
-            android:textColor="@color/white"
+            android:id="@+id/tv_title_add_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Touch to add new card"
             android:textSize="20sp"
-            android:textAlignment="center"
-            android:paddingTop="5dp"
-            android:fontFamily="@font/quicksand_medium"/>
+            android:textColor="@color/black"
+            android:textStyle="italic"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"/>
 
-
-        <org.opencv.android.JavaCameraView
-            android:id="@+id/camerapreview"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/tv_title_scan_page"
-            android:layout_marginTop="-3dp" />
+        <ImageView
+            android:id="@+id/img_add_card"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/img_add_card"
+            android:gravity="center"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tv_title_add_card"/>
 
         <TextView
-            android:id="@+id/tv_plateId_result"
+            android:id="@+id/tv_cardId_result"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/camerapreview"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:layout_below="@+id/img_add_card"
             android:background="@drawable/rounded_corner3"
             android:fontFamily="@font/quicksand_medium"
             android:gravity="center"
-            android:text="77C1-08172"
+            android:text=""
             android:textSize="35sp"
             android:textStyle="bold" />
 
@@ -51,7 +53,7 @@
             android:id="@+id/btn_exit"
             android:layout_width="150dp"
             android:layout_height="55dp"
-            android:layout_below="@+id/tv_plateId_result"
+            android:layout_below="@+id/tv_cardId_result"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
@@ -64,7 +66,7 @@
             android:id="@+id/btn_confirm"
             android:layout_width="150dp"
             android:layout_height="55dp"
-            android:layout_below="@+id/tv_plateId_result"
+            android:layout_below="@+id/tv_cardId_result"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
@@ -73,6 +75,6 @@
             android:textSize="20sp"
             android:textColor="@color/black"
             android:fontFamily="@font/quicksand_medium"/>
-
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
