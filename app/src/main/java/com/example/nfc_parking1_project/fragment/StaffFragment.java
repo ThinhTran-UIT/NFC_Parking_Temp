@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nfc_parking1_project.activity.MainActivity;
+import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.activity.RegisterStaff;
+import com.example.nfc_parking1_project.model.User;
+import com.example.nfc_parking1_project.adapter.UserAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

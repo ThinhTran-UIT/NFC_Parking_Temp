@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Detail_Info_Plate">
+    tools:context=".activity.Detail_Info_Plate">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -156,7 +156,6 @@
                 android:textColor="@color/blue"
                 android:textSize="17sp" />
         </RelativeLayout>
-        1
 
         <Button
             android:id="@+id/btn_exit"

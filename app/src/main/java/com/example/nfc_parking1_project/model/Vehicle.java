@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.model;
 
 public class Vehicle {
 

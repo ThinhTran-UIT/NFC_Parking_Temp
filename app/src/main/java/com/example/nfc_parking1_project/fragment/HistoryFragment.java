@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.model.Vehicle;
+import com.example.nfc_parking1_project.adapter.VehicleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

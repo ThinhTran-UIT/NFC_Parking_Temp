@@ -1,8 +1,10 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.nfc_parking1_project.R;
 
 public class RegisterStaff extends AppCompatActivity {
 

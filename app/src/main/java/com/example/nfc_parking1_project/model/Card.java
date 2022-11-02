@@ -1,19 +1,23 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.model;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Card {
-    private String cardId;
+    @SerializedName("CardID")
+    private int cardId;
+    @SerializedName("CardStatus")
     private String status;
 
-    public Card(String cardId, String status) {
+    public Card(int cardId, String status) {
         this.cardId = cardId;
         this.status = status;
     }
 
-    public String getCardId() {
+    public int getCardId() {
         return cardId;
     }
 
-    public void setCardId(String cardId) {
+    public void setCardId(int cardId) {
         this.cardId = cardId;
     }
 

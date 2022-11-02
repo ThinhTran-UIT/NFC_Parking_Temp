@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.nfc_parking1_project.R;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;

@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.nfc_parking1_project.activity.Detail_Info_Plate;
+import com.example.nfc_parking1_project.activity.MainActivity;
+import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.activity.ScanActivity;
 
 
 public class ProfileFragment extends Fragment {

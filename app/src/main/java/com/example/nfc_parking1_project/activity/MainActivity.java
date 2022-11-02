@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -18,6 +18,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.fragment.CardFragment;
+import com.example.nfc_parking1_project.fragment.HistoryFragment;
+import com.example.nfc_parking1_project.fragment.ProfileFragment;
+import com.example.nfc_parking1_project.fragment.StaffFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -118,7 +123,6 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
-/*
 
     @Override
     protected void onResume() {
@@ -149,7 +153,6 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
     }
-*/
 
 
 }

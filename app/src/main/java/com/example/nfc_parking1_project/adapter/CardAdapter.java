@@ -1,4 +1,4 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nfc_parking1_project.model.Card;
+import com.example.nfc_parking1_project.R;
 
 import java.util.List;
 
@@ -41,14 +44,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         if (card == null) {
             return;
         }
-        if (card.getStatus().equals("Report Lost")) {
+        if (card.getStatus().equals("AVAILABLE")) {
             holder.imgLocation.setImageResource(R.drawable.icon_location_red);
-            holder.actionButton.setText("RESTORE");
+            holder.actionButton.setText("REPORT LOST");
         } else {
             holder.imgLocation.setImageResource(R.drawable.icon_location_green);
-            holder.actionButton.setText("REPORT LOST");
+            holder.actionButton.setText("RESTORE");
         }
-        holder.tvCardId.setText(card.getCardId());
+        holder.tvCardId.setText(String.valueOf(card.getCardId()));
         holder.tvStatus.setText(card.getStatus());
 
     }
