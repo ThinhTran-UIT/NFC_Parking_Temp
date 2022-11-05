@@ -40,7 +40,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_corner3"
+            android:background="@drawable/rounded_corner2"
             android:fontFamily="@font/quicksand_medium"
             android:gravity="center"
             android:text="77C1-08172"
@@ -55,8 +55,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/button"
             android:text="EXIT"
+            android:background="@color/white"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -68,7 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_bg"
             android:text="CONFIRM"
             android:textSize="20sp"
             android:textColor="@color/black"

@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCardActivity">
+    tools:context=".AddCardActivity"
+    android:background="@drawable/main_bg">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tv_title_add_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,17 +21,17 @@
             android:gravity="center"
             android:layout_marginTop="40dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"/>-->
 
         <ImageView
             android:id="@+id/img_add_card"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
             android:src="@drawable/img_add_card"
             android:gravity="center"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tv_title_add_card"/>
+            />
 
         <TextView
             android:id="@+id/tv_cardId_result"
@@ -42,7 +43,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:layout_below="@+id/img_add_card"
-            android:background="@drawable/rounded_corner3"
+            android:background="@drawable/rounded_corner_cardview"
             android:fontFamily="@font/quicksand_medium"
             android:gravity="center"
             android:text=""
@@ -57,9 +58,9 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_bg"
             android:text="EXIT"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <Button
@@ -70,10 +71,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_bg"
             android:text="CONFIRM"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="@font/quicksand_medium"/>
     </RelativeLayout>
 

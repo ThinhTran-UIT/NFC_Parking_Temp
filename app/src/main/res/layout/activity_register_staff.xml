@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_bg"
+    android:background="@drawable/main_bg"
     tools:context=".RegisterStaff">
 
     <ScrollView
@@ -34,7 +34,7 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Create new account"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/white"
                 android:textSize="50dp"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Full name"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/white"
                 android:textSize="17dp" />
 
             <EditText
@@ -60,7 +60,7 @@
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corner3"
+                android:background="@drawable/rounded_corner_cardview"
                 android:padding="10dp" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Phone Number"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/white"
                 android:textSize="17dp" />
 
             <EditText
@@ -85,7 +85,8 @@
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corner3" />
+                android:background="@drawable/rounded_corner_cardview"
+                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/tv_password"
@@ -97,7 +98,7 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Password"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/white"
                 android:textSize="17dp" />
 
             <EditText
@@ -109,7 +110,8 @@
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corner3" />
+                android:background="@drawable/rounded_corner_cardview"
+                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/tv_confirm_password"
@@ -121,7 +123,7 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Confirm Password"
-                android:textColor="@color/primary_color"
+                android:textColor="@color/white"
                 android:textSize="17dp" />
 
             <EditText
@@ -133,7 +135,8 @@
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/rounded_corner3" />
+                android:background="@drawable/rounded_corner_cardview"
+                android:padding="10dp"/>
 
             <Button
                 android:id="@+id/btn_register"
@@ -142,6 +145,7 @@
                 android:layout_below="@+id/edt_confirm_password"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
+                android:paddingBottom="2dp"
                 android:background="@drawable/rounded_corner2"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Register Now" />

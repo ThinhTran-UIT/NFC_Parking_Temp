@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner3">
+        android:background="@drawable/rounded_corner_cardview">
 
         <ImageView
             android:id="@+id/img_user"
@@ -74,11 +74,11 @@
 
         <Button
             android:id="@+id/img_edit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/icon_edit" />
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/img_icon_edit" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
