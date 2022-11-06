@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@drawable/main_bg">
     tools:context=".activity.Detail_Info_Plate">
 
     <RelativeLayout
@@ -48,7 +48,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="65dp"
             android:layout_marginRight="5dp"
-            android:background="@drawable/rounded_corner2"
+            android:background="@drawable/white_corner_background"
             android:paddingTop="20dp"
             android:paddingBottom="20dp">
 
@@ -70,7 +70,7 @@
                 android:layout_toEndOf="@id/img_watch_in"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Time in: 11:23"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="17sp" />
 
             <ImageView
@@ -91,7 +91,7 @@
                 android:layout_toEndOf="@id/img_watch_out"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Time out: 12:34"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="17sp" />
 
             <ImageView
@@ -112,7 +112,7 @@
                 android:layout_toEndOf="@id/img_card"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Card ID: 13658749632"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="17sp" />
 
             <ImageView
@@ -133,7 +133,7 @@
                 android:layout_toEndOf="@+id/img_badge_in"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Confirm Get-In: Tran Duc Thinh"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="17sp" />
 
             <ImageView
@@ -154,10 +154,15 @@
                 android:layout_toEndOf="@+id/img_badge_out"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Confirm Get-Out: Tran Duc Thinh"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textSize="17sp" />
         </RelativeLayout>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </androidx.cardview.widget.CardView>
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="150dp"
@@ -166,7 +171,6 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/button"
             android:fontFamily="@font/quicksand_medium"
             android:text="EXIT"
             android:textColor="@color/white"
@@ -180,7 +184,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="25dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_bg"
             android:fontFamily="@font/quicksand_medium"
             android:text="CONFIRM"
             android:textColor="@color/white"

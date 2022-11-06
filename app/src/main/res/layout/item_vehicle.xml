@@ -6,11 +6,10 @@
     android:layout_margin="5dp"
     android:paddingVertical="5dp"
     app:cardCornerRadius="10dp">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:background="@drawable/rounded_corner3">
+        android:background="@drawable/rounded_corner_cardview">
 
         <ImageView
             android:id="@+id/img_vehicle"

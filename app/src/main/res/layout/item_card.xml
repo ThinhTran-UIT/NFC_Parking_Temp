@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner3">
+        android:background="@drawable/rounded_corner_cardview">
 
         <ImageView
             android:id="@+id/img_location"
@@ -53,7 +53,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/button"
+            android:background="@drawable/button_bg_red"
             android:text="Restore"
             android:textSize="10dp"
             android:fontFamily="@font/quicksand_medium"/>

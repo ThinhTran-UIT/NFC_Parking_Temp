@@ -108,9 +108,9 @@ public class MainActivity extends FragmentActivity {
         if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[] { permission }, requestCode);
         }
-        else {
+        /*else {
             Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override
@@ -168,4 +168,5 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
