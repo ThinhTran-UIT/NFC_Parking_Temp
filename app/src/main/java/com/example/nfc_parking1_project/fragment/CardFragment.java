@@ -1,9 +1,11 @@
 package com.example.nfc_parking1_project.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nfc_parking1_project.activity.AddCardActivity;
+import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.api.CardAPI;
 import com.example.nfc_parking1_project.model.Card;
 import com.example.nfc_parking1_project.R;
@@ -28,6 +32,7 @@ public class CardFragment extends Fragment {
     private RecyclerView rcvCard;
     private CardAdapter cardAdapter;
     private List<Card> cardList;
+    MainActivity mainActivity;
     private TextView cardNumber;
     public CardFragment() {
         // Required empty public constructor
@@ -36,8 +41,17 @@ public class CardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        cardList = new ArrayList<>();
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_card, null);
+        cardList = new ArrayList<>();
+        Button btnAddCard = root.findViewById(R.id.btn_add_card);
+        mainActivity = (MainActivity)getActivity();
+        btnAddCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddCardActivity.class);
+                startActivity(intent);
+            }
+        });
         rcvCard = (RecyclerView) root.findViewById(R.id.rcv_card);
         cardAdapter = new CardAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);

@@ -6,7 +6,11 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,16 +27,21 @@ import com.example.nfc_parking1_project.fragment.CardFragment;
 import com.example.nfc_parking1_project.fragment.HistoryFragment;
 import com.example.nfc_parking1_project.fragment.ProfileFragment;
 import com.example.nfc_parking1_project.fragment.StaffFragment;
+import com.example.nfc_parking1_project.helper.ConvertCardID;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import org.opencv.android.OpenCVLoader;
+
+import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends FragmentActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
     BottomNavigationView bottomNavigationView;
     private PendingIntent pendingIntent;
     private IntentFilter[] writeTagFilters;
+    private Intent intentScan;
+    private String cardId;
     private NfcAdapter nfcAdapter;
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
@@ -42,7 +51,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // Check opencv
         Log.d("OPENCV", "Loading OPENCV status" + OpenCVLoader.initDebug());
         checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -51,11 +60,13 @@ public class MainActivity extends FragmentActivity {
                     Toast.LENGTH_SHORT).show();
             /*finish();*/
         }
-        Intent intentScan = new Intent(MainActivity.this, ScanActivity.class);
+        intentScan = new Intent(MainActivity.this, ScanActivity.class);
+        setCardToExtra(intentScan);
         pendingIntent = PendingIntent.getActivity(this, 0, intentScan, PendingIntent.FLAG_IMMUTABLE);
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
         writeTagFilters = new IntentFilter[]{tagDetected};
+        /*onNewIntent(getIntent());*/
 
         //Bottom Navigation Bar
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -86,6 +97,11 @@ public class MainActivity extends FragmentActivity {
 
 
     }
+
+    private void setCardToExtra(Intent intentScan) {
+
+    }
+
     public void checkPermission(String permission, int requestCode)
     {
         // Checking if permission is not granted
@@ -141,7 +157,6 @@ public class MainActivity extends FragmentActivity {
             nfcAdapter.disableForegroundDispatch(this);
         }
     }
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -153,6 +168,4 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }

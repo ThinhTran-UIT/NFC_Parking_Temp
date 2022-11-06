@@ -1,8 +1,10 @@
-package com.example.nfc_parking1_project;
+package com.example.nfc_parking1_project.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.nfc_parking1_project.R;
 
 public class LoginActivity extends AppCompatActivity {
 
