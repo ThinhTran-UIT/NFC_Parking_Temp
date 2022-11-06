@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_cardId_result"
-            android:layout_width="250dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="30dp"
@@ -50,26 +50,40 @@
             android:textSize="35sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_card_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Warning: Card Already Exist!!!"
+            android:textColor="#EED202"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand_medium"
+            android:layout_below="@+id/tv_cardId_result"
+            android:textAlignment="center"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"/>
+
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="150dp"
             android:layout_height="55dp"
-            android:layout_below="@+id/tv_cardId_result"
+            android:layout_below="@+id/tv_card_status"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_bg"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_exit_bg"
             android:text="EXIT"
-            android:textColor="@color/white"
+            android:textColor="@color/blue"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="150dp"
             android:layout_height="55dp"
-            android:layout_below="@+id/tv_cardId_result"
+            android:layout_below="@+id/tv_card_status"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/button_bg"
             android:text="CONFIRM"
