@@ -1,6 +1,7 @@
 package com.example.nfc_parking1_project.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -23,24 +24,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.api.CardAPI;
+import com.example.nfc_parking1_project.api.MessageResponse;
 import com.example.nfc_parking1_project.helper.ConvertCardID;
+import com.example.nfc_parking1_project.model.Card;
 
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddCardActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
     private Button buttonExit;
     private Button buttonConfirm;
+    private TextView cardStatus;
     private IntentFilter[] writeTagFilters;
     private PendingIntent pendingIntent;
     private TextView idCard;
     private NfcAdapter nfcAdapter;
     Tag NfcTag;
-    Context context;
+    Context context = AddCardActivity.this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
         idCard = (TextView) findViewById(R.id.tv_cardId_result);
+        cardStatus = (TextView) findViewById(R.id.tv_card_status);
         //Start button Exit
         buttonExit = (Button) findViewById(R.id.btn_exit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
@@ -73,12 +83,39 @@ public class AddCardActivity extends AppCompatActivity implements NfcAdapter.Rea
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddCardActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                Card card = new Card();
+                card.setCardId(idCard.getText().toString());
+                callApiCreateCard(card);
             }
         });
 
+    }
+    private void callApiCreateCard(Card card) {
+        CardAPI.cardApi.createCard(card).enqueue(new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if(response.code()==200)
+                {
+                    MessageResponse messageResponse = response.body();
+                    if(messageResponse.getSuccess())
+                    {
+                        cardStatus.setText("Create card successfully!");
+                        int cardStatusColor = ResourcesCompat.getColor(getApplicationContext().getResources(),R.color.green,null);
+                        cardStatus.setTextColor(cardStatusColor);
+                    }
+                }
+                else {
+                    cardStatus.setText("Card is exist!");
+                    int cardStatusColor = ResourcesCompat.getColor(getApplicationContext().getResources(),R.color.red,null);
+                    cardStatus.setTextColor(cardStatusColor);
+                }
+
+            }
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

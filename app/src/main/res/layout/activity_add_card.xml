@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
     tools:context=".activity.AddCardActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,7 +54,6 @@
             android:id="@+id/tv_card_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Warning: Card Already Exist!!!"
             android:textColor="#EED202"
             android:textSize="18sp"
             android:textStyle="bold"
