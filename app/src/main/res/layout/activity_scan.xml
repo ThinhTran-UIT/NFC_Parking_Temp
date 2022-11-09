@@ -7,72 +7,107 @@
     android:id="@+id/scan_activity"
     tools:context=".activity.ScanActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <TextView
             android:id="@+id/tv_title_scan_page"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:background="@color/primary_color"
+            android:fontFamily="@font/quicksand_medium"
+            android:paddingTop="2dp"
             android:text="Scan License PLate"
-            android:textColor="@color/white"
-            android:textSize="20sp"
             android:textAlignment="center"
-            android:paddingTop="5dp"
-            android:fontFamily="@font/quicksand_medium"/>
-
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <org.opencv.android.JavaCameraView
-            android:id="@+id/camerapreview"
+            android:id="@+id/camera_preview"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/tv_title_scan_page"
-            android:layout_marginTop="-3dp" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"/>
 
-        <TextView
-            android:id="@+id/tv_plateId_result"
-            android:layout_width="250dp"
+        <RelativeLayout
+            android:layout_width="330dp"
+            android:layout_height="480dp"
+            android:background="@color/grey"
+            android:alpha="0.2"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_scan_page">
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="330dp"
+            android:layout_height="480dp"
+            android:src="@drawable/camera_focus"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_scan_page"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:alpha="0.6"
+            android:background="@color/grey"
+            app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
+            tools:ignore="MissingConstraints">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/camerapreview"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/rounded_corner2"
-            android:fontFamily="@font/quicksand_medium"
-            android:gravity="center"
-            android:text="77C1-08172"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
+            tools:ignore="MissingConstraints"
+            android:paddingBottom="30dp">
+                <TextView
+                    android:id="@+id/tv_plateId_result"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_corner2"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:gravity="center"
+                    android:text="77C1-08172"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_exit"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_below="@+id/tv_plateId_result"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="EXIT"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+                <Button
+                    android:id="@+id/btn_exit"
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    android:layout_below="@+id/tv_plateId_result"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_exit_bg"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="EXIT"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/btn_confirm"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_below="@+id/tv_plateId_result"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/button_bg"
-            android:text="CONFIRM"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/quicksand_medium"/>
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    android:layout_below="@+id/tv_plateId_result"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/button_confirm_bg"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="CONFIRM"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

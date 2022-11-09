@@ -54,7 +54,6 @@
             android:id="@+id/tv_card_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Warning: Card Already Exist!!!"
             android:textColor="#EED202"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -74,7 +73,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button_exit_bg"
             android:text="EXIT"
-            android:textColor="@color/blue"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <Button
@@ -85,7 +84,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/button_bg"
+            android:background="@drawable/button_confirm_bg"
             android:text="CONFIRM"
             android:textSize="20sp"
             android:textColor="@color/white"

@@ -19,6 +19,7 @@ import com.example.nfc_parking1_project.api.CardAPI;
 import com.example.nfc_parking1_project.model.Card;
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.adapter.CardAdapter;
+import com.example.nfc_parking1_project.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +76,14 @@ public class CardFragment extends Fragment {
                 Toast.makeText(getContext(),"Can not get card",Toast.LENGTH_SHORT).show();
            }
        });
+    }
+
+    private List<Card> getListData() {
+        List<Card> cardList = new ArrayList<>();
+
+        cardList.add(new Card(12423412, "Active"));
+        cardList.add(new Card(12432511, "Available"));
+
+        return cardList;
     }
 }

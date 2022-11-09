@@ -168,5 +168,4 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

@@ -8,38 +8,6 @@
     android:background="@color/blue_bg"
     tools:context=".fragment.ProfileFragment">
 
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_redirect_scan_activity"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="235dp"
-            android:layout_marginEnd="35dp"
-            android:background="@drawable/icon_camera"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_redirect_detail_info_activity"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/btn_redirect_scan_activity"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="35dp"
-            android:background="@drawable/icon_info" />
-
-    </RelativeLayout>
--->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -103,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Testing Shop Staff"
+                        android:text="mistake2000@gmail.com.vn"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="italic"
@@ -300,24 +268,24 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/tv_phone_number"
+                                android:id="@+id/tv_email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/quicksand_medium"
-                                android:text="Phone Number:"
+                                android:text="Email:"
                                 android:textColor="@color/blue"
                                 android:textSize="18sp"
                                 android:layout_marginEnd="3dp"/>
 
 
                             <TextView
-                                android:id="@+id/tv_display_phone_number"
+                                android:id="@+id/tv_display_email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/quicksand_medium"
-                                android:text="+84973583485"
+                                android:text="mistake2000@gmail.com.vn"
                                 android:textAlignment="viewEnd"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
@@ -402,6 +370,8 @@
                                 android:layout_marginEnd="3dp"/>
 
                         </LinearLayout>
+
+
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
