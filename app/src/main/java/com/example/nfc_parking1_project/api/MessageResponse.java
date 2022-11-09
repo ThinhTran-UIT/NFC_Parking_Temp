@@ -1,7 +1,8 @@
 package com.example.nfc_parking1_project.api;
 
-public class Response {
+public class MessageResponse {
     private Boolean success;
+
     private String message;
 
     public Boolean getSuccess() {

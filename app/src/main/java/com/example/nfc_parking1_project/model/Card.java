@@ -4,20 +4,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class Card {
     @SerializedName("CardID")
-    private int cardId;
+    private String cardId;
     @SerializedName("CardStatus")
     private String status;
-
-    public Card(int cardId, String status) {
+    public Card(){};
+    public Card(String cardId, String status) {
         this.cardId = cardId;
         this.status = status;
     }
 
-    public int getCardId() {
+    public String getCardId() {
         return cardId;
     }
 
-    public void setCardId(int cardId) {
+    public void setCardId(String cardId) {
         this.cardId = cardId;
     }
 
