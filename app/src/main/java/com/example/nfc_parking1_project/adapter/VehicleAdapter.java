@@ -1,12 +1,19 @@
 package com.example.nfc_parking1_project.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +28,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
 
     private Context mContext;
     private List<Vehicle> mListVehicle;
+    Dialog vehicleDialog;
 
     public VehicleAdapter(Context mContext) {
         this.mContext = mContext;
@@ -30,7 +38,22 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
     @Override
     public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vehicle, parent, false);
-        return new VehicleViewHolder(view);
+        final VehicleViewHolder vehicleViewHolder = new VehicleViewHolder(view);
+
+        vehicleDialog = new Dialog(mContext);
+        vehicleDialog.setContentView(R.layout.dialog_history_detail);
+        vehicleDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        vehicleViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView tvCardId = (TextView) vehicleDialog.findViewById(R.id.tv_card_id);
+
+                vehicleDialog.show();
+            }
+        });
+
+        return vehicleViewHolder;
     }
 
     @SuppressLint("Data set changed")

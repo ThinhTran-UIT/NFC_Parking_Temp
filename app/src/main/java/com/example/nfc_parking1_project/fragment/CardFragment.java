@@ -58,7 +58,10 @@ public class CardFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
         rcvCard.setLayoutManager(linearLayoutManager);
         cardNumber = root.findViewById(R.id.tv_number_parking_card);
-        callApiGetCard();
+        cardAdapter.setData(getListData());
+        cardNumber.setText(String.format("Number of parking card: %s",cardAdapter.getItemCount()));
+        rcvCard.setAdapter(cardAdapter);
+        //callApiGetCard();
         return root;
     }
 
@@ -81,8 +84,8 @@ public class CardFragment extends Fragment {
     private List<Card> getListData() {
         List<Card> cardList = new ArrayList<>();
 
-        cardList.add(new Card(12423412, "Active"));
-        cardList.add(new Card(12432511, "Available"));
+        cardList.add(new Card("12423412", "Active"));
+        cardList.add(new Card("12432511", "Available"));
 
         return cardList;
     }

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:paddingVertical="5dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    android:id="@+id/item_vehicle">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"

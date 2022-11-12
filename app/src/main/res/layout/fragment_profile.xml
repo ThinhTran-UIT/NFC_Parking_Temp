@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="mistake2000@gmail.com.vn"
+                        android:text="Testing staff shop"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="italic"
@@ -88,7 +88,6 @@
                         android:layout_marginBottom="12dp"
                         android:background="@drawable/white_corner_background"
                         android:elevation="3dp"
-
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -116,13 +115,12 @@
                                     android:layout_gravity="center_horizontal"
                                     android:layout_margin="5dp">
 
-                                    <ImageView
-                                        android:id="@+id/img_edit"
+                                    <Button
+                                        android:id="@+id/btn_edit"
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
-                                        android:background="@drawable/circle_background"
+                                        android:background="@drawable/img_icon_edit"
                                         android:padding="7dp"
-                                        android:src="@drawable/img_icon_edit"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -156,13 +154,12 @@
                                     android:layout_gravity="center_horizontal"
                                     android:layout_margin="5dp">
 
-                                    <ImageView
-                                        android:id="@+id/img_logout"
+                                    <Button
+                                        android:id="@+id/btn_logout"
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
-                                        android:background="@drawable/circle_background"
+                                        android:background="@drawable/icon_logout"
                                         android:padding="7dp"
-                                        android:src="@drawable/icon_logout"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -197,12 +194,11 @@
                                     android:layout_margin="5dp">
 
                                     <ImageView
-                                        android:id="@+id/img_notify"
+                                        android:id="@+id/btn_notify"
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
-                                        android:background="@drawable/circle_background"
+                                        android:background="@drawable/icon_notify"
                                         android:padding="5dp"
-                                        android:src="@drawable/icon_notify"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -273,11 +269,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/quicksand_medium"
-                                android:text="Email:"
+                                android:text="Phone Number:"
                                 android:textColor="@color/blue"
                                 android:textSize="18sp"
                                 android:layout_marginEnd="3dp"/>
-
 
                             <TextView
                                 android:id="@+id/tv_display_email"
@@ -285,7 +280,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/quicksand_medium"
-                                android:text="mistake2000@gmail.com.vn"
+                                android:text="+84973583485"
                                 android:textAlignment="viewEnd"
                                 android:textSize="18sp"
                                 android:textStyle="bold"

@@ -2,15 +2,19 @@ package com.example.nfc_parking1_project.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.activity.MainActivity;
+import com.example.nfc_parking1_project.activity.RegisterStaff;
 import com.example.nfc_parking1_project.model.User;
 
 import java.util.List;
@@ -19,6 +23,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     private Context mContext;
     private List<User> mListUser;
+    MainActivity mainActivity;
 
     public UserAdapter(Context mContext) {
         this.mContext = mContext;
@@ -62,12 +67,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         private TextView tvUsername;
         private TextView tvPhoneNumber;
         private TextView tvShopName;
+        private Button btnEdit;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvPhoneNumber = itemView.findViewById(R.id.tv_phone_number);
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
+
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
+
+
     }
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
+    tools:ignore="ExtraText">
     tools:context=".activity.Detail_Info_Plate">
 
     <RelativeLayout
@@ -158,11 +159,6 @@
                 android:textSize="17sp" />
         </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </androidx.cardview.widget.CardView>
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="150dp"
@@ -172,6 +168,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/quicksand_medium"
+            android:background="@drawable/button_exit_bg"
             android:text="EXIT"
             android:textColor="@color/white"
             android:textSize="20sp" />
