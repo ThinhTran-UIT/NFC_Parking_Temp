@@ -3,8 +3,15 @@ package com.example.nfc_parking1_project.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
@@ -18,15 +25,21 @@ import com.example.nfc_parking1_project.R;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
+import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.label.Category;
+import org.tensorflow.lite.task.vision.detector.Detection;
+import org.tensorflow.lite.task.vision.detector.ObjectDetector;
 
-import pub.devrel.easypermissions.EasyPermissions;
+import java.io.IOException;
+import java.util.List;
 
 public class ScanActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
@@ -34,11 +47,11 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
     public Button buttonConfirm;
 
     private static final String TAG="MainActivity";
-
+    private SurfaceHolder surfaceHolder;
     private Mat mRgba;
     private Mat mGray;
     private CameraBridgeViewBase mOpenCvCameraView;
-
+    private static final String LICENSE = "License";
     private BaseLoaderCallback mLoaderCallback =new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -80,6 +93,7 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
         setContentView(R.layout.activity_scan);
 
         mOpenCvCameraView=(CameraBridgeViewBase) findViewById(R.id.camera_preview);
+        surfaceHolder = mOpenCvCameraView.getHolder();
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         //Start button Exit
@@ -149,9 +163,94 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
         mRgba=inputFrame.rgba();
         mGray=inputFrame.gray();
 
-        return mRgba;
+        Mat result = new Mat();
+        try {
+            result = detection(mRgba);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
 
     }
 
+
+    public Mat detection(Mat inputMat) throws IOException {
+        ObjectDetector.ObjectDetectorOptions options = ObjectDetector.ObjectDetectorOptions
+                .builder()
+                .setMaxResults(1)
+                .setScoreThreshold(0.7f)
+                .build();
+        ObjectDetector detector = ObjectDetector.createFromFileAndOptions(this,"newmodel.tflite",options);
+        Log.d("Load model:","Model Detected");
+        Bitmap imgBitMap = null;
+        imgBitMap = Bitmap.createBitmap(inputMat.width(),inputMat.height(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(inputMat,imgBitMap);
+        TensorImage imgToDetect = TensorImage.fromBitmap(imgBitMap);
+        List<Detection> result = detector.detect(imgToDetect);
+        Log.d("Result Length:",String.valueOf(result.size()));
+        debugPrint(result);
+//        Bitmap resultBitmap = drawDetectionResult(imgBitMap,result);
+//        Log.d("Height:",String.valueOf(resultBitmap.getHeight()));
+//        Log.d("Width:",String.valueOf(resultBitmap.getWidth()));
+        if(result.size()>0)
+        {
+            Detection detection = result.get(0);
+            RectF box = detection.getBoundingBox();
+            Imgproc.rectangle(inputMat,new Point(box.left,box.top),new Point(box.right,box.bottom),new Scalar(0, 255, 0, 255),2);
+        }
+
+        detector.close();
+        return inputMat;
+    }
+    public static void debugPrint(List<Detection> results)
+    {
+        for (Detection d: results) {
+            RectF a = d.getBoundingBox();
+            Log.d(TAG,"Detected object:");
+            Log.d(TAG," bouding box:"+ "( "+a.left+ ","+ a.top+"),("+a.right+","+a.bottom+")");
+
+            List<Category> categories = d.getCategories();
+            for (Category c:categories) {
+                Log.d(TAG,"Detect Label "+c.getLabel());
+                Log.d(TAG,"Detect Score "+c.getScore());
+            }
+        }
+    }
+    public  Bitmap drawDetectionResult(Bitmap bitmap,List<Detection> result)
+    {
+        Bitmap outputBitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
+        Canvas canvas = new Canvas(outputBitmap);
+        canvas = surfaceHolder.lockCanvas();
+        Paint pen = new Paint();
+        pen.setTextAlign(Paint.Align.LEFT);
+        for (Detection d:result) {
+            pen.setColor(Color.RED);
+            pen.setStrokeWidth(8F);
+            pen.setStyle(Paint.Style.STROKE);
+            RectF box = d.getBoundingBox();
+            canvas.drawRect(box,pen);
+            Rect tagSize = new Rect(0,0,0,0);
+            pen.setStyle(Paint.Style.FILL_AND_STROKE);
+            pen.setColor(Color.YELLOW);
+            pen.setStrokeWidth(2F);
+            pen.setStrokeWidth(2F);
+            pen.setTextSize(96F);
+            pen.getTextBounds(LICENSE,0,LICENSE.length(),tagSize);
+            Float fontSize = pen.getTextSize()* box.width()/tagSize.width();
+            if(fontSize<pen.getTextSize())
+            {
+                pen.setTextSize(fontSize);
+            }
+            float margin = (box.width()-tagSize.width())/2.0F;
+            if(margin<0F)
+            {
+                margin = 0F;
+            }
+            canvas.drawText(
+                    LICENSE,box.left+margin,box.top+tagSize.height()*1F,pen);
+            surfaceHolder.unlockCanvasAndPost(canvas);
+        }
+        return outputBitmap;
+    }
 
 }

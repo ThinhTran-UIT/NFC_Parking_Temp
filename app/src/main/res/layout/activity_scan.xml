@@ -21,6 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <org.opencv.android.JavaCameraView
+            android:orientation="horizontal"
             android:id="@+id/camera_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
