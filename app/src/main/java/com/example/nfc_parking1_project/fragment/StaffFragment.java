@@ -13,10 +13,11 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nfc_parking1_project.kotlin.ScanActivityKotlin;
 import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.activity.RegisterStaff;
-import com.example.nfc_parking1_project.activity.ScanActivity;
+
 import com.example.nfc_parking1_project.model.User;
 import com.example.nfc_parking1_project.adapter.UserAdapter;
 
@@ -55,7 +56,7 @@ public class StaffFragment extends Fragment {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ScanActivity.class);
+                Intent intent = new Intent(getActivity(), ScanActivityKotlin.class);
                 startActivity(intent);
             }
         });

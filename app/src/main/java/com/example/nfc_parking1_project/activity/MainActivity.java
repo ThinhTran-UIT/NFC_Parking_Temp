@@ -6,11 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,18 +18,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.nfc_parking1_project.kotlin.ScanActivityKotlin;
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.fragment.CardFragment;
 import com.example.nfc_parking1_project.fragment.HistoryFragment;
 import com.example.nfc_parking1_project.fragment.ProfileFragment;
 import com.example.nfc_parking1_project.fragment.StaffFragment;
-import com.example.nfc_parking1_project.helper.ConvertCardID;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import org.opencv.android.OpenCVLoader;
-
-import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends FragmentActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
@@ -60,7 +54,7 @@ public class MainActivity extends FragmentActivity {
                     Toast.LENGTH_SHORT).show();
             /*finish();*/
         }
-        intentScan = new Intent(MainActivity.this, ScanActivity.class);
+        intentScan = new Intent(MainActivity.this, ScanActivityKotlin.class);
         setCardToExtra(intentScan);
         pendingIntent = PendingIntent.getActivity(this, 0, intentScan, PendingIntent.FLAG_IMMUTABLE);
         IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);

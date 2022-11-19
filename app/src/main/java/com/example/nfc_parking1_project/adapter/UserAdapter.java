@@ -75,12 +75,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             tvPhoneNumber = itemView.findViewById(R.id.tv_phone_number);
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
 
-            btnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+//            btnEdit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                }
+//            });
         }
 
 

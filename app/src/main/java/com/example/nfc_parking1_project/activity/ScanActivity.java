@@ -17,22 +17,23 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageProxy;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.example.nfc_parking1_project.R;
+import com.example.nfc_parking1_project.helper.OverlayView;
+import com.google.common.util.concurrent.ListenableFuture;
 
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.task.vision.detector.Detection;
@@ -40,36 +41,23 @@ import org.tensorflow.lite.task.vision.detector.ObjectDetector;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
-public class ScanActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+public abstract class ScanActivity extends AppCompatActivity implements ImageAnalysis.Analyzer{
 
+    private ListenableFuture <ProcessCameraProvider> cameraProviderFuture;
+    PreviewView previewView;
     public Button buttonExit;
     public Button buttonConfirm;
-
+    private OverlayView overlayView;
     private static final String TAG="MainActivity";
+    private SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
-    private Mat mRgba;
-    private Mat mGray;
-    private CameraBridgeViewBase mOpenCvCameraView;
     private static final String LICENSE = "License";
-    private BaseLoaderCallback mLoaderCallback =new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch (status){
-                case LoaderCallbackInterface
-                        .SUCCESS:{
-                    Log.i(TAG,"OpenCv Is loaded");
-                    mOpenCvCameraView.enableView();
-                }
-                default:
-                {
-                    super.onManagerConnected(status);
 
-                }
-                break;
-            }
-        }
-    };
+
+
 
     public ScanActivity(){
         Log.i(TAG,"Instantiated new "+this.getClass());
@@ -90,12 +78,19 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
             ActivityCompat.requestPermissions(ScanActivity.this, new String[] {Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         }
 
-        setContentView(R.layout.activity_scan);
+        setContentView(R.layout.activityscan);
+        previewView = findViewById(R.id.camera_preview);
+        overlayView = new OverlayView(this);
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                startCameraX(cameraProvider);
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, getExecutor());
 
-        mOpenCvCameraView=(CameraBridgeViewBase) findViewById(R.id.camera_preview);
-        surfaceHolder = mOpenCvCameraView.getHolder();
-        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-        mOpenCvCameraView.setCvCameraViewListener(this);
         //Start button Exit
         buttonExit = (Button) findViewById(R.id.btn_exit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
@@ -119,91 +114,81 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (OpenCVLoader.initDebug()){
-            //if load success
-            Log.d(TAG,"Opencv initialization is done");
-            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
-        else{
-            //if not loaded
-            Log.d(TAG,"Opencv is not loaded. try again");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_4_0,this,mLoaderCallback);
-        }
+    Executor getExecutor() {
+        return ContextCompat.getMainExecutor(this);
+    }
+
+
+    private void startCameraX(ProcessCameraProvider cameraProvider) {
+        cameraProvider.unbindAll();
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+        Preview preview = new Preview.Builder()
+                .build();
+        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+
+        ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build();
+
+        imageAnalysis.setAnalyzer(getExecutor(), this::analyze);
+
+        //bind to lifecycle:
+        cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview,imageAnalysis);
     }
 
 
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (mOpenCvCameraView !=null){
-            mOpenCvCameraView.disableView();
-        }
-    }
-
-    public void onDestroy(){
-        super.onDestroy();
-        if(mOpenCvCameraView !=null){
-            mOpenCvCameraView.disableView();
-        }
-
-    }
-
-    public void onCameraViewStarted(int width ,int height){
-        mRgba=new Mat(height,width, CvType.CV_8UC4);
-        mGray =new Mat(height,width,CvType.CV_8UC1);
-    }
-    public void onCameraViewStopped(){
-        mRgba.release();
-    }
-    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame){
-        mRgba=inputFrame.rgba();
-        mGray=inputFrame.gray();
-
-        Mat result = new Mat();
+    public void analyze(@NonNull ImageProxy image) {
+        Log.d("TAG", "analyze: got the frame at: " + image.getImageInfo().getTimestamp());
+        final Bitmap bitmap = previewView.getBitmap();
+        bitmap.setConfig(Bitmap.Config.ARGB_8888);
         try {
-            result = detection(mRgba);
+            detection(bitmap);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
-
+        image.close();
     }
 
 
-    public Mat detection(Mat inputMat) throws IOException {
+
+    public void detection(Bitmap imgBitMap) throws IOException {
+
         ObjectDetector.ObjectDetectorOptions options = ObjectDetector.ObjectDetectorOptions
                 .builder()
                 .setMaxResults(1)
-                .setScoreThreshold(0.7f)
+                .setScoreThreshold(0.5f)
                 .build();
         ObjectDetector detector = ObjectDetector.createFromFileAndOptions(this,"newmodel.tflite",options);
+
         Log.d("Load model:","Model Detected");
-        Bitmap imgBitMap = null;
-        imgBitMap = Bitmap.createBitmap(inputMat.width(),inputMat.height(),Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(inputMat,imgBitMap);
+//        Bitmap imgBitMap = null;
+//        imgBitMap = Bitmap.createBitmap(inputMat.width(),inputMat.height(),Bitmap.Config.ARGB_8888);
+//        Utils.matToBitmap(inputMat,imgBitMap);
         TensorImage imgToDetect = TensorImage.fromBitmap(imgBitMap);
         List<Detection> result = detector.detect(imgToDetect);
         Log.d("Result Length:",String.valueOf(result.size()));
-        debugPrint(result);
-//        Bitmap resultBitmap = drawDetectionResult(imgBitMap,result);
+        float score = debugPrint(result);
+//
 //        Log.d("Height:",String.valueOf(resultBitmap.getHeight()));
 //        Log.d("Width:",String.valueOf(resultBitmap.getWidth()));
         if(result.size()>0)
         {
             Detection detection = result.get(0);
             RectF box = detection.getBoundingBox();
-            Imgproc.rectangle(inputMat,new Point(box.left,box.top),new Point(box.right,box.bottom),new Scalar(0, 255, 0, 255),2);
+//            Imgproc.rectangle(inputMat,new Point(box.left,box.top),new Point(box.right,box.bottom),new Scalar(0, 255, 0, 255),2);
+//            Imgproc.putText(inputMat,String.valueOf(score),new Point(box.left,box.top),3,1,new Scalar(255, 0, 0, 255),2);
         }
 
         detector.close();
-        return inputMat;
+//        return inputMat;
     }
-    public static void debugPrint(List<Detection> results)
+    public static float debugPrint(List<Detection> results)
     {
+        float score =0;
         for (Detection d: results) {
             RectF a = d.getBoundingBox();
             Log.d(TAG,"Detected object:");
@@ -213,16 +198,30 @@ public class ScanActivity extends AppCompatActivity implements CameraBridgeViewB
             for (Category c:categories) {
                 Log.d(TAG,"Detect Label "+c.getLabel());
                 Log.d(TAG,"Detect Score "+c.getScore());
+                score = c.getScore();
+
             }
         }
+        return score;
+    }
+    public static float maximum(float[] array) {
+        if (array.length <= 0)
+            throw new IllegalArgumentException("The array is empty");
+        float max = array[0];
+        for (int i = 1; i < array.length; i++)
+            if (array[i] > max)
+                max = array[i];
+        return max;
     }
     public  Bitmap drawDetectionResult(Bitmap bitmap,List<Detection> result)
     {
+
         Bitmap outputBitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
         Canvas canvas = new Canvas(outputBitmap);
         canvas = surfaceHolder.lockCanvas();
         Paint pen = new Paint();
         pen.setTextAlign(Paint.Align.LEFT);
+
         for (Detection d:result) {
             pen.setColor(Color.RED);
             pen.setStrokeWidth(8F);
