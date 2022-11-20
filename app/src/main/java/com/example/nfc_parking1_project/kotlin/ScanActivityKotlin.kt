@@ -4,6 +4,8 @@ package com.example.nfc_parking1_project.kotlin
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Point
+import android.graphics.RectF
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
@@ -20,11 +22,15 @@ import androidx.databinding.DataBindingUtil
 import com.example.nfc_parking1_project.R
 import com.example.nfc_parking1_project.databinding.ActivityscanBinding
 import com.example.nfc_parking1_project.helper.Helper
+import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import org.tensorflow.lite.Tensor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
+import kotlin.math.roundToInt
 
 
 class ScanActivityKotlin:AppCompatActivity(){
@@ -32,6 +38,7 @@ class ScanActivityKotlin:AppCompatActivity(){
     private lateinit var objectDetector: ObjectDetector;
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>;
     private lateinit var bitmapBuffer: Bitmap
+    val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activityscan);
@@ -44,7 +51,7 @@ class ScanActivityKotlin:AppCompatActivity(){
         val options = ObjectDetector.ObjectDetectorOptions
             .builder()
             .setMaxResults(1)
-            .setScoreThreshold(0.5f)
+            .setScoreThreshold(0.8f)
             .build();
         objectDetector = ObjectDetector.createFromFileAndOptions(this,"newmodel.tflite",options);
     }
@@ -80,11 +87,21 @@ class ScanActivityKotlin:AppCompatActivity(){
                 Log.d("Result",results.size.toString())
                 if(results.size > 0)
                 {
+//                    val result = results[0];
+//                    val boundingBox = result.boundingBox
+//                    val top = boundingBox.top * 1f
+//                    val bottom = boundingBox.bottom * 1f
+//                    val left = boundingBox.left * 1f
+//                    val right = boundingBox.right * 1f
+//
+//                    // Draw bounding box around detected objects
+//                    val drawableRect = RectF(left, top, right, bottom)
+//                    Log.d("Helper","Bitmap drop:" + bitmap.width +"  x  " + bitmap.height)
                    this@ScanActivityKotlin.runOnUiThread {
                        binding.overlay.setResults(results,tensorImage.height,tensorImage.width)
                    }
                     binding.overlay.invalidate();
-
+                    Helper.debugPrint(results,tensorImage);
                 }
                 else
                 {
@@ -92,7 +109,7 @@ class ScanActivityKotlin:AppCompatActivity(){
                     binding.overlay.clear()
                 }
                 binding.overlay.clear()
-                Helper.debugPrint(results);
+
                 imageProxy.close();
             }
 

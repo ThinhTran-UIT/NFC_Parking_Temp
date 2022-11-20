@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.util.Log;
 
+import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.task.vision.detector.Detection;
 
@@ -30,7 +31,7 @@ public class Helper {
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;
     }
-    public static float debugPrint(List<Detection> results)
+    public static float debugPrint(List<Detection> results, TensorImage tensorImage)
     {
         float score =0;
         for (Detection d: results) {
@@ -46,6 +47,7 @@ public class Helper {
 
             }
         }
+        Log.d(TAG," TensorImage:"+ tensorImage.getWidth() +"x" + tensorImage.getHeight());
         return score;
     }
 }
