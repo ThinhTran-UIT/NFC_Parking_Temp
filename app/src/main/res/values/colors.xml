@@ -15,4 +15,5 @@
     <color name="green">#439446</color>
     <color name="orange">#F58220</color>
     <color name="grey">#F1F1F1</color>
+    <color name="bounding_box_color">#4CAF50</color>
 </resources>

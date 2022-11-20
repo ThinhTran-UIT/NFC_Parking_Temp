@@ -80,22 +80,26 @@ class ScanActivityKotlin:AppCompatActivity(){
                 Log.d("Result",results.size.toString())
                 if(results.size > 0)
                 {
-                    if(binding.parentLayout.childCount>1) binding.parentLayout.removeViewAt(1);
-                    val result = results[0]
-                    val element = Draw(this,rect = result.boundingBox,"License")
-                    binding.parentLayout.addView(element);
-                    imageProxy.close();
+                   this@ScanActivityKotlin.runOnUiThread {
+                       binding.overlay.setResults(results,tensorImage.height,tensorImage.width)
+                   }
+                    binding.overlay.invalidate();
+
                 }
                 else
                 {
                     imageProxy.close();
+                    binding.overlay.clear()
                 }
+                binding.overlay.clear()
                 Helper.debugPrint(results);
-
+                imageProxy.close();
             }
 
         }
         cameraProvider.bindToLifecycle(this,cameraSelector,imageAnalysis,preview)
     }
+
+
 
 }
