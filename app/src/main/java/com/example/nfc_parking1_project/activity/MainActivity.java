@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,12 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import org.opencv.android.OpenCVLoader;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class MainActivity extends FragmentActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
     BottomNavigationView bottomNavigationView;
@@ -39,12 +46,18 @@ public class MainActivity extends FragmentActivity {
     private NfcAdapter nfcAdapter;
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
-
+    public static MainActivity instance = null;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            prepareLanguageDir();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Check opencv
         Log.d("OPENCV", "Loading OPENCV status" + OpenCVLoader.initDebug());
         checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
@@ -90,6 +103,14 @@ public class MainActivity extends FragmentActivity {
         });
 
 
+    }
+    private void checkPermissions() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 120);
+        }
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 121);
+        }
     }
 
     private void setCardToExtra(Intent intentScan) {
@@ -162,4 +183,33 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "NFCasf", Toast.LENGTH_SHORT).show();
         }
     }
+    private void copyFile() throws IOException {
+        // work with assets folder
+        AssetManager assMng = getAssets();
+        InputStream is = assMng.open("tessdata/eus.traineddata");
+        OutputStream os = new FileOutputStream(getFilesDir() +
+                "/tessdata/vie.traineddata");
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = is.read(buffer)) != -1) {
+            os.write(buffer, 0, read);
+        }
+
+        is.close();
+        os.flush();
+        os.close();
+    }
+
+    private void prepareLanguageDir() throws IOException {
+        File dir = new File(getFilesDir() + "/tessdata");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File trainedData = new File(getFilesDir() + "/tessdata/eus.traineddata");
+        if (!trainedData.exists()) {
+            copyFile();
+        }
+    }
+
 }

@@ -61,7 +61,7 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
             // Draw bounding box around detected objects
             val drawableRect = RectF(left, top, right, bottom)
             canvas.drawRect(drawableRect, boxPaint)
-
+            drawableRect.top
             // Create text to display alongside detected objects
             val drawableText =
                 result.categories[0].label + " " +
@@ -71,6 +71,7 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
             textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
             val textWidth = bounds.width()
             val textHeight = bounds.height()
+            canvas.clipRect(boundingBox);
             canvas.drawRect(
                 left,
                 top,
@@ -95,6 +96,6 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
         scaleFactor = max(width * 1f / imageWidth, height * 1f / imageHeight)
     }
     companion object {
-        private const val BOUNDING_RECT_TEXT_PADDING = 8
+        private const val BOUNDING_RECT_TEXT_PADDING = 1
     }
 }

@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.nfc_parking1_project"
-        minSdk 24
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,13 @@ android {
 
     dataBinding{
         enable = true
+    }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets', 'src\\main\\assets\\tessdata'
+            }
+        }
     }
 }
 
@@ -78,6 +85,8 @@ dependencies {
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
+
+    implementation 'com.rmtheis:tess-two:6.3.0'
 
     //noinspection GradleDependency
 //    implementation "com.quickbirdstudios:yuvtomat:1.1.0"

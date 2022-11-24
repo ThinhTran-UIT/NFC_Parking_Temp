@@ -24,7 +24,7 @@
                     android:id="@+id/camera_preview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"/>
+                    app:scaleType="fillStart"/>
                 <com.example.nfc_parking1_project.kotlin.DrawOverlayView
                     android:id="@+id/overlay"
                     android:layout_width="match_parent"

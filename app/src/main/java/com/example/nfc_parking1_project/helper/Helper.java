@@ -31,7 +31,7 @@ public class Helper {
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;
     }
-    public static float debugPrint(List<Detection> results, TensorImage tensorImage)
+    public static float debugPrint(List<Detection> results)
     {
         float score =0;
         for (Detection d: results) {
@@ -43,11 +43,11 @@ public class Helper {
             for (Category c:categories) {
                 Log.d(TAG,"Detect Label "+c.getLabel());
                 Log.d(TAG,"Detect Score "+c.getScore());
+                Log.d(TAG,"Detect Location "+c.getScore());
                 score = c.getScore();
 
             }
         }
-        Log.d(TAG," TensorImage:"+ tensorImage.getWidth() +"x" + tensorImage.getHeight());
         return score;
     }
 }
