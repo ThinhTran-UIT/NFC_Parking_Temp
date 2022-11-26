@@ -161,7 +161,7 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
             )
             val textLicense = ConvertTextLicense.convertText(objectDetectorHelper.getTextRecognize())
             Log.d("Text License",textLicense);
-            if(textLicense.length==10)
+            if(textLicense.length>7)
             {
                 binding.tvPlateIdResult.text = textLicense;
             }
