@@ -26,10 +26,14 @@ import androidx.core.graphics.toRect
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import org.tensorflow.lite.DataType
 import org.tensorflow.lite.gpu.CompatibilityList
+import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.Rot90Op
+import org.tensorflow.lite.support.image.ops.TransformToGrayscaleOp
 import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
@@ -153,12 +157,15 @@ class ObjectDetectorHelper(
             if(boundingBox.left >0 && boundingBox.top > 0)
             {
                 val imageBitmap = Bitmap.createBitmap(tensorImage.bitmap,boundingBox.left.toInt(),boundingBox.top.toInt(),boundingBoxInt.width(),boundingBoxInt.height())
-                val resultText = recognizer.process(imageBitmap, 0)
+                val bitmap = ConvertTextLicense.toGrayscale(imageBitmap);
+                val resultText = recognizer.process(bitmap, 0)
                     .addOnSuccessListener { text ->
                         textRecognition = text.text;
                         val textReplaced = textRecognition.toString()
                         Log.d("Text Record",textReplaced)
                     }
+
+
             }
 
         }
@@ -183,6 +190,28 @@ class ObjectDetectorHelper(
             imageWidth: Int
         )
     }
+
+    fun bitmapToTensorImageForRecognition(
+        bitmapIn: Bitmap,
+        width: Int,
+        height: Int,
+        mean: Float,
+        std: Float
+    ): TensorImage {
+        val imageProcessor =
+            ImageProcessor.Builder()
+                .add(ResizeOp(height, width, ResizeOp.ResizeMethod.BILINEAR))
+                .add(TransformToGrayscaleOp())
+                .add(NormalizeOp(mean, std))
+                .build()
+        var tensorImage = TensorImage(DataType.FLOAT32)
+
+        tensorImage.load(bitmapIn)
+        tensorImage = imageProcessor.process(tensorImage)
+
+        return tensorImage
+    }
+
 
     fun getTextRecognize():String{
         if(textRecognition.toString()!=null)

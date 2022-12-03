@@ -118,6 +118,7 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
                         }
 
                         detectObjects(image)
+                        image.close();
                     }
                 }
 
