@@ -4,6 +4,14 @@ public class User {
     private String username;
     private String phoneNumber;
     private String shopName;
+    private String token;
+
+    public User(String username, String phoneNumber, String shopName, String token) {
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.shopName = shopName;
+        this.token = token;
+    }
 
     public User(String username, String phoneNumber, String shopName) {
         this.username = username;

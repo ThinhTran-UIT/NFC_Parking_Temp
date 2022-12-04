@@ -84,7 +84,7 @@ public class AddCardActivity extends AppCompatActivity implements NfcAdapter.Rea
             @Override
             public void onClick(View view) {
                 Card card = new Card();
-                card.setCardId(idCard.getText().toString());
+                card.setId(idCard.getText().toString());
                 callApiCreateCard(card);
             }
         });
