@@ -64,7 +64,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             drawable = ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.button_bg_red, null);
             holder.actionButton.setBackground(drawable);
         }
-        holder.tvCardId.setText(card.getCardId());
+        holder.tvCardId.setText(card.getId());
         holder.tvStatus.setText(card.getStatus());
 
     }

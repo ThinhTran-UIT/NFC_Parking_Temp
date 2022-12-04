@@ -14,7 +14,6 @@ public class RetrofitConfig {
         return new Retrofit.Builder().baseUrl(NFCParkingConstant.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-
     }
 }
 

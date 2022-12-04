@@ -48,16 +48,21 @@ public class MainActivity extends FragmentActivity {
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
     public static MainActivity instance = null;
+    private  String TAG = "MainActivity";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         try {
-            prepareLanguageDir();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Log.d(TAG,getIntent().getStringExtra("token"));
+        }catch (Exception e)
+        {
+            Log.d(TAG,e.getMessage());
         }
+
+
 
         // Check opencv
         Log.d("OPENCV", "Loading OPENCV status" + OpenCVLoader.initDebug());
