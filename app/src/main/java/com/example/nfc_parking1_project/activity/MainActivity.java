@@ -2,6 +2,7 @@ package com.example.nfc_parking1_project.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.FragmentTransaction;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -94,7 +95,7 @@ public class MainActivity extends FragmentActivity {
                         fragment = new StaffFragment();
                         break;
                     case R.id.nav_profile:
-                        fragment = new ProfileFragment();
+                        fragment = new Fragment();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
@@ -102,6 +103,10 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
+        ProfileFragment fragment = new ProfileFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, fragment, "Profile Fragment");
+        transaction.commit();
 
     }
     private void checkPermissions() {
@@ -211,5 +216,6 @@ public class MainActivity extends FragmentActivity {
             copyFile();
         }
     }
+
 
 }

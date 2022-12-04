@@ -18,7 +18,7 @@
             android:layout_height="65dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
-            android:src="@drawable/icon_motor" />
+            android:src="@drawable/icon_motor_green" />
 
         <ImageView
             android:id="@+id/img_watch_in"

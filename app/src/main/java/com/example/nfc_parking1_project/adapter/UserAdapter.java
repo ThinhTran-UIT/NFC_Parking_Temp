@@ -1,8 +1,11 @@
 package com.example.nfc_parking1_project.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +27,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private Context mContext;
     private List<User> mListUser;
     MainActivity mainActivity;
-
+    Dialog changePasswordDialog;
     public UserAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -33,7 +36,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public UserAdapter.UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
-        return new UserAdapter.UserViewHolder(view);
+        final UserAdapter.UserViewHolder userViewHolder = new UserAdapter.UserViewHolder(view);
+
+        changePasswordDialog = new Dialog(mContext);
+        changePasswordDialog.setContentView(R.layout.dialog_change_password);
+        changePasswordDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        userViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TextView tvCardId = (TextView) editProfileDialog.findViewById(R.id.tv_card_id);
+
+                changePasswordDialog.show();
+            }
+        });
+        return userViewHolder;
     }
 
     @SuppressLint("Data set changed")

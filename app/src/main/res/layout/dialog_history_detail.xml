@@ -5,6 +5,8 @@
     android:layout_gravity="center"
     android:background="@drawable/white_corner_background"
     android:paddingBottom="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     android:id="@+id/dialog_history_detail"
     android:elevation="5dp">
 
@@ -70,7 +72,7 @@
             android:layout_height="35dp"
             android:layout_below="@id/img_watch_out"
             android:layout_marginStart="12dp"
-            android:src="@drawable/icon_card_black" />
+            android:src="@drawable/icon_nfc_card" />
 
         <TextView
             android:id="@+id/tv_card_id"
@@ -127,15 +129,54 @@
             android:textColor="@color/blue"
             android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/btn_report_lost"
+        <ImageView
+            android:id="@+id/img_time_visit"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/img_badge_out"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/icon_time_visit" />
+
+        <TextView
+            android:id="@+id/tv_time_visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_staff_confirm_getout"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="70dp"
+            android:layout_below="@id/tv_staff_confirm_getout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/img_badge_out"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="Time visits: 3 times"
+            android:textColor="@color/blue"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/img_point"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/img_time_visit"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/medal" />
+
+        <TextView
+            android:id="@+id/tv_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time_visit"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/img_badge_out"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="Points reward: 3 points"
+            android:textColor="@color/blue"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_report_lost"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_point"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@drawable/button_bg_red"
             android:text="Report Lost"

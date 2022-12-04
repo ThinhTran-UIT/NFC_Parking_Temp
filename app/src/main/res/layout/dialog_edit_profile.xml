@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/blue_corner_bg"
+    android:paddingBottom="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:id="@+id/dialog_edit_profile"
+    android:elevation="5dp">
+
+    <TextView
+        android:id="@+id/tv_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Edit Profile"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:background="@drawable/white_corner_background_top"
+        android:fontFamily="@font/quicksand_medium"/>
+
+    <TextView
+        android:id="@+id/tv_full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_edit_profile"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="Full name"
+        android:textColor="@color/blue"
+        android:textSize="17dp" />
+
+    <EditText
+        android:id="@+id/edt_full_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_full_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_corner_cardview"
+        android:padding="10dp"
+        android:inputType="textPersonName"
+        android:hint="Enter your name"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_full_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="Phone Number"
+        android:textColor="@color/blue"
+        android:textSize="17dp" />
+
+    <EditText
+        android:id="@+id/edt_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_phone_number"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_corner_cardview"
+        android:padding="10dp"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:hint="Enter your phone number"/>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_phone_number"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_bg_orange"
+        android:text="Confirm"
+        android:textSize="18sp"
+        android:fontFamily="@font/quicksand_medium"
+        android:textColor="@color/orange"/>
+</RelativeLayout>

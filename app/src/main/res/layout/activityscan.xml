@@ -24,7 +24,9 @@
                     android:id="@+id/camera_preview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:scaleType="fillStart"/>
+                    app:scaleType="fillStart">
+
+                </androidx.camera.view.PreviewView>
                 <com.example.nfc_parking1_project.kotlin.DrawOverlayView
                     android:id="@+id/overlay"
                     android:layout_width="match_parent"
@@ -85,11 +87,36 @@
                             android:textSize="35sp"
                             android:textStyle="bold" />
 
+                        <LinearLayout
+                            android:id="@+id/layout_cardId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_below="@+id/tv_plateId_result"
+                            android:layout_centerHorizontal="true">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_toStartOf="@+id/tv_card_id"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@drawable/icon_nfc_card"/>
+
+                                <TextView
+                                    android:id="@+id/tv_card_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="31F2462D6A457F326A5"
+                                    android:layout_marginTop="1dp"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"/>
+                        </LinearLayout>
+
                         <Button
                             android:id="@+id/btn_exit"
                             android:layout_width="150dp"
                             android:layout_height="55dp"
-                            android:layout_below="@+id/tv_plateId_result"
+                            android:layout_below="@+id/layout_cardId"
                             android:layout_alignParentStart="true"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
@@ -103,7 +130,7 @@
                             android:id="@+id/btn_confirm"
                             android:layout_width="150dp"
                             android:layout_height="55dp"
-                            android:layout_below="@+id/tv_plateId_result"
+                            android:layout_below="@+id/layout_cardId"
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
