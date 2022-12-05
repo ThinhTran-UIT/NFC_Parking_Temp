@@ -49,6 +49,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="65dp"
             android:layout_marginRight="5dp"
+            android:elevation="5dp"
             android:background="@drawable/white_corner_background"
             android:paddingTop="20dp"
             android:paddingBottom="20dp">

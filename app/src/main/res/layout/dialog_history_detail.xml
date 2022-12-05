@@ -144,45 +144,4 @@
 
 </RelativeLayout>
 
-<!--
-<ImageView
-android:id="@+id/img_time_visit"
-android:layout_width="35dp"
-android:layout_height="35dp"
-android:layout_below="@+id/img_badge_out"
-android:layout_marginStart="12dp"
-android:background="@drawable/icon_time_visit" />
 
-<TextView
-android:id="@+id/tv_time_visit"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_below="@id/tv_staff_confirm_getout"
-android:layout_marginStart="15dp"
-android:layout_marginTop="14dp"
-android:layout_toEndOf="@+id/img_badge_out"
-android:fontFamily="@font/quicksand_medium"
-android:text="Time visits: 3 times"
-android:textColor="@color/blue"
-android:textSize="15sp" />
-
-<ImageView
-android:id="@+id/img_point"
-android:layout_width="35dp"
-android:layout_height="35dp"
-android:layout_below="@+id/img_time_visit"
-android:layout_marginStart="12dp"
-android:background="@drawable/medal" />
-
-<TextView
-android:id="@+id/tv_point"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_below="@id/tv_time_visit"
-android:layout_marginStart="15dp"
-android:layout_marginTop="14dp"
-android:layout_toEndOf="@+id/img_badge_out"
-android:fontFamily="@font/quicksand_medium"
-android:text="Points reward: 3 points"
-android:textColor="@color/blue"
-android:textSize="15sp" />-->

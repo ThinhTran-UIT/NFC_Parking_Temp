@@ -31,7 +31,9 @@
             android:maxLines="2"
             android:paddingStart="15dp"
             android:text="Testing Parking Lot, \nNumber of Vehicles: 10 Motor"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="@font/quicksand_medium"/>
 
         <Button
             android:id="@+id/btn_filter"
