@@ -100,7 +100,7 @@ public class MainActivity extends FragmentActivity {
                         fragment = new StaffFragment();
                         break;
                     case R.id.nav_profile:
-                        fragment = new Fragment();
+                        fragment = new ProfileFragment();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
@@ -108,10 +108,10 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        ProfileFragment fragment = new ProfileFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_container, fragment, "Profile Fragment");
-        transaction.commit();
+//        ProfileFragment fragment = new ProfileFragment();
+//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        transaction.replace(R.id.main_container, fragment, "Profile Fragment");
+//        transaction.commit();
 
     }
     private void checkPermissions() {
