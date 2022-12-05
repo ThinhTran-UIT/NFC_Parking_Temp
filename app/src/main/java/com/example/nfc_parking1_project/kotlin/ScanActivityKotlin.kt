@@ -37,6 +37,7 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
     private var cameraProvider: ProcessCameraProvider? = null
     val regex = "\\d{2}-\\w\\d-\\d{4,5}".toRegex()
     private lateinit var cameraExecutor: ExecutorService
+
     private val TAG = "ObjectDetection"
     override fun onDestroy() {
         super.onDestroy()
@@ -52,7 +53,7 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
             context = this@ScanActivityKotlin,
             objectDetectorListener = this
         )
-
+        ConvertTextLicense.init();
         // Initialize our background executor
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -62,6 +63,13 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
             setUpCamera()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.tvPlateIdResult.text="";
+
+        ConvertTextLicense.destroyMapping();
     }
 
     private fun setUpCamera() {
@@ -160,12 +168,15 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
                 imageHeight,
                 imageWidth
             )
-            val textLicense = ConvertTextLicense.convertText(objectDetectorHelper.getTextRecognize())
-            Log.d("Text License",textLicense);
-            if(textLicense.length>7)
-            {
-                binding.tvPlateIdResult.text = textLicense;
+            if(ConvertTextLicense.count==20 && !ConvertTextLicense.isDetected){
+                val textLicense = ConvertTextLicense.getTextRecognize()
+                Log.d("Text License",textLicense);
+                if(textLicense.length>=9)
+                {
+                    binding.tvPlateIdResult.text = textLicense;
+                }
             }
+
 
             // Force a redraw
             binding.overlay.invalidate()

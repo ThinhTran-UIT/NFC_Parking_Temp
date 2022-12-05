@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The TensorFlow Authors. All Rights Reserved.
+ * Copyright 2022 The TensorFlow Authors.  All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,10 +52,11 @@ class ObjectDetectorHelper(
     // For this example this needs to be a var so it can be reset on changes. If the ObjectDetector
     // will not change, a lazy val would be preferable.
     private var objectDetector: ObjectDetector? = null
+    private var convertTextLicense:ConvertTextLicense?=null
     val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-    var textRecognition: String? = null;
     init {
         setupObjectDetector()
+        convertTextLicense = ConvertTextLicense();
     }
 
     fun clearObjectDetector() {
@@ -156,21 +157,23 @@ class ObjectDetectorHelper(
 
             if(boundingBox.left >0 && boundingBox.top > 0)
             {
-                val imageBitmap = Bitmap.createBitmap(tensorImage.bitmap,boundingBox.left.toInt(),boundingBox.top.toInt(),boundingBoxInt.width(),boundingBoxInt.height())
-                val bitmap = ConvertTextLicense.toGrayscale(imageBitmap);
-                val resultText = recognizer.process(bitmap, 0)
-                    .addOnSuccessListener { text ->
-                        textRecognition = text.text;
-                        val textReplaced = textRecognition.toString()
-                        Log.d("Text Record",textReplaced)
+                if(boundingBoxInt.left+boundingBoxInt.width()<tensorImage.bitmap.width && boundingBoxInt.height()<tensorImage.bitmap.height)
+                {
+                    val imageBitmap = Bitmap.createBitmap(tensorImage.bitmap,boundingBox.left.toInt(),boundingBox.top.toInt(),boundingBoxInt.width(),boundingBoxInt.height())
+                    val bitmap = ConvertTextLicense.toGrayscale(imageBitmap);
+                    if(convertTextLicense!!.numberLicenseDetected <50)
+                    {
+                        val resultText = recognizer.process(bitmap, 0)
+                            .addOnSuccessListener { text ->
+                                val textRecognition = text.text;
+                                convertTextLicense?.convertText(textRecognition.toString());
+                                val textReplaced = textRecognition.toString()
+                                Log.d("Text Record",textReplaced)
+                            }
                     }
-
-
+                }
             }
 
-        }
-        else {
-            textRecognition = ""
         }
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
         objectDetectorListener?.onResults(
@@ -213,14 +216,7 @@ class ObjectDetectorHelper(
     }
 
 
-    fun getTextRecognize():String{
-        if(textRecognition.toString()!=null)
-        {
-            return textRecognition.toString();
-        }
-        else return "";
 
-    }
 
     companion object {
         const val DELEGATE_CPU = 0
