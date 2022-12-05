@@ -53,8 +53,9 @@ public class LoginActivity extends AppCompatActivity {
                     String phoneNumber = tvPhoneNumber.getText().toString();
                     String password = tvPassword.getText().toString();
                     Auth auth = new Auth(phoneNumber, password);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);startActivity(intent);
-                    /*callApiLogin(auth);*/
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+//                    callApiLogin(auth);
                 } catch (Exception e) {
                     Log.d("Login Activity", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

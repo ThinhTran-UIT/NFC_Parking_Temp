@@ -21,6 +21,7 @@ import com.example.nfc_parking1_project.activity.RegisterStaff;
 import com.example.nfc_parking1_project.model.User;
 
 import java.util.List;
+import java.util.Vector;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
@@ -28,6 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private List<User> mListUser;
     MainActivity mainActivity;
     Dialog changePasswordDialog;
+
     public UserAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -38,18 +40,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
         final UserAdapter.UserViewHolder userViewHolder = new UserAdapter.UserViewHolder(view);
 
-        changePasswordDialog = new Dialog(mContext);
-        changePasswordDialog.setContentView(R.layout.dialog_change_password);
-        changePasswordDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        userViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TextView tvCardId = (TextView) editProfileDialog.findViewById(R.id.tv_card_id);
 
-                changePasswordDialog.show();
-            }
-        });
         return userViewHolder;
     }
 
@@ -69,6 +61,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.tvUsername.setText(user.getUsername());
         holder.tvPhoneNumber.setText(user.getPhoneNumber());
         holder.tvShopName.setText(user.getShopName());
+        changePasswordDialog = new Dialog(mContext);
+        changePasswordDialog.setContentView(R.layout.dialog_change_password);
+        changePasswordDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        holder.btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePasswordDialog.show();
+            }
+        });
     }
 
     @Override
@@ -81,18 +82,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
+
+
         private TextView tvUsername;
         private TextView tvPhoneNumber;
         private TextView tvShopName;
-        private Button btnEdit;
+        private Button btnChangePassword;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvPhoneNumber = itemView.findViewById(R.id.tv_phone_number);
             tvShopName = itemView.findViewById(R.id.tv_shop_name);
-
-//            btnEdit.setOnClickListener(new View.OnClickListener() {
+            btnChangePassword = itemView.findViewById(R.id.btn_edit);
+//            btnChangePassword.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
 //
@@ -101,5 +104,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         }
 
 
+
+
     }
+
+
+
+
 }

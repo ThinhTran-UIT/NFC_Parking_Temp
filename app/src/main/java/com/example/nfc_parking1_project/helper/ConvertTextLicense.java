@@ -7,51 +7,106 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ConvertTextLicense {
-    public static String convertText(String text)
+    public ConvertTextLicense(){};
+    public static boolean isDetected = false;
+    public static Map<String, Integer> licenseMapping = new HashMap<>();
+
+    public static int count=0;
+
+    public static void init()
     {
+        isDetected=false;
+    }
+
+    public int getNumberLicenseDetected()
+    {
+        return count;
+    }
+    public static void destroyMapping(){
+        licenseMapping.clear();
+        count=0;
+        isDetected=false;
+    }
+
+    public static  String getTextRecognize()
+    {
+        return getMaxEntryInMapBasedOnValue(licenseMapping).getKey().toString();
+    }
+
+
+
+    public void convertText(String text) {
         StringBuilder result = new StringBuilder();
-        for(int i =0;i<text.length();i++)
-        {
+        for (int i = 0; i < text.length(); i++) {
             int asci = (int) text.charAt(i);
-            if( (asci>47 && asci<58)|| (asci>64 && asci <91) ) {
-                if(result.length()==2)
-                {
-                    if (asci>64 && asci <91){
+            if ((asci > 47 && asci < 58) || (asci > 64 && asci < 91) ) {
+                if (result.length() == 2) {
+                    if (asci > 64 && asci < 91 && asci != 87) {
                         result.append(text.charAt(i));
                         continue;
-                    }else
+                    } else
                         break;
-                }else
-                {
-                    if(result.length()<4)
-                    {
-                        result.append(text.charAt(i));
-                    }
-
                 }
-
-
                 if (result.length() == 4) {
                     result.append("-");
                 }
-                else if (result.length() >= 5)
-                {
-                    if(asci>47 && asci<58)
-                    {
-                        result.append(text.charAt(i));
+                if (result.length() >= 5) {
+                    if (asci > 64 && asci < 91) {
+                        break;
                     }
-                    else break;
-
                 }
-
-
-
+                result.append(text.charAt(i));
             }
         }
+        String key = result.toString();
+        if (count<= 20) {
+            if (licenseMapping.containsKey(key)) {
+                licenseMapping.put(key, licenseMapping.get(key) + 1);
+                count++;
+            } else {
+                licenseMapping.put(key, 1);
+                count++;
+            }
 
-        return result.toString();
+        }else{
+            isDetected=true;
+        }
+    }
+
+    //Find the license with higest indentical value
+    // Find the entry with highest value
+    public static <K, V extends Comparable<V>>
+    Map.Entry<K, V>
+    getMaxEntryInMapBasedOnValue(Map<K, V> map) {
+
+        // To store the result
+        Map.Entry<K, V> entryWithMaxValue = null;
+
+        // Iterate in the map to find the required entry
+        for (Map.Entry<K, V> currentEntry :
+                map.entrySet()) {
+
+            if (
+                // If this is the first entry, set result as
+                // this
+                    entryWithMaxValue == null
+
+                            // If this entry's value is more than the
+                            // max value Set this entry as the max
+                            || currentEntry.getValue().compareTo(
+                            entryWithMaxValue.getValue())
+                            > 0) {
+
+                entryWithMaxValue = currentEntry;
+            }
+        }
+        // Return the entry with highest value
+        return entryWithMaxValue;
     }
 
 
@@ -71,8 +126,7 @@ public class ConvertTextLicense {
         return bmpGrayscale;
     }
 
-    private Bitmap adjustedContrast(Bitmap src, double value)
-    {
+    private Bitmap adjustedContrast(Bitmap src, double value) {
         // image size
         int width = src.getWidth();
         int height = src.getHeight();
@@ -96,26 +150,35 @@ public class ConvertTextLicense {
         double contrast = Math.pow((100 + value) / 100, 2);
 
         // scan through all pixels
-        for(int x = 0; x < width; ++x) {
-            for(int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
                 // get pixel color
                 pixel = src.getPixel(x, y);
                 A = Color.alpha(pixel);
                 // apply filter contrast for every channel R, G, B
                 R = Color.red(pixel);
-                R = (int)(((((R / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
-                if(R < 0) { R = 0; }
-                else if(R > 255) { R = 255; }
+                R = (int) (((((R / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
+                if (R < 0) {
+                    R = 0;
+                } else if (R > 255) {
+                    R = 255;
+                }
 
                 G = Color.green(pixel);
-                G = (int)(((((G / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
-                if(G < 0) { G = 0; }
-                else if(G > 255) { G = 255; }
+                G = (int) (((((G / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
+                if (G < 0) {
+                    G = 0;
+                } else if (G > 255) {
+                    G = 255;
+                }
 
                 B = Color.blue(pixel);
-                B = (int)(((((B / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
-                if(B < 0) { B = 0; }
-                else if(B > 255) { B = 255; }
+                B = (int) (((((B / 255.0) - 0.5) * contrast) + 0.5) * 255.0);
+                if (B < 0) {
+                    B = 0;
+                } else if (B > 255) {
+                    B = 255;
+                }
 
                 // set new pixel color to output bitmap
                 bmOut.setPixel(x, y, Color.argb(A, R, G, B));
