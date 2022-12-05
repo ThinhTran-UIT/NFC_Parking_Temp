@@ -57,7 +57,7 @@
                 <RelativeLayout
                     android:id="@+id/relativeLayout2"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="245dp"
                     android:alpha="0.6"
                     android:background="@color/grey"
                     app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
@@ -71,13 +71,45 @@
                     app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
                     tools:ignore="MissingConstraints"
                     android:paddingBottom="30dp">
+                        <LinearLayout
+                            android:id="@+id/layout_notify_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginTop="7dp"
+                                    android:src="@drawable/icon_alert" />
+
+                                <TextView
+                                    android:id="@+id/tv_notify_scan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Can't recognize. Please re-scan!"
+                                    android:textColor="@color/red"
+                                    android:textStyle="bold"/>
+
+                                <Button
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:background="@drawable/icon_rescan"
+                                    android:layout_marginStart="10dp"/>
+                        </LinearLayout>
+
+
                         <TextView
                             android:id="@+id/tv_plateId_result"
                             android:layout_width="250dp"
                             android:layout_height="wrap_content"
+                            android:layout_below="@+id/layout_notify_scan"
                             android:layout_centerHorizontal="true"
                             android:layout_marginStart="30dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="20dp"
                             android:background="@drawable/rounded_corner2"
@@ -108,7 +140,7 @@
                                     android:layout_centerHorizontal="true"
                                     android:text="31F2462D6A457F326A5"
                                     android:layout_marginTop="1dp"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/orange"
                                     android:textStyle="bold"/>
                         </LinearLayout>
 
