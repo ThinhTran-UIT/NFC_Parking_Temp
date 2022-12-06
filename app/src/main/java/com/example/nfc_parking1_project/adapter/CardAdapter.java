@@ -50,14 +50,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             return;
         }
         if (card.getStatus().equals("Report Lost")) {
-            holder.imgLocation.setImageResource(R.drawable.icon_location_red);
+            holder.imgLocation.setImageResource(R.drawable.icon_location);
             holder.actionButton.setText("RESTORE");
             btnTextColor = ResourcesCompat.getColor(mContext.getResources(),R.color.green,null);
             holder.actionButton.setTextColor(btnTextColor);
             drawable = ResourcesCompat.getDrawable(mContext.getResources(), R.drawable.button_bg_green, null);
             holder.actionButton.setBackground(drawable);
         } else {
-            holder.imgLocation.setImageResource(R.drawable.icon_location_green);
+            holder.imgLocation.setImageResource(R.drawable.icon_location);
             holder.actionButton.setText("REPORT LOST");
             btnTextColor = ResourcesCompat.getColor(mContext.getResources(),R.color.red,null);
             holder.actionButton.setTextColor(btnTextColor);

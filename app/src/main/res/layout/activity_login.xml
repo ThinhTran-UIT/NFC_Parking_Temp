@@ -21,13 +21,6 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/top_background" />
 
-        <!--<ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/line2" />-->
     </LinearLayout>
 
     <TextView

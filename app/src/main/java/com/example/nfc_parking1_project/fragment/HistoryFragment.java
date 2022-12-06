@@ -1,11 +1,17 @@
 package com.example.nfc_parking1_project.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,6 +53,16 @@ public class HistoryFragment extends Fragment {
             }
         });
 
+        Button btnFilter = root.findViewById(R.id.btn_filter);
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
+
+
         rcvVehicle = (RecyclerView) root.findViewById(R.id.rcv_vehicle);
         vehicleAdapter = new VehicleAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),RecyclerView.VERTICAL,false);
@@ -55,6 +71,23 @@ public class HistoryFragment extends Fragment {
         rcvVehicle.setAdapter(vehicleAdapter);
         // Inflate the layout for this fragment
         return root;
+    }
+
+    private void showDialog() {
+        final Dialog dialogFilter = new Dialog(getContext());
+        dialogFilter.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogFilter.setContentView(R.layout.dialog_bottom_filter);
+
+        LinearLayout vehicleInLayout = dialogFilter.findViewById(R.id.layoutVehicleIn);
+        LinearLayout historyVehicleLayout = dialogFilter.findViewById(R.id.layoutHistoryVehicle);
+        LinearLayout reportLostLayout = dialogFilter.findViewById(R.id.layoutReportLost);
+
+        dialogFilter.show();
+        dialogFilter.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogFilter.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogFilter.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogFilter.getWindow().setGravity(Gravity.BOTTOM);
+
     }
 
     private List<Vehicle> getListData()

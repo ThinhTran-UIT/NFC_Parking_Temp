@@ -10,23 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<TextView
+        <TextView
             android:id="@+id/tv_title_add_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Touch to add new card"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="italic"
+            android:text="Add new NFC card"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand_medium"
             android:gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"/>-->
+            android:layout_alignParentEnd="true"/>
 
         <ImageView
             android:id="@+id/img_add_card"
             android:layout_width="wrap_content"
             android:layout_height="300dp"
+            android:layout_below="@+id/tv_title_add_card"
             android:src="@drawable/img_add_card"
             android:gravity="center"
             android:layout_alignParentStart="true"
@@ -43,7 +45,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:layout_below="@+id/img_add_card"
-            android:background="@drawable/rounded_corner_cardview"
+            android:background="@drawable/rounded_corner_edittext"
             android:fontFamily="@font/quicksand_medium"
             android:gravity="center"
             android:text=""
@@ -54,6 +56,7 @@
             android:id="@+id/tv_card_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Card already exists! Try another card"
             android:textColor="#EED202"
             android:textSize="18sp"
             android:textStyle="bold"
