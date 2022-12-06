@@ -18,12 +18,13 @@ package com.example.nfc_parking1_project.helper
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.CountDownTimer
+import android.os.Handler
+import android.os.HandlerThread
 import android.os.SystemClock
 import android.util.Log
 import androidx.camera.core.ImageProxy
-import androidx.core.graphics.BitmapCompat
 import androidx.core.graphics.toRect
-import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import org.tensorflow.lite.DataType
@@ -38,13 +39,13 @@ import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
+
 class ObjectDetectorHelper(
-    var threshold: Float = 0.8f,
+    var threshold: Float = 0.6f,
     var numThreads: Int = 1,
     var maxResults: Int = 1,
     var currentDelegate: Int = 0,
     var currentModel: Int = 0,
-
     val context: Context,
     val objectDetectorListener: DetectorListener?
 ) {
@@ -52,8 +53,13 @@ class ObjectDetectorHelper(
     // For this example this needs to be a var so it can be reset on changes. If the ObjectDetector
     // will not change, a lazy val would be preferable.
     private var objectDetector: ObjectDetector? = null
-    private var convertTextLicense:ConvertTextLicense?=null
+    lateinit var countdown_timer: CountDownTimer
+    private var convertTextLicense: ConvertTextLicense? = null
+    var isTimerStart: Boolean = false;
+    var time_in_milli_seconds = 0L
+    var START_MILLI_SECONDS = 60000L
     val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+
     init {
         setupObjectDetector()
         convertTextLicense = ConvertTextLicense();
@@ -120,8 +126,31 @@ class ObjectDetectorHelper(
         }
     }
 
+
+
+    private fun startTimer() {
+        countdown_timer = object : CountDownTimer(2000, 1000) {
+            override fun onFinish() {
+                ConvertTextLicense.isDetected=true;
+                ConvertTextLicense.setResult();
+                Log.d("Text Record","timer finish")
+            }
+            override fun onTick(p0: Long) {
+            }
+        }
+        countdown_timer.start()
+        ConvertTextLicense.isTimerRunning = true
+
+    }
+
+
+
+
+
+
+
     @SuppressLint("UnsafeOptInUsageError")
-    fun detect(image: Bitmap, imageRotation: Int, imageProxy:ImageProxy) {
+    fun detect(image: Bitmap, imageRotation: Int, imageProxy: ImageProxy) {
         if (objectDetector == null) {
             setupObjectDetector()
         }
@@ -147,28 +176,43 @@ class ObjectDetectorHelper(
             val boundingBox = result.boundingBox
             val boundingBoxInt = boundingBox.toRect()
 
-            Log.d("Helper","Image width"+ tensorImage.width)
-            Log.d("Helper","Image height"+ tensorImage.height)
-            Log.d("Helper","Bounding Box"+ boundingBox.width())
-            Log.d("Helper","Bounding Box height"+ boundingBox.height())
-            Log.d("Helper","Bounding Box X"+ boundingBox.left)
-            Log.d("Helper","Bounding Box XINt"+ boundingBoxInt.left)
-            Log.d("Helper","Bounding Box Y"+ boundingBox.top)
+            Log.d("Helper", "Image width" + tensorImage.width)
+            Log.d("Helper", "Image height" + tensorImage.height)
+            Log.d("Helper", "Bounding Box" + boundingBox.width())
+            Log.d("Helper", "Bounding Box height" + boundingBox.height())
+            Log.d("Helper", "Bounding Box X" + boundingBox.left)
+            Log.d("Helper", "Bounding Box XINt" + boundingBoxInt.left)
+            Log.d("Helper", "Bounding Box Y" + boundingBox.top)
 
-            if(boundingBox.left >0 && boundingBox.top > 0)
-            {
-                if(boundingBoxInt.left+boundingBoxInt.width()<tensorImage.bitmap.width && boundingBoxInt.height()<tensorImage.bitmap.height)
-                {
-                    val imageBitmap = Bitmap.createBitmap(tensorImage.bitmap,boundingBox.left.toInt(),boundingBox.top.toInt(),boundingBoxInt.width(),boundingBoxInt.height())
+            if (boundingBox.left > 0 && boundingBox.top > 0) {
+                if (boundingBoxInt.left + boundingBoxInt.width() < tensorImage.bitmap.width && boundingBoxInt.height() < tensorImage.bitmap.height) {
+                    val imageBitmap = Bitmap.createBitmap(
+                        tensorImage.bitmap,
+                        boundingBox.left.toInt(),
+                        boundingBox.top.toInt(),
+                        boundingBoxInt.width(),
+                        boundingBoxInt.height()
+                    )
                     val bitmap = ConvertTextLicense.toGrayscale(imageBitmap);
-                    if(convertTextLicense!!.numberLicenseDetected <50)
+                    if(!ConvertTextLicense.isTimerRunning && !ConvertTextLicense.isDetected)
                     {
+                        val bgThread = HandlerThread("MyHandlerThread")
+                        bgThread.start()
+                        val bgHandler = Handler(bgThread.looper)
+                        bgHandler.post(Runnable {
+                            startTimer();
+                            ConvertTextLicense.isTimerRunning=true;
+
+                        })
+                    }
+
+                    if(ConvertTextLicense.isTimerRunning && !ConvertTextLicense.isDetected){
                         val resultText = recognizer.process(bitmap, 0)
                             .addOnSuccessListener { text ->
                                 val textRecognition = text.text;
                                 convertTextLicense?.convertText(textRecognition.toString());
                                 val textReplaced = textRecognition.toString()
-                                Log.d("Text Record",textReplaced)
+                                Log.d("Text Record", textReplaced)
                             }
                     }
                 }
@@ -194,6 +238,7 @@ class ObjectDetectorHelper(
         )
     }
 
+
     fun bitmapToTensorImageForRecognition(
         bitmapIn: Bitmap,
         width: Int,
@@ -214,8 +259,6 @@ class ObjectDetectorHelper(
 
         return tensorImage
     }
-
-
 
 
     companion object {

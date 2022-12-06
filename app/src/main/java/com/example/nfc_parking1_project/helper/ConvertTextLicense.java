@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.os.CountDownTimer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,29 +15,42 @@ import java.util.Map;
 public class ConvertTextLicense {
     public ConvertTextLicense(){};
     public static boolean isDetected = false;
+    public static String result = null;
     public static Map<String, Integer> licenseMapping = new HashMap<>();
+    public static boolean isTimerRunning = false;
 
-    public static int count=0;
 
     public static void init()
     {
         isDetected=false;
     }
 
-    public int getNumberLicenseDetected()
-    {
-        return count;
-    }
     public static void destroyMapping(){
         licenseMapping.clear();
-        count=0;
         isDetected=false;
+        isTimerRunning=false;
+        result=null;
     }
+
+    public static void setResult()
+    {
+        result = getMaxEntryInMapBasedOnValue(licenseMapping).getKey().toString();
+        isDetected=true;
+    }
+
 
     public static  String getTextRecognize()
     {
-        return getMaxEntryInMapBasedOnValue(licenseMapping).getKey().toString();
+        if(isDetected)
+        {
+            return result;
+        }
+        return null;
+
     }
+
+    //Create count down time for detection
+
 
 
 
@@ -64,17 +78,20 @@ public class ConvertTextLicense {
             }
         }
         String key = result.toString();
-        if (count<= 20) {
+
+        if (key.length()>=8) {
             if (licenseMapping.containsKey(key)) {
-                licenseMapping.put(key, licenseMapping.get(key) + 1);
-                count++;
+                try{
+                    licenseMapping.put(key, licenseMapping.get(key) + 1);
+                }catch (Exception e)
+                {
+
+                }
+
             } else {
                 licenseMapping.put(key, 1);
-                count++;
             }
 
-        }else{
-            isDetected=true;
         }
     }
 

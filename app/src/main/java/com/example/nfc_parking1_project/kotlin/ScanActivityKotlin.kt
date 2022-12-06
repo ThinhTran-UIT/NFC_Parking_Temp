@@ -4,6 +4,7 @@ package com.example.nfc_parking1_project.kotlin
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -63,11 +64,20 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
             setUpCamera()
         }
 
+        binding.btnRescan.setOnClickListener {
+            ConvertTextLicense.destroyMapping();
+            binding.tvNotifyScan.text = "";
+            binding.tvPlateIdResult.text = "";
+        }
+
     }
+
+
+
 
     override fun onResume() {
         super.onResume()
-        binding.tvPlateIdResult.text="";
+        binding.tvPlateIdResult.text = "";
 
         ConvertTextLicense.destroyMapping();
     }
@@ -124,7 +134,6 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
                                 Bitmap.Config.ARGB_8888
                             )
                         }
-
                         detectObjects(image)
                         image.close();
                     }
@@ -168,14 +177,17 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
                 imageHeight,
                 imageWidth
             )
-            if(ConvertTextLicense.count==20 && !ConvertTextLicense.isDetected){
-                val textLicense = ConvertTextLicense.getTextRecognize()
-                Log.d("Text License",textLicense);
-                if(textLicense.length>=9)
-                {
-                    binding.tvPlateIdResult.text = textLicense;
-                }
+            val textLicense = ConvertTextLicense.getTextRecognize()
+            if(textLicense!=null && ConvertTextLicense.isDetected)
+            {
+                binding.tvPlateIdResult.text = textLicense;
+                Log.d("Text License", textLicense);
             }
+            else if(ConvertTextLicense.isDetected && textLicense==null)
+            {
+                binding.tvNotifyScan.text = "Can't recognize. Please re-scan!"
+            }
+
 
 
             // Force a redraw
