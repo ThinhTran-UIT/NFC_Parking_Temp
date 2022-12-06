@@ -6,7 +6,8 @@
     android:layout_margin="5dp"
     android:paddingVertical="5dp"
     app:cardCornerRadius="10dp"
-    android:elevation="15dp">
+    android:elevation="15dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,11 +47,12 @@
 
         <ImageView
             android:id="@+id/img_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_below="@id/img_phone"
             android:layout_marginStart="3dp"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:layout_toEndOf="@id/img_user"
             android:src="@drawable/icon_location" />
 

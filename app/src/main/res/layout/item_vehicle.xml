@@ -14,11 +14,12 @@
 
         <ImageView
             android:id="@+id/img_vehicle"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
-            android:src="@drawable/icon_motor_green" />
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_motor" />
 
         <ImageView
             android:id="@+id/img_watch_in"
