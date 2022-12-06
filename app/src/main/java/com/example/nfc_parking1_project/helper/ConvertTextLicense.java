@@ -34,7 +34,13 @@ public class ConvertTextLicense {
 
     public static void setResult()
     {
-        result = getMaxEntryInMapBasedOnValue(licenseMapping).getKey().toString();
+        if(getMaxEntryInMapBasedOnValue(licenseMapping)!=null)
+        {
+            result = getMaxEntryInMapBasedOnValue(licenseMapping).getKey().toString();
+        }
+        else{
+            result=null;
+        }
         isDetected=true;
     }
 
@@ -85,7 +91,6 @@ public class ConvertTextLicense {
                     licenseMapping.put(key, licenseMapping.get(key) + 1);
                 }catch (Exception e)
                 {
-
                 }
 
             } else {

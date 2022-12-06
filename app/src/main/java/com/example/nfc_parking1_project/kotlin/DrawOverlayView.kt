@@ -58,30 +58,33 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
             val left = boundingBox.left * scaleFactor
             val right = boundingBox.right * scaleFactor
 
+            if(top >0 && bottom>0){
+                val drawableRect = RectF(left, top, right, bottom)
+                canvas.drawRect(drawableRect, boxPaint)
+                drawableRect.top
+                // Create text to display alongside detected objects
+                val drawableText =
+                    result.categories[0].label + " " +
+                            String.format("%.2f", result.categories[0].score)
+
+                // Draw rect behind display text
+                textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
+                val textWidth = bounds.width()
+                val textHeight = bounds.height()
+                canvas.clipRect(boundingBox);
+                canvas.drawRect(
+                    left,
+                    top,
+                    left + textWidth + Companion.BOUNDING_RECT_TEXT_PADDING,
+                    top + textHeight + Companion.BOUNDING_RECT_TEXT_PADDING,
+                    textBackgroundPaint
+                )
+
+                // Draw text for detected object
+                canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
+            }
             // Draw bounding box around detected objects
-            val drawableRect = RectF(left, top, right, bottom)
-            canvas.drawRect(drawableRect, boxPaint)
-            drawableRect.top
-            // Create text to display alongside detected objects
-            val drawableText =
-                result.categories[0].label + " " +
-                        String.format("%.2f", result.categories[0].score)
 
-            // Draw rect behind display text
-            textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
-            val textWidth = bounds.width()
-            val textHeight = bounds.height()
-            canvas.clipRect(boundingBox);
-            canvas.drawRect(
-                left,
-                top,
-                left + textWidth + Companion.BOUNDING_RECT_TEXT_PADDING,
-                top + textHeight + Companion.BOUNDING_RECT_TEXT_PADDING,
-                textBackgroundPaint
-            )
-
-            // Draw text for detected object
-            canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
         }
     }
     fun setResults(
