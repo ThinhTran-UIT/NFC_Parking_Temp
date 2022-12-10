@@ -10,9 +10,6 @@ public class History {
     @SerializedName("license_number")
     private String licenseNumber;
 
-    @SerializedName("card_id")
-    private String cardId;
-
     @SerializedName("time_in")
     private Date timeIn;
 
@@ -47,14 +44,6 @@ public class History {
 
     public void setLicenseNumber(String licenseNumber) {
         this.licenseNumber = licenseNumber;
-    }
-
-    public String getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
     }
 
     public Date getTimeIn() {

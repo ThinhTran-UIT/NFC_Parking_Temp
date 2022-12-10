@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,8 +63,6 @@ public class HistoryFragment extends Fragment {
             }
         });
 
-
-
         rcvVehicle = (RecyclerView) root.findViewById(R.id.rcv_vehicle);
         vehicleAdapter = new VehicleAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),RecyclerView.VERTICAL,false);
@@ -78,9 +78,9 @@ public class HistoryFragment extends Fragment {
         dialogFilter.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogFilter.setContentView(R.layout.dialog_bottom_filter);
 
-        LinearLayout vehicleInLayout = dialogFilter.findViewById(R.id.layoutVehicleIn);
-        LinearLayout historyVehicleLayout = dialogFilter.findViewById(R.id.layoutHistoryVehicle);
-        LinearLayout reportLostLayout = dialogFilter.findViewById(R.id.layoutReportLost);
+        RadioButton vehicleInLayout = dialogFilter.findViewById(R.id.radio_one);
+        RadioButton historyVehicleLayout = dialogFilter.findViewById(R.id.radio_two);
+        RadioButton reportLostLayout = dialogFilter.findViewById(R.id.radio_three);
 
         dialogFilter.show();
         dialogFilter.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -94,18 +94,14 @@ public class HistoryFragment extends Fragment {
     {
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        vehicleList.add(new Vehicle("134245234","71B2-12312"));
-        vehicleList.add(new Vehicle("212423433","71B2-12312"));
-        vehicleList.add(new Vehicle("235345633","71B2-12312"));
-        vehicleList.add(new Vehicle("142354654","71B2-12312"));
-        vehicleList.add(new Vehicle("223454363","71B2-12312"));
-        vehicleList.add(new Vehicle("323453215","71B2-12312"));
-        vehicleList.add(new Vehicle("114235362","71B2-12312"));
-        vehicleList.add(new Vehicle("223534621","71B2-12312"));
-        vehicleList.add(new Vehicle("324235672","71B2-12312"));
-        vehicleList.add(new Vehicle("123534625","71B2-12312"));
-        vehicleList.add(new Vehicle("242354563","71B2-12312"));
-        vehicleList.add(new Vehicle("323453643","71B2-12312"));
+        vehicleList.add(new Vehicle("134245234","71-B2\n12312"));
+        vehicleList.add(new Vehicle("212423433","71-B2\n12312"));
+        vehicleList.add(new Vehicle("235345633","71-B2\n12312"));
+        vehicleList.add(new Vehicle("142354654","71-B2\n12312"));
+        vehicleList.add(new Vehicle("223454363","71-B2\n12312"));
+        vehicleList.add(new Vehicle("323453215","71-B2\n12312"));
+        vehicleList.add(new Vehicle("114235362","71-B2\n12312"));
+        vehicleList.add(new Vehicle("223534621","71-B2\n12312"));
 
         return vehicleList;
     }

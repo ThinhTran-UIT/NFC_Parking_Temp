@@ -56,7 +56,7 @@
             android:id="@+id/tv_card_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Card already exists! Try another card"
+            android:text=""
             android:textColor="#EED202"
             android:textSize="18sp"
             android:textStyle="bold"

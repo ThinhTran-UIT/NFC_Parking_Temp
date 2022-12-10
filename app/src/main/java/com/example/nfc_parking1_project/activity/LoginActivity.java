@@ -1,12 +1,18 @@
 package com.example.nfc_parking1_project.activity;
 
+import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG;
+import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,10 +36,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 101010;
     private Button buttonLogin;
     private TextView tvPhoneNumber;
     private TextView tvPassword;
     private Context mContext;
+    Button btnFingerPrint;
     private final String TAG = "Login Activity";
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this.getApplicationContext();
         setContentView(R.layout.activity_login);
+
+
         tvPhoneNumber = (TextView) findViewById(R.id.edt_phone_number);
         tvPassword = (TextView) findViewById(R.id.edt_password);
         //Start button redirect scan activity
@@ -62,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     public void callApiLogin(Auth auth) {

@@ -5,87 +5,56 @@
     android:layout_height="match_parent"
     android:background="@drawable/grey_corner_background"
     android:id="@+id/layoutBottomFilter"
-    android:paddingBottom="20dp"
-    android:paddingLeft="20dp">
+    android:paddingBottom="20dp">
 
     <TextView
         android:id="@+id/tv_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Filter"
-        android:textColor="@color/black"
+        android:text="FILTER"
+        android:textColor="@color/blue"
         android:layout_marginTop="5dp"
         android:textSize="25dp"
         android:textStyle="bold"
         android:fontFamily="@font/quicksand_medium"/>
 
-    <LinearLayout
-        android:id="@+id/layoutVehicleIn"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
-
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/icon_motor_parking"/>
-
-        <TextView
+        android:paddingLeft="20dp">
+        <RadioButton
+            android:id="@+id/radio_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vehicle in parking lot"
-            android:layout_marginLeft="30dp"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand_medium"
+            android:onClick="checkButton"
+            android:checked="true"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutHistoryVehicle"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/icon_motor_parking"/>
-
-        <TextView
+        <RadioButton
+            android:id="@+id/radio_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="History vehicle in parking lot"
+            android:textSize="15dp"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
-            android:textSize="16sp"/>
+            android:fontFamily="@font/quicksand_medium"
+            android:onClick="checkButton"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutReportLost"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/icon_alert"/>
-
-        <TextView
+        <RadioButton
+            android:id="@+id/radio_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Report Lost"
-            android:layout_marginLeft="30dp"
+            android:textSize="15dp"
             android:textStyle="bold"
-            android:textSize="16sp"/>
-
-    </LinearLayout>
+            android:fontFamily="@font/quicksand_medium"
+            android:onClick="checkButton"/>
+    </RadioGroup>
 
 </LinearLayout>
+

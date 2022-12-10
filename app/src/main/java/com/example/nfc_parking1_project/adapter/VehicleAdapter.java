@@ -68,7 +68,6 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
         if(vehicle == null){
             return;
         }
-        holder.tvCardId.setText(vehicle.getCardId());
         holder.tvPlateId.setText(vehicle.getPlateId());
     }
 
@@ -83,14 +82,12 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleV
     public class VehicleViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgVehicle;
-        private TextView tvCardId;
         private TextView tvPlateId;
 
         public VehicleViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgVehicle = itemView.findViewById(R.id.img_vehicle);
-            tvCardId = itemView.findViewById(R.id.tv_card_id);
             tvPlateId = itemView.findViewById(R.id.tv_plate_id);
         }
     }
