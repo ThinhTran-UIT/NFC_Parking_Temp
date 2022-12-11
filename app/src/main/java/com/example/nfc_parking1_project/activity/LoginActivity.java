@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvPhoneNumber;
     private TextView tvPassword;
     private Context mContext;
-    Button btnFingerPrint;
     private final String TAG = "Login Activity";
     @SuppressLint("MissingInflatedId")
     @Override
