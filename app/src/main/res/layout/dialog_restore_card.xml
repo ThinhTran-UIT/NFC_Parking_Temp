@@ -11,48 +11,48 @@
     android:elevation="5dp">
 
     <TextView
-        android:id="@+id/tv_notify_title"
+        android:id="@+id/tv_recovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="NOTIFICATION"
+        android:text="RECOVERY"
         android:textAlignment="center"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/blue"/>
 
     <ImageView
-        android:id="@+id/img_checked"
+        android:id="@+id/img_recovery"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/icon_checked"
-        android:layout_below="@+id/tv_notify_title"
+        android:src="@drawable/icon_recovery"
+        android:layout_below="@+id/tv_recovery"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/tv_pass_logout"
+        android:id="@+id/tv_recovery_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_checked"
+        android:layout_below="@+id/img_recovery"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:text="Updated Password Infomation Successfully. Please login again!"
+        android:text="This card has been reported lost before. Please recovery card\nif you want to re-use"
         android:textSize="13dp"
         android:textStyle="bold"
         android:fontFamily="@font/quicksand_medium"/>
 
     <Button
-        android:id="@+id/btn_logout"
+        android:id="@+id/btn_recovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg_orange"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tv_pass_logout"
+        android:layout_below="@+id/tv_recovery_title"
         android:layout_marginTop="10dp"
-        android:text="LOG OUT"
+        android:text="RECOVERY"
         android:textStyle="bold"
         android:textColor="@color/orange"/>
 
