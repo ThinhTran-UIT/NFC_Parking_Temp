@@ -69,7 +69,7 @@ public class StaffFragment extends Fragment {
         });
         numberStaff = view.findViewById(R.id.tv_number_staff);
         //Button Register user(staff)
-        Button btnCamera = view.findViewById(R.id.btn_camera);
+        /*Button btnCamera = view.findViewById(R.id.btn_camera);
         mainActivity = (MainActivity) getActivity();
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +77,7 @@ public class StaffFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ScanActivityKotlin.class);
                 startActivity(intent);
             }
-        });
+        });*/
         setUpSearch(view);
         rcvUser = (RecyclerView) view.findViewById(R.id.rcv_staff);
         userAdapter = new UserAdapter(this.getContext(),token);

@@ -3,7 +3,7 @@ package com.example.nfc_parking1_project.helper;
 import java.util.regex.Pattern;
 
 public class Constant {
-    public static final String BASE_URL = "https://a04b-2001-ee0-4f4f-d9d0-ad01-452a-4cc3-c667.ap.ngrok.io";
+    public static final String BASE_URL = "https://nfcparking.tech/?fbclid=IwAR3QbrDwHwFbKTLLx0VCnPvl8a41km6ct9tc-vidaQBnNhzNwNsVMB078RA";
     public static final String regexPassword = "^(?=.*[0-9])"
             + "(?=.*[a-z])(?=.*[A-Z])"
             + "(?=.*[@#$%^&+=])"
