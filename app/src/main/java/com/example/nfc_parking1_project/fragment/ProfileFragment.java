@@ -22,6 +22,7 @@ import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.api.AuthAPI;
 import com.example.nfc_parking1_project.api.MessageResponse;
 import com.example.nfc_parking1_project.api.UserAPI;
+import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.helper.Helper;
 import com.example.nfc_parking1_project.model.Auth;
 import com.example.nfc_parking1_project.model.User;
@@ -77,7 +78,7 @@ public class ProfileFragment extends Fragment {
         //Find layout for button and component
         tvProfileName = view.findViewById(R.id.tv_profile_name);
         tvProfilePhoneNumber = view.findViewById(R.id.tv_display_phonenumber);
-        profileRole = view.findViewById(R.id.tv_role);
+        profileRole = view.findViewById(R.id.tv_role_name);
         btnEditProfileDialog = view.findViewById(R.id.btn_edit_profile);
         btnChangePasswordDialog = view.findViewById(R.id.btn_change_password);
         //Set up dialog
@@ -181,6 +182,12 @@ public class ProfileFragment extends Fragment {
                         userId = user.getId();
                         tvProfileName.setText(user.getName());
                         tvProfilePhoneNumber.setText(user.getPhoneNumber());
+                        if(user.getRole().equals(Constant.ROLE_STAFF)){
+                            profileRole.setText("STAFF");
+                        }
+                        else {
+                            profileRole.setText(Constant.ROLE_AMIN);
+                        }
 
                     } else {
                         Toast.makeText(getContext(), "Can not get user profile", Toast.LENGTH_SHORT).show();
@@ -265,10 +272,12 @@ public class ProfileFragment extends Fragment {
                 if (response.code() == 200) {
                     Toast.makeText(getContext(), "Log out successfully!", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
+                    mainActivity.finish();
                 } else {
 
                     Toast.makeText(getContext(), messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(intent);
+                    mainActivity.finish();
                 }
             }
 

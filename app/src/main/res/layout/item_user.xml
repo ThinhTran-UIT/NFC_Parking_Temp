@@ -68,14 +68,14 @@
             android:text="0973583485" />
 
         <TextView
-            android:id="@+id/tv_shop_name"
+            android:id="@+id/tv_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_phone_number"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/img_location"
-            android:text="Testing Parking Lot" />
+            android:text="" />
 
         <Button
             android:id="@+id/btn_edit"

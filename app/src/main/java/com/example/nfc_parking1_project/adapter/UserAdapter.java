@@ -75,6 +75,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
             return;
         }
+        if(!Constant.CURRENT_ROLE.isEmpty()){
+            if(Constant.CURRENT_ROLE.equals(Constant.ROLE_STAFF)){
+                holder.btnChangePassword.setVisibility(View.INVISIBLE);
+            }
+        }
+        if(user.getRole().equals(Constant.ROLE_STAFF))
+        {
+            holder.tvRole.setText("STAFF");
+        }
+        else {
+            holder.tvRole.setText(Constant.ROLE_AMIN);
+        }
         holder.tvUsername.setText(user.getName());
         holder.tvPhoneNumber.setText(user.getPhoneNumber());
 //        holder.tvShopName.setText(user.getShopName());
@@ -142,14 +154,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public class UserViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
         private TextView tvPhoneNumber;
-        private TextView tvShopName;
+        private TextView tvRole;
         private Button btnChangePassword;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvPhoneNumber = itemView.findViewById(R.id.tv_phone_number);
-            tvShopName = itemView.findViewById(R.id.tv_shop_name);
+            tvRole = itemView.findViewById(R.id.tv_role);
             btnChangePassword = itemView.findViewById(R.id.btn_edit);
         }
     }

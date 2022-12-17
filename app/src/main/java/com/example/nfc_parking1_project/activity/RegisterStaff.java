@@ -2,9 +2,12 @@ package com.example.nfc_parking1_project.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +28,10 @@ public class RegisterStaff extends AppCompatActivity {
     public static final String TAG = "RegisterStaff";
     private Button btnRegister;
     private Button btnHome;
-    private TextView tvStaffName;
-    private TextView tvPhoneNumber;
-    private TextView tvPassword;
-    private TextView tvConfirmPassword;
+    private EditText tvStaffName;
+    private EditText tvPhoneNumber;
+    private EditText tvPassword;
+    private EditText tvConfirmPassword;
     private  TextView tvNotify;
     private String token;
 
@@ -84,7 +87,74 @@ public class RegisterStaff extends AppCompatActivity {
                 finish();
             }
         });
+        //Set up destroy error message
+        setUpDestroyErrorMessage();
+    }
+    private void setUpDestroyErrorMessage(){
+        tvPhoneNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNotify.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        tvStaffName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNotify.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        tvPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNotify.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        tvConfirmPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNotify.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void callApiCreateStaff(User user) {

@@ -31,10 +31,22 @@ public class History {
 
     @SerializedName("card_status")
     private String cardStatus;
+    @SerializedName("is_lost_card")
+    private int lostCardStatus;
+    @SerializedName("report_lost_at")
+    private String reportLostTime;
+    public int getLostCardStatus() {
+        return lostCardStatus;
+    }
+
+    public void setLostCardStatus(int lostCardStatus) {
+        this.lostCardStatus = lostCardStatus;
+    }
 
     public String getCardStatus() {
         return cardStatus;
     }
+
 
     public void setCardStatus(String cardStatus) {
         this.cardStatus = cardStatus;

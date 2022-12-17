@@ -5,9 +5,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.api.AuthAPI;
 import com.example.nfc_parking1_project.api.AuthRespone;
+import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.model.Auth;
+import com.example.nfc_parking1_project.model.User;
 
 import org.json.JSONObject;
 
@@ -28,8 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 101010;
     private final String TAG = "Login Activity";
     private Button buttonLogin;
-    private TextView tvPhoneNumber;
-    private TextView tvPassword;
+    private EditText tvPhoneNumber;
+    private EditText tvPassword;
+    private TextView tvNotifyLogin;
     private Context mContext;
 
     @SuppressLint("MissingInflatedId")
@@ -38,10 +44,41 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this.getApplicationContext();
         setContentView(R.layout.activity_login);
+        tvNotifyLogin = findViewById(R.id.tv_login_notify);
+        tvPhoneNumber =  findViewById(R.id.edt_phone_number);
+        tvPhoneNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
-        tvPhoneNumber = (TextView) findViewById(R.id.edt_phone_number);
-        tvPassword = (TextView) findViewById(R.id.edt_password);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNotifyLogin.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        tvPassword =  findViewById(R.id.edt_password);
+        tvPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNotifyLogin.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         //Start button redirect scan activity
         buttonLogin = (Button) findViewById(R.id.btn_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -76,16 +113,18 @@ public class LoginActivity extends AppCompatActivity {
                     AuthRespone authRespone = response.body();
                     if (authRespone.isSuccess()) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        User user = authRespone.getUser();
+                        Constant.CURRENT_ROLE=user.getRole();
                         intent.putExtra("token", "Bearer " + authRespone.getToken());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
+                        finish();
                     }
                     else{
-                        runOnUiThread(() -> {
-                            Toast.makeText(getApplicationContext(), "Incorrect username or password!", Toast.LENGTH_SHORT).show();
-                        });
+
                     }
                 } else {
+                    tvNotifyLogin.setText("Incorrect phone number or password!");
                    Log.e(TAG,response.message());
                 }
             }

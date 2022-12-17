@@ -33,8 +33,8 @@ public interface CardAPI {
     Call<MessageResponse> createCard(@Header("Authorization") String token, @Body Card card);
 
     //Report card lost
-    @POST("api/cards/reportLost/{id}")
-    Call<MessageResponse> reportLost(@Header("Authorization") String token, @Path("id") String id);
+    @POST("api/cards/reportLost/{id}/{pkId}")
+    Call<MessageResponse> reportLost(@Header("Authorization") String token, @Path("id") String id,@Path("pkId") int parkingId);
 
     //Update available status for lost card
     @PATCH("api/cards/")

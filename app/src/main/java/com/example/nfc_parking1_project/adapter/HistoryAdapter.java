@@ -91,9 +91,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
             holder.timeOut.setText("OUT: "+ history.getTimeOut());
         }
         try {
-            if(history.getCardStatus().equals(Constant.CARD_STATUS_LOST))
-            {
+            if(history.getLostCardStatus()==1) {
                 holder.imgVehicle.setImageResource(R.drawable.icon_motor_red);
+            }
+            else{
+                holder.imgVehicle.setImageResource(R.drawable.icon_motor);
             }
         }catch (Exception e)
         {
@@ -113,7 +115,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
                 btnReportCardLost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        reportLostCard(history.getCardId());
+                        reportLostCard(history.getCardId(),history.getId());
                     }
                 });
                 tvCardId.setText(history.getCardId());
@@ -195,9 +197,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
         }
     }
 
-    private void reportLostCard(String id)
+    private void reportLostCard(String id,int historyId)
     {
-        CardAPI.cardApi.reportLost(token,id).enqueue(new Callback<MessageResponse>() {
+        CardAPI.cardApi.reportLost(token,id,historyId).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 try {
