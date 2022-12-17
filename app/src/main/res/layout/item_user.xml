@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/img_user"
             android:fontFamily="@font/quicksand_medium"
-            android:text="Tran Duc Thinh"
+            android:text=""
             android:textSize="18dp"
             android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:layout_toEndOf="@id/img_user"
-            android:src="@drawable/icon_location" />
+            android:src="@drawable/icon_badge_black" />
 
         <TextView
             android:id="@+id/tv_phone_number"
@@ -65,7 +65,7 @@
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/img_phone"
             android:fontFamily="@font/quicksand_medium"
-            android:text="0973583485" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_role"

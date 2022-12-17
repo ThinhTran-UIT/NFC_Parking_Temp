@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:text="This card has been reported lost before. Please recovery card\nif you want to re-use"
+        android:text="This card has been reported lost before. Please recovery card if you want to re-use"
         android:textSize="13dp"
         android:textStyle="bold"
         android:fontFamily="@font/quicksand_medium"/>

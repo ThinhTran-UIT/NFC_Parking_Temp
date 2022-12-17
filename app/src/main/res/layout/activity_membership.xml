@@ -77,55 +77,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/rounder_bg"/>
 
-    <ImageView
-        android:id="@+id/img_time_visit"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_gift"
-        android:background="@drawable/icon_time_visit" />
-
-    <TextView
-        android:id="@+id/tv_time_visit"
+    <RelativeLayout
+        android:id="@+id/rlt_time_visit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="55dp"
-        android:fontFamily="@font/quicksand_medium"
-        android:text="Time visits:"
-        android:textColor="@color/blue"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_time_visit"
-        app:layout_constraintTop_toBottomOf="@+id/img_gift" />
-
-    <ImageView
-        android:id="@+id/img_point"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_time_visit"
-        android:background="@drawable/medal" />
+        app:layout_constraintTop_toBottomOf="@+id/img_gift">
 
-    <TextView
-        android:id="@+id/tv_point"
+        <ImageView
+            android:id="@+id/img_time_visit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/icon_time_visit" />
+
+
+        <TextView
+            android:id="@+id/tv_time_visit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/img_time_visit"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="Time visits:"
+            android:textColor="@color/blue"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlt_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/quicksand_medium"
-        android:text="Points reward: "
-        android:textColor="@color/blue"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_point"
-        app:layout_constraintTop_toBottomOf="@+id/tv_time_visit" />
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlt_time_visit">
+        <ImageView
+            android:id="@+id/img_point"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/medal" />
+
+        <TextView
+            android:id="@+id/tv_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="Points reward: "
+            android:textColor="@color/blue"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_toEndOf="@+id/img_point"
+            />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_plateId_result"

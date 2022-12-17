@@ -58,7 +58,7 @@ public class CardFragment extends Fragment {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_card, null);
         cardList = new ArrayList<>();
-        Button btnAddCard = root.findViewById(R.id.btn_add_card);
+       /* Button btnAddCard = root.findViewById(R.id.btn_add_card);
         mainActivity = (MainActivity) getActivity();
         btnAddCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class CardFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), AddCardActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         rcvCard = (RecyclerView) root.findViewById(R.id.rcv_card);
         cardAdapter = new CardAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);

@@ -10,12 +10,12 @@
     android:id="@+id/dialog_phonenum_logout"
     android:elevation="5dp">
 
-
     <TextView
         android:id="@+id/tv_title_add_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:text="ADD NEW NFC CARD"
         android:textAlignment="center"
@@ -25,9 +25,9 @@
 
     <ImageView
         android:id="@+id/img_add_card"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/img_add_card"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icon_mobile_nfc"
         android:layout_below="@+id/tv_title_add_card"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"/>
@@ -45,15 +45,14 @@
         android:background="@drawable/rounded_corner_edittext"
         android:fontFamily="@font/quicksand_medium"
         android:gravity="center"
-        android:text=""
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_card_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Existing"
+        android:text=""
         android:textColor="#EED202"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -63,7 +62,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="104dp"
         android:layout_below="@+id/tv_card_status"
@@ -78,7 +77,9 @@
             android:id="@+id/btn_exit"
             android:layout_width="150dip"
             android:layout_height="55dip"
-            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
             android:background="@drawable/button_confirm_bg"
             android:text="EXIT"
             android:textColor="@color/white"
@@ -88,14 +89,14 @@
             android:id="@+id/btn_confirm"
             android:layout_width="150dip"
             android:layout_height="55dip"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="51dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/button_confirm_bg"
             android:fontFamily="@font/quicksand_medium"
             android:text="CONFIRM"
             android:textColor="@color/white"
             android:textSize="20sp" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
