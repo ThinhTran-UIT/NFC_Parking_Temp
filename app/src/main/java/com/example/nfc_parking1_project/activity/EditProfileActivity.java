@@ -1,8 +1,8 @@
 package com.example.nfc_parking1_project.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nfc_parking1_project.R;
 

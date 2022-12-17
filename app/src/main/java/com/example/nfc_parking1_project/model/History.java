@@ -2,33 +2,51 @@ package com.example.nfc_parking1_project.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 public class History {
     private int id;
 
     @SerializedName("license_number")
     private String licenseNumber;
 
+    @SerializedName("card_id")
+    private String cardId;
+
     @SerializedName("time_in")
-    private Date timeIn;
+    private String timeIn;
 
     @SerializedName("time_out")
-    private Date timeOut;
+    private String timeOut;
 
-    @SerializedName("userid_in")
-    private int userIdIn;
+    @SerializedName("name_user_checkin")
+    private String userCheckin;
 
-    @SerializedName("userid_out")
-    private int userIdOut;
+    @SerializedName("name_user_checkout")
+    private String userCheckout;
 
     @SerializedName("created_at")
-    private int createdDate;
+    private String createdDate;
 
     @SerializedName("updated_at")
-    private int updatedDate;
+    private String updatedDate;
 
-    public History(){};
+    @SerializedName("card_status")
+    private String cardStatus;
+
+    public String getCardStatus() {
+        return cardStatus;
+    }
+
+    public void setCardStatus(String cardStatus) {
+        this.cardStatus = cardStatus;
+    }
+
+    public History() {
+    }
+
+    public History(String licenseNumber, String cardId) {
+        this.licenseNumber = licenseNumber;
+        this.cardId = cardId;
+    }
 
     public int getId() {
         return id;
@@ -46,51 +64,78 @@ public class History {
         this.licenseNumber = licenseNumber;
     }
 
-    public Date getTimeIn() {
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    public String getTimeIn() {
         return timeIn;
     }
 
-    public void setTimeIn(Date timeIn) {
+    public void setTimeIn(String timeIn) {
         this.timeIn = timeIn;
     }
 
-    public Date getTimeOut() {
+    public String getTimeOut() {
         return timeOut;
     }
 
-    public void setTimeOut(Date timeOut) {
+    public void setTimeOut(String timeOut) {
         this.timeOut = timeOut;
     }
 
-    public int getUserIdIn() {
-        return userIdIn;
+    public String getUserCheckin() {
+        return userCheckin;
     }
 
-    public void setUserIdIn(int userIdIn) {
-        this.userIdIn = userIdIn;
+    public void setUserCheckin(String userCheckin) {
+        this.userCheckin = userCheckin;
     }
 
-    public int getUserIdOut() {
-        return userIdOut;
+    public String getUserCheckout() {
+        return userCheckout;
     }
 
-    public void setUserIdOut(int userIdOut) {
-        this.userIdOut = userIdOut;
+    public void setUserCheckout(String userCheckout) {
+        this.userCheckout = userCheckout;
     }
 
-    public int getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(int createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
-    public int getUpdatedDate() {
+    public String getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(int updatedDate) {
+    public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "id=" + id +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                ", cardId='" + cardId + '\'' +
+                ", timeIn='" + timeIn + '\'' +
+                ", timeOut='" + timeOut + '\'' +
+                ", userCheckin='" + userCheckin + '\'' +
+                ", userCheckout='" + userCheckout + '\'' +
+                ", createdDate='" + createdDate + '\'' +
+                ", updatedDate='" + updatedDate + '\'' +
+                '}';
+    }
+
+    ;
+
+
 }

@@ -6,49 +6,44 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.os.CountDownTimer;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class ConvertTextLicense {
-    public ConvertTextLicense(){};
     public static boolean isDetected = false;
+
+    ;
     public static String result = null;
     public static Map<String, Integer> licenseMapping = new HashMap<>();
     public static boolean isTimerRunning = false;
-
-
-    public static void init()
-    {
-        isDetected=false;
+    public ConvertTextLicense() {
     }
 
-    public static void destroyMapping(){
+    public static void init() {
+        isDetected = false;
+    }
+
+    public static void destroyMapping() {
         licenseMapping.clear();
-        isDetected=false;
-        isTimerRunning=false;
-        result=null;
+        isDetected = false;
+        isTimerRunning = false;
+        result = null;
     }
 
-    public static void setResult()
-    {
-        if(getMaxEntryInMapBasedOnValue(licenseMapping)!=null)
-        {
+    public static void setResult() {
+        if (getMaxEntryInMapBasedOnValue(licenseMapping) != null) {
             result = getMaxEntryInMapBasedOnValue(licenseMapping).getKey().toString();
+        } else {
+            result = null;
         }
-        else{
-            result=null;
-        }
-        isDetected=true;
+        isDetected = true;
     }
 
 
-    public static  String getTextRecognize()
-    {
-        if(isDetected)
-        {
+    public static String getTextRecognize() {
+        if (isDetected) {
             return result;
         }
         return null;
@@ -56,49 +51,6 @@ public class ConvertTextLicense {
     }
 
     //Create count down time for detection
-
-
-
-
-    public void convertText(String text) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            int asci = (int) text.charAt(i);
-            if ((asci > 47 && asci < 58) || (asci > 64 && asci < 91) ) {
-                if (result.length() == 2) {
-                    if (asci > 64 && asci < 91 && asci != 87) {
-                        result.append(text.charAt(i));
-                        continue;
-                    } else
-                        break;
-                }
-                if (result.length() == 4) {
-                    result.append("-");
-                }
-                if (result.length() >= 5) {
-                    if (asci > 64 && asci < 91) {
-                        break;
-                    }
-                }
-                result.append(text.charAt(i));
-            }
-        }
-        String key = result.toString();
-
-        if (key.length()>=8) {
-            if (licenseMapping.containsKey(key)) {
-                try{
-                    licenseMapping.put(key, licenseMapping.get(key) + 1);
-                }catch (Exception e)
-                {
-                }
-
-            } else {
-                licenseMapping.put(key, 1);
-            }
-
-        }
-    }
 
     //Find the license with higest indentical value
     // Find the entry with highest value
@@ -131,7 +83,6 @@ public class ConvertTextLicense {
         return entryWithMaxValue;
     }
 
-
     public static Bitmap toGrayscale(Bitmap bmpOriginal) {
         int width, height;
         height = bmpOriginal.getHeight();
@@ -146,6 +97,45 @@ public class ConvertTextLicense {
         paint.setColorFilter(f);
         c.drawBitmap(bmpOriginal, 0, 0, paint);
         return bmpGrayscale;
+    }
+
+    public void convertText(String text) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            int asci = (int) text.charAt(i);
+            if ((asci > 47 && asci < 58) || (asci > 64 && asci < 91)) {
+                if (result.length() == 2) {
+                    if (asci > 64 && asci < 91 && asci != 87) {
+                        result.append(text.charAt(i));
+                        continue;
+                    } else
+                        break;
+                }
+                if (result.length() == 4) {
+                    result.append("-");
+                }
+                if (result.length() >= 5) {
+                    if (asci > 64 && asci < 91) {
+                        break;
+                    }
+                }
+                result.append(text.charAt(i));
+            }
+        }
+        String key = result.toString();
+
+        if (key.length() >= 8) {
+            if (licenseMapping.containsKey(key)) {
+                try {
+                    licenseMapping.put(key, licenseMapping.get(key) + 1);
+                } catch (Exception e) {
+                }
+
+            } else {
+                licenseMapping.put(key, 1);
+            }
+
+        }
     }
 
     private Bitmap adjustedContrast(Bitmap src, double value) {

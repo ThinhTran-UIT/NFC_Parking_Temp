@@ -30,7 +30,7 @@
             android:lines="2"
             android:maxLines="2"
             android:paddingStart="15dp"
-            android:text="Testing Parking Lot, \nNumber of Vehicles: 10 Motor"
+            android:text="Testing Parking Lot, \n"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:fontFamily="@font/quicksand_medium"/>
@@ -64,7 +64,7 @@
 
         </LinearLayout>
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/sv_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_first"
@@ -81,7 +81,7 @@
             android:id="@+id/rcv_vehicle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/searchView"
+            android:layout_below="@+id/sv_history"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="0dp"

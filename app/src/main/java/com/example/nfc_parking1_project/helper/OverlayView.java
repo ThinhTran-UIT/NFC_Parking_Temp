@@ -13,9 +13,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import com.example.nfc_parking1_project.R;
 
 import org.tensorflow.lite.task.vision.detector.Detection;
 
@@ -25,12 +22,29 @@ import java.util.List;
 
 public class OverlayView extends View {
 
+    private static final String LICENSE = "License";
     private List<Detection> result = new LinkedList<Detection>();
     private Paint boxPaint = new Paint();
     private Paint textBackgroundPaint = new Paint();
-    private Paint textPaint =  new Paint();
-    private static final String LICENSE = "License";
+    private Paint textPaint = new Paint();
     private Float scaleFactor = 1f;
+    private Rect bounds = new Rect();
+
+    public OverlayView(Context context) {
+        super(context);
+    }
+
+    public OverlayView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public OverlayView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public OverlayView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
 
     @SuppressLint("ResourceAsColor")
     private void initPaints() {
@@ -50,7 +64,7 @@ public class OverlayView extends View {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        for (Detection d:result) {
+        for (Detection d : result) {
             RectF boundingBox = d.getBoundingBox();
             float top = boundingBox.top * scaleFactor;
             float bottom = boundingBox.bottom * scaleFactor;
@@ -81,23 +95,6 @@ public class OverlayView extends View {
 //            // Draw text for detected object
 //            canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
         }
-    }
-
-    private Rect bounds = new Rect();
-    public OverlayView(Context context) {
-        super(context);
-    }
-
-    public OverlayView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public OverlayView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    public OverlayView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
 }

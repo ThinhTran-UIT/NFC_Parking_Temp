@@ -1,33 +1,22 @@
 package com.example.nfc_parking1_project.activity;
 
-import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG;
-import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.biometrics.BiometricManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.api.AuthAPI;
 import com.example.nfc_parking1_project.api.AuthRespone;
-import com.example.nfc_parking1_project.api.MessageResponse;
 import com.example.nfc_parking1_project.model.Auth;
-import com.example.nfc_parking1_project.model.User;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -37,11 +26,12 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 101010;
+    private final String TAG = "Login Activity";
     private Button buttonLogin;
     private TextView tvPhoneNumber;
     private TextView tvPassword;
     private Context mContext;
-    private final String TAG = "Login Activity";
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                     String phoneNumber = tvPhoneNumber.getText().toString();
                     String password = tvPassword.getText().toString();
                     Auth auth = new Auth(phoneNumber, password);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-//                    callApiLogin(auth);
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+                    callApiLogin(auth);
                 } catch (Exception e) {
                     Log.d("Login Activity", e.getMessage());
                     Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -76,28 +66,33 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void callApiLogin(Auth auth) {
+        Log.d("Login Activity", "api work");
 
         AuthAPI.authApi.login(auth).enqueue(new Callback<AuthRespone>() {
             @Override
             public void onResponse(Call<AuthRespone> call, Response<AuthRespone> response) {
-                if(response.code()==200) {
+                Log.d("Login Activity", String.valueOf(response.code()));
+                if (response.code() == 200) {
                     AuthRespone authRespone = response.body();
                     if (authRespone.isSuccess()) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("token",authRespone.getToken());
+                        intent.putExtra("token", "Bearer " + authRespone.getToken());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
                     }
-                }else {
-                    runOnUiThread(()->{
-                        Toast.makeText(getApplicationContext(), "Incorrect username or password!", Toast.LENGTH_SHORT).show();
-                    });
+                    else{
+                        runOnUiThread(() -> {
+                            Toast.makeText(getApplicationContext(), "Incorrect username or password!", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                } else {
+                   Log.e(TAG,response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<AuthRespone> call, Throwable t) {
-
+                Log.e(TAG,t.getMessage());
             }
         });
 

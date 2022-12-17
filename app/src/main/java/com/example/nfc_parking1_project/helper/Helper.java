@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.util.Log;
 
-import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.task.vision.detector.Detection;
 
@@ -12,6 +11,7 @@ import java.util.List;
 
 public class Helper {
     private static final String TAG = "Helper";
+
     public static Bitmap bitmapFromRgba(int width, int height, byte[] bytes) {
         int[] pixels = new int[bytes.length / 4];
         int j = 0;
@@ -31,23 +31,39 @@ public class Helper {
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;
     }
-    public static float debugPrint(List<Detection> results)
-    {
-        float score =0;
-        for (Detection d: results) {
+
+    public static float debugPrint(List<Detection> results) {
+        float score = 0;
+        for (Detection d : results) {
             RectF a = d.getBoundingBox();
-            Log.d(TAG,"Detected object:");
-            Log.d(TAG," bouding box:"+ "( "+a.left+ ","+ a.top+"),("+a.right+","+a.bottom+")");
+            Log.d(TAG, "Detected object:");
+            Log.d(TAG, " bouding box:" + "( " + a.left + "," + a.top + "),(" + a.right + "," + a.bottom + ")");
 
             List<Category> categories = d.getCategories();
-            for (Category c:categories) {
-                Log.d(TAG,"Detect Label "+c.getLabel());
-                Log.d(TAG,"Detect Score "+c.getScore());
-                Log.d(TAG,"Detect Location "+c.getScore());
+            for (Category c : categories) {
+                Log.d(TAG, "Detect Label " + c.getLabel());
+                Log.d(TAG, "Detect Score " + c.getScore());
+                Log.d(TAG, "Detect Location " + c.getScore());
                 score = c.getScore();
 
             }
         }
         return score;
+    }
+
+    public static boolean validationPhoneNumber(String phoneNumber) {
+        return Constant.phoneNumberPattern.matcher(phoneNumber).matches();
+    }
+
+    public static boolean validationPassword(String password) {
+        return Constant.passwordPattern.matcher(password).matches();
+    }
+
+    public static boolean isPhoneNumberSearch(String search){
+        return Constant.regexPhoneNumberPatternFilter.matcher(search).matches();
+    }
+    public static  boolean isCustomerNameSearch(String search)
+    {
+        return Constant.regexNamePatternFilter.matcher(search).matches();
     }
 }

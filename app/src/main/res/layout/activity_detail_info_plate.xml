@@ -53,111 +53,95 @@
             android:background="@drawable/white_corner_background"
             android:paddingTop="20dp"
             android:paddingBottom="20dp">
-
-            <ImageView
-                android:id="@+id/img_watch_in"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+            <RelativeLayout
+                android:id="@+id/rlt_time_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/icon_watch_green" />
+                android:layout_marginStart="15dp">
+                <ImageView
+                    android:id="@+id/img_watch_in"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/icon_watch_green" />
 
-            <TextView
-                android:id="@+id/tv_time_in"
+                <TextView
+                    android:id="@+id/tv_time_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/img_watch_in"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="Time in: 11:23"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlt_card_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/rlt_time_in"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/img_watch_in"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="Time in: 11:23"
-                android:textColor="@color/blue"
-                android:textSize="17sp" />
+                android:layout_marginTop="7dp">
+                <ImageView
+                    android:id="@+id/img_card"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/icon_nfc_card" />
 
-            <ImageView
-                android:id="@+id/img_watch_out"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_below="@id/img_watch_in"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/icon_watch_red" />
+                <TextView
+                    android:id="@+id/tv_card_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@id/img_card"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="Card ID: 13658749632"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_time_out"
+            <RelativeLayout
+                android:id="@+id/rlt_userid_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_time_in"
+                android:layout_below="@+id/rlt_card_id"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/img_watch_out"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="Time out: 12:34"
-                android:textColor="@color/blue"
-                android:textSize="17sp" />
+                android:layout_marginTop="7dp">
+                <ImageView
+                    android:id="@+id/img_badge_in"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/icon_badge_black" />
 
-            <ImageView
-                android:id="@+id/img_card"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_below="@id/img_watch_out"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/icon_nfc_card" />
+                <TextView
+                    android:id="@+id/tv_staff_confirm_getin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/img_badge_in"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:text="Confirm Get-In: Tran Duc Thinh"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp" />
 
-            <TextView
-                android:id="@+id/tv_card_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_time_out"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/img_card"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="Card ID: 13658749632"
-                android:textColor="@color/blue"
-                android:textSize="17sp" />
+            </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/img_badge_in"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_below="@+id/img_card"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/icon_badge_black" />
 
-            <TextView
-                android:id="@+id/tv_staff_confirm_getin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_card_id"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="12dp"
-                android:layout_toEndOf="@+id/img_badge_in"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="Confirm Get-In: Tran Duc Thinh"
-                android:textColor="@color/blue"
-                android:textSize="17sp" />
 
-            <ImageView
-                android:id="@+id/img_badge_out"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_below="@+id/img_badge_in"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/icon_badge_black" />
-
-            <TextView
-                android:id="@+id/tv_staff_confirm_getout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_staff_confirm_getin"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="11dp"
-                android:layout_toEndOf="@+id/img_badge_out"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="Confirm Get-Out: Tran Duc Thinh"
-                android:textColor="@color/blue"
-                android:textSize="17sp" />
         </RelativeLayout>
 
         <Button

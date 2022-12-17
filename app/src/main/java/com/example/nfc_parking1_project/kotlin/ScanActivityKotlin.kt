@@ -4,7 +4,6 @@ package com.example.nfc_parking1_project.kotlin
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,13 +13,17 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.nfc_parking1_project.R
+import com.example.nfc_parking1_project.api.HistoryAPI
+import com.example.nfc_parking1_project.api.MessageResponse
 import com.example.nfc_parking1_project.databinding.ActivityscanBinding
 import com.example.nfc_parking1_project.helper.ConvertTextLicense
 import com.example.nfc_parking1_project.helper.ObjectDetectorHelper
+import com.example.nfc_parking1_project.model.History
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import org.tensorflow.lite.task.vision.detector.Detection
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -36,6 +39,8 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
     private var preview: Preview? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
+    private var token:String=""
+    private var cardId:String=""
     val regex = "\\d{2}-\\w\\d-\\d{4,5}".toRegex()
     private lateinit var cameraExecutor: ExecutorService
 
@@ -48,8 +53,16 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activityscan);
+        val bundle = intent.extras
+        try{
+            token = bundle?.getString("token").toString()
+            cardId = bundle?.getString("cardId").toString()
+        }catch (e:Exception){
+            Log.d(TAG, e.message.toString());
+        }
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activityscan);
+        binding.tvCardId.text = cardId;
         objectDetectorHelper = ObjectDetectorHelper(
             context = this@ScanActivityKotlin,
             objectDetectorListener = this
@@ -69,9 +82,65 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
             binding.tvNotifyScan.text = "";
             binding.tvPlateIdResult.text = "";
         }
+        binding.btnExit.setOnClickListener{
+            finish();
+        }
 
+        binding.btnConfirm.setOnClickListener{
+           confirmCheckout();
+        }
     }
 
+
+    private fun confirmCheckout() {
+        val cardId = binding.tvCardId.text.toString()
+        val licensPlate = binding.tvPlateIdResult.text.toString()
+        val history = History(licensPlate,cardId);
+        Log.d(TAG,history.toString())
+        if(history.licenseNumber.isEmpty()){
+            binding.tvNotifyScan.text = "License number not found!"
+        }else{
+            Log.d(TAG,token);
+        }
+        try{
+            HistoryAPI.historyApi.createHistory(token, history)
+                .enqueue(object : Callback<MessageResponse> {
+                    override fun onResponse(
+                        call: Call<MessageResponse>,
+                        response: Response<MessageResponse>
+                    ) {
+                        try {
+                            if (response.code() == 200) {
+                                val messageResponse = response.body()
+                                if (messageResponse.success) {
+                                    Toast.makeText(baseContext, messageResponse.message, Toast.LENGTH_SHORT)
+                                        .show()
+                                    finish()
+                                } else {
+                                    Toast.makeText(baseContext, messageResponse.message, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            } else {
+                                Log.d(TAG, response.message())
+                                Toast.makeText(baseContext,"Server Error!", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        } catch (e: java.lang.Exception) {
+                            Log.d(TAG, e.message!!)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                        Log.d(TAG, t.message!!)
+                    }
+                })
+        }catch (e:Exception)
+        {
+            Log.d(TAG, e.message!!)
+        }
+
+
+    }
 
 
 
@@ -201,5 +270,6 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
             Toast.makeText(this@ScanActivityKotlin, error, Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

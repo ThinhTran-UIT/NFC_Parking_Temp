@@ -1,40 +1,60 @@
 package com.example.nfc_parking1_project.fragment;
 
+
+
+
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import androidx.appcompat.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nfc_parking1_project.R;
-import com.example.nfc_parking1_project.activity.AddCardActivity;
 import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.activity.MembershipActivity;
-import com.example.nfc_parking1_project.model.Vehicle;
-import com.example.nfc_parking1_project.adapter.VehicleAdapter;
+import com.example.nfc_parking1_project.adapter.HistoryAdapter;
+import com.example.nfc_parking1_project.api.HistoryAPI;
+import com.example.nfc_parking1_project.model.History;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HistoryFragment extends Fragment {
 
-    private RecyclerView rcvVehicle;
-    private VehicleAdapter vehicleAdapter;
+    final static String TAG = "HistoryFragment";
     MainActivity mainActivity;
-
+    RadioGroup radioFilter;
+    RadioButton vehicleIn;
+    RadioButton historyVehicle;
+    RadioButton reportLost;
+    Dialog dialogFilter;
+    private RecyclerView rcvVehicle;
+    private HistoryAdapter vehicleAdapter;
+    private TextView countHistory;
+    private List<History> histories;
+    private String token;
+    private SearchView searchBar;
     public HistoryFragment() {
         // Required empty public constructor
     }
@@ -44,65 +64,203 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_history, null);
-
+        //Get authorize token
+        Bundle bundle = this.getArguments();
+        try {
+            if (bundle != null) {
+                token = bundle.getString("token");
+            }
+            Log.d(TAG, token);
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
         Button btnMembership = root.findViewById(R.id.btn_membership);
-        mainActivity = (MainActivity)getActivity();
+        countHistory = root.findViewById(R.id.tv_first);
+        mainActivity = (MainActivity) getActivity();
+        //Set up dialog filter
+        setUpDialogFilter();
+        //Set up Onclick event button in fragment
         btnMembership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MembershipActivity.class);
+                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
-
         Button btnFilter = root.findViewById(R.id.btn_filter);
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog();
+                dialogFilter.show();
             }
         });
 
+        //handle filter
+
+        //implement search
+        setUpSearch(root);
+
+
         rcvVehicle = (RecyclerView) root.findViewById(R.id.rcv_vehicle);
-        vehicleAdapter = new VehicleAdapter(this.getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(),RecyclerView.VERTICAL,false);
+        vehicleAdapter = new HistoryAdapter(this.getContext(),token);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
         rcvVehicle.setLayoutManager(linearLayoutManager);
-        vehicleAdapter.setData(getListData());
         rcvVehicle.setAdapter(vehicleAdapter);
+        callApiGetHistories();
+
         // Inflate the layout for this fragment
         return root;
     }
 
-    private void showDialog() {
-        final Dialog dialogFilter = new Dialog(getContext());
+
+    private void callApiGetHistories() {
+        HistoryAPI.historyApi.getHistories(token).enqueue(new Callback<List<History>>() {
+            @Override
+            public void onResponse(Call<List<History>> call, Response<List<History>> response) {
+                Log.d("History Fragment", "On Response");
+                if (response.code() == 200) {
+                    histories = response.body();
+                    Log.d("History Fragment", "recived data");
+                    vehicleAdapter.setData(histories);
+                    countHistory.setText(String.format("Number of vehicle: %s", vehicleAdapter.getItemCount()));
+                    rcvVehicle.setAdapter(vehicleAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Can not get history", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<History>> call, Throwable t) {
+                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                Log.d("History Fragment", t.getMessage());
+            }
+        });
+    }
+
+    private void getCurrentHistories() {
+        HistoryAPI.historyApi.getCurrentHistory(token).enqueue(new Callback<List<History>>() {
+            @Override
+            public void onResponse(Call<List<History>> call, Response<List<History>> response) {
+                if (response.code() == 200) {
+                    histories = response.body();
+                    Log.d("History Fragment", "recived data");
+                    vehicleAdapter.setData(histories);
+                    countHistory.setText(String.format("Number of vehicle: %s", vehicleAdapter.getItemCount()));
+                    rcvVehicle.setAdapter(vehicleAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Can not get history", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<History>> call, Throwable t) {
+                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                Log.d("History Fragment", t.getMessage());
+            }
+        });
+    }
+
+
+    private void setUpDialogFilter() {
+        dialogFilter = new Dialog(getContext());
         dialogFilter.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogFilter.setContentView(R.layout.dialog_bottom_filter);
-
-        RadioButton vehicleInLayout = dialogFilter.findViewById(R.id.radio_one);
-        RadioButton historyVehicleLayout = dialogFilter.findViewById(R.id.radio_two);
-        RadioButton reportLostLayout = dialogFilter.findViewById(R.id.radio_three);
-
-        dialogFilter.show();
         dialogFilter.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialogFilter.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogFilter.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialogFilter.getWindow().setGravity(Gravity.BOTTOM);
+        vehicleIn = dialogFilter.findViewById(R.id.radio_one);
+        historyVehicle = dialogFilter.findViewById(R.id.radio_two);
+        reportLost = dialogFilter.findViewById(R.id.radio_three);
+        radioFilter = dialogFilter.findViewById(R.id.radioGroup);
+
+        radioFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radio_one:
+                        getCurrentHistories();
+                        dialogFilter.cancel();
+                        break;
+                    case R.id.radio_two:
+                        callApiGetHistories();
+                        dialogFilter.cancel();
+                        break;
+                    case R.id.radio_three:
+                        getLostCardHistories();
+                        dialogFilter.cancel();
+                        break;
+                }
+            }
+        });
+
+//        vehicleIn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getCurrentHistories();
+//                dialogFilter.cancel();
+//            }
+//        });
+//        historyVehicle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                callApiGetHistories();
+//                dialogFilter.cancel();
+//            }
+//        });
+//
+//        reportLost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getLostCardHistories();
+//                dialogFilter.cancel();
+//            }
+//        });
+
 
     }
 
-    private List<Vehicle> getListData()
-    {
-        List<Vehicle> vehicleList = new ArrayList<>();
+    private void setUpSearch(View v){
+        searchBar = v.findViewById(R.id.sv_history);
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                vehicleAdapter.getFilter().filter(query);
+                return false;
+            }
 
-        vehicleList.add(new Vehicle("134245234","71-B2\n12312"));
-        vehicleList.add(new Vehicle("212423433","71-B2\n12312"));
-        vehicleList.add(new Vehicle("235345633","71-B2\n12312"));
-        vehicleList.add(new Vehicle("142354654","71-B2\n12312"));
-        vehicleList.add(new Vehicle("223454363","71-B2\n12312"));
-        vehicleList.add(new Vehicle("323453215","71-B2\n12312"));
-        vehicleList.add(new Vehicle("114235362","71-B2\n12312"));
-        vehicleList.add(new Vehicle("223534621","71-B2\n12312"));
-
-        return vehicleList;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                vehicleAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
+
+
+    private void getLostCardHistories() {
+        HistoryAPI.historyApi.getLostCardHistory(token).enqueue(new Callback<List<History>>() {
+            @Override
+            public void onResponse(Call<List<History>> call, Response<List<History>> response) {
+                if (response.code() == 200) {
+                    histories = response.body();
+                    Log.d("History Fragment", "recived data");
+                    vehicleAdapter.setData(histories);
+                    countHistory.setText(String.format("Number of vehicle: %s", vehicleAdapter.getItemCount()));
+                    rcvVehicle.setAdapter(vehicleAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Can not get history", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<History>> call, Throwable t) {
+                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                Log.d("History Fragment", t.getMessage());
+            }
+        });
+    }
+
 }

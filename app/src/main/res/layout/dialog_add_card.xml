@@ -10,6 +10,7 @@
     android:id="@+id/dialog_phonenum_logout"
     android:elevation="5dp">
 
+
     <TextView
         android:id="@+id/tv_title_add_card"
         android:layout_width="wrap_content"
@@ -62,31 +63,39 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"/>
 
-    <Button
-        android:id="@+id/btn_exit"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
         android:layout_below="@+id/tv_card_status"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_confirm_bg"
-        android:text="EXIT"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="-1dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_confirm"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/tv_card_status"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/button_confirm_bg"
-        android:text="CONFIRM"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/quicksand_medium"/>
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="150dip"
+            android:layout_height="55dip"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_confirm_bg"
+            android:text="EXIT"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="150dip"
+            android:layout_height="55dip"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="51dp"
+            android:background="@drawable/button_confirm_bg"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="CONFIRM"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </RelativeLayout>
