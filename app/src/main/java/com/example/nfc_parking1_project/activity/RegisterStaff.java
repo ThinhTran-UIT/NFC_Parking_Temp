@@ -24,10 +24,12 @@ public class RegisterStaff extends AppCompatActivity {
 
     public static final String TAG = "RegisterStaff";
     private Button btnRegister;
+    private Button btnHome;
     private TextView tvStaffName;
     private TextView tvPhoneNumber;
     private TextView tvPassword;
     private TextView tvConfirmPassword;
+    private  TextView tvNotify;
     private String token;
 
     @Override
@@ -42,7 +44,7 @@ public class RegisterStaff extends AppCompatActivity {
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
         }
-
+        tvNotify = findViewById(R.id.tv_notify_register);
         tvStaffName = findViewById(R.id.edt_full_name);
         tvPhoneNumber = findViewById(R.id.edt_phone_number);
         tvPassword = findViewById(R.id.edt_password);
@@ -62,32 +64,45 @@ public class RegisterStaff extends AppCompatActivity {
                         User user = new User(name, phoneNumber, password);
                         callApiCreateStaff(user);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Password not match! ", Toast.LENGTH_SHORT).show();
+                        tvNotify.setText("Password doest not match!");
                     }
                 } else {
                     if (!Helper.validationPhoneNumber(phoneNumber)) {
-                        Toast.makeText(getApplicationContext(), "Invalid phone number", Toast.LENGTH_SHORT).show();
+                        tvNotify.setText("Invalid phone number");
                     } else if (!Helper.validationPassword(password)) {
-                        Toast.makeText(getApplicationContext(), "Invalid password", Toast.LENGTH_SHORT).show();
+                        tvNotify.setText("Invalid password");
                     }
 
                 }
             }
         });
 
+        btnHome= findViewById(R.id.btn_home);
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void callApiCreateStaff(User user) {
+        Log.d(TAG,user.toString());
         UserAPI.userApi.createStaff(token, user).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                if (response.code() == 201) {
+                if (response.code() == 200) {
                     MessageResponse messageResponse = response.body();
-                    Toast.makeText(getApplicationContext(), messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterStaff.this, MainActivity.class);
-                    startActivity(intent);
+                    if(messageResponse.getSuccess())
+                    {
+                        tvNotify.setText(messageResponse.getMessage());
+                    }else {
+                        tvNotify.setText(messageResponse.getMessage());
+                    }
+
                 } else {
-                    Toast.makeText(RegisterStaff.this, response.message(), Toast.LENGTH_SHORT).show();
+                    tvNotify.setText(response.message());
                 }
 
             }

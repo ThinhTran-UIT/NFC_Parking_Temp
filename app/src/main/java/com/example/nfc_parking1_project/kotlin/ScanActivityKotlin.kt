@@ -60,7 +60,6 @@ class ScanActivityKotlin : AppCompatActivity(), ObjectDetectorHelper.DetectorLis
         }catch (e:Exception){
             Log.d(TAG, e.message.toString());
         }
-
         binding = DataBindingUtil.setContentView(this, R.layout.activityscan);
         binding.tvCardId.text = cardId;
         objectDetectorHelper = ObjectDetectorHelper(

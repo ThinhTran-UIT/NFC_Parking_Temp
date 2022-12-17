@@ -1,6 +1,7 @@
 package com.example.nfc_parking1_project.adapter;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -80,13 +81,25 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
         String line2 = licenseNumber.substring(2);
         licenseNumber = line1 + "-" + line2;
         holder.tvPlateId.setText(licenseNumber);
-        holder.timeIn.setText(history.getTimeIn());
-        holder.timeOut.setText(history.getTimeOut());
-        if(history.getCardStatus().equals(Constant.CARD_STATUS_LOST))
+        holder.timeIn.setText("IN: "+history.getTimeIn());
+        if(history.getTimeOut() == null)
         {
-
-            holder.imgVehicle.setImageResource(R.drawable.icon_motor_red);
+            holder.timeOut.setText("OUT: N/A");
         }
+        else
+        {
+            holder.timeOut.setText("OUT: "+ history.getTimeOut());
+        }
+        try {
+            if(history.getCardStatus().equals(Constant.CARD_STATUS_LOST))
+            {
+                holder.imgVehicle.setImageResource(R.drawable.icon_motor_red);
+            }
+        }catch (Exception e)
+        {
+            Log.d("HistoryAdapter",e.getMessage());
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,12 +119,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
                 tvCardId.setText(history.getCardId());
                 tvLicensePlate.setText(history.getLicenseNumber());
                 tvTimeIn.setText(history.getTimeIn());
-                tvTimeOut.setText(history.getTimeOut());
-                try {
-                    tvConfirmGetIn.setText(history.getUserCheckin());
+                if(history.getTimeOut()==null)
+                {
+                    tvTimeOut.setText("N/A");
+                }
+                else {
+                    tvTimeOut.setText(history.getTimeOut());
+                }
+                tvConfirmGetIn.setText(history.getUserCheckin());
+                if(history.getUserCheckout()==null) {
+                    tvConfirmGetOut.setText("N/A");
+                }else {
                     tvConfirmGetOut.setText(history.getUserCheckout());
-                } catch (Exception e) {
-
                 }
                 vehicleDialog.show();
             }
@@ -168,7 +187,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
 
         public VehicleViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imgVehicle = itemView.findViewById(R.id.img_vehicle);
             tvCardId = itemView.findViewById(R.id.tv_card_id);
             tvPlateId = itemView.findViewById(R.id.tv_plate_id);

@@ -85,6 +85,8 @@ public class ProfileFragment extends Fragment {
         btnEditProfileDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tvNewFullName.setText(tvProfileName.getText());
+                tvNewPhoneNumber.setText(tvProfilePhoneNumber.getText());
                 editProfileDialog.show();
             }
         });
