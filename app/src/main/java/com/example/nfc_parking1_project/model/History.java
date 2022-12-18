@@ -35,6 +35,15 @@ public class History {
     private int lostCardStatus;
     @SerializedName("report_lost_at")
     private String reportLostTime;
+
+    public String getReportLostTime() {
+        return reportLostTime;
+    }
+
+    public void setReportLostTime(String reportLostTime) {
+        this.reportLostTime = reportLostTime;
+    }
+
     public int getLostCardStatus() {
         return lostCardStatus;
     }

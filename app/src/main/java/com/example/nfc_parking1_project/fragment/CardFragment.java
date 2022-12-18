@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.activity.AddCardActivity;
@@ -37,7 +38,7 @@ public class CardFragment extends Fragment {
     private List<Card> cardList;
     private TextView cardNumber;
     private String token;
-
+    private SwipeRefreshLayout swipeCard;
     public CardFragment() {
         // Required empty public constructor
     }
@@ -76,9 +77,19 @@ public class CardFragment extends Fragment {
         cardNumber.setText(String.format("Number of parking card: %s", cardAdapter.getItemCount()));
         rcvCard.setAdapter(cardAdapter);
         callApiGetCard();
+        setUpSwipeCard(root);
         return root;
     }
-
+    private void setUpSwipeCard(View view){
+        swipeCard = view.findViewById(R.id.swipe_card);
+        swipeCard.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callApiGetCard();
+                swipeCard.setRefreshing(false);
+            }
+        });
+    }
     private void callApiGetCard() {
         CardAPI.cardApi.getCards(token).enqueue(new Callback<List<Card>>() {
             @Override

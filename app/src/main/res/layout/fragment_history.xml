@@ -77,16 +77,20 @@
             android:paddingBottom="2dp"
             app:iconifiedByDefault="false"
             app:queryHint="Search Card ID" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_vehicle"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sv_history"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="0dp"
-            android:padding="5dp" />
+            android:layout_alignParentBottom="true">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:padding="5dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

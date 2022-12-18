@@ -28,10 +28,8 @@ public class Detail_Info_Plate extends AppCompatActivity {
     private Button buttonConfirm;
     private TextView tvLicensePlate;
     private TextView tvTimeIn;
-    private TextView tvTimeOut;
     private TextView tvCardId;
     private TextView tvUserIdIn;
-    private TextView tvUserIdOut;
     private String token;
 
     @SuppressLint("MissingInflatedId")
@@ -51,10 +49,7 @@ public class Detail_Info_Plate extends AppCompatActivity {
         tvLicensePlate = findViewById(R.id.tv_plateId_result);
         tvCardId = findViewById(R.id.tv_card_id);
         tvTimeIn = findViewById(R.id.tv_time_in);
-        tvTimeOut = findViewById(R.id.tv_time_out);
         tvUserIdIn = findViewById(R.id.tv_staff_confirm_getin);
-        tvUserIdOut = findViewById(R.id.tv_staff_confirm_getout);
-
         //Start button Exit
         buttonExit = (Button) findViewById(R.id.btn_exit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
@@ -90,15 +85,9 @@ public class Detail_Info_Plate extends AppCompatActivity {
                         tvLicensePlate.setText(history.getLicenseNumber());
                         tvCardId.setText(history.getCardId());
                         tvTimeIn.setText(history.getTimeIn());
-                        tvTimeOut.setText("N/A");
                         if (!history.getUserCheckin().isEmpty()) {
                             tvUserIdIn.setText(history.getUserCheckin());
-                            tvUserIdOut.setText(history.getUserCheckout());
-                        } else {
-                            tvUserIdIn.setText("N/A");
-                            tvUserIdOut.setText("N/A");
                         }
-
                     } else {
                         Toast.makeText(getApplicationContext(), "Server Error!", Toast.LENGTH_SHORT).show();
                     }

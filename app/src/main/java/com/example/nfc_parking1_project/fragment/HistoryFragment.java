@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.activity.MainActivity;
@@ -48,6 +49,7 @@ public class HistoryFragment extends Fragment {
     RadioButton vehicleIn;
     RadioButton historyVehicle;
     RadioButton reportLost;
+    SwipeRefreshLayout swipeHistory;
     Dialog dialogFilter;
     private RecyclerView rcvVehicle;
     private HistoryAdapter vehicleAdapter;
@@ -108,11 +110,24 @@ public class HistoryFragment extends Fragment {
         rcvVehicle.setLayoutManager(linearLayoutManager);
         rcvVehicle.setAdapter(vehicleAdapter);
         callApiGetHistories();
+        //Set up swipe history
+        setUpSwipeHistory(root);
+
 
         // Inflate the layout for this fragment
         return root;
     }
 
+    private void setUpSwipeHistory(View v){
+        swipeHistory = v.findViewById(R.id.swipe_history);
+        swipeHistory.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callApiGetHistories();
+                swipeHistory.setRefreshing(false);
+            }
+        });
+    }
 
     private void callApiGetHistories() {
         HistoryAPI.historyApi.getHistories(token).enqueue(new Callback<List<History>>() {

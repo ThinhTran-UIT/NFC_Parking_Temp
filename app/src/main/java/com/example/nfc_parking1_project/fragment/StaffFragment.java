@@ -14,6 +14,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.activity.MainActivity;
@@ -39,6 +40,7 @@ public class StaffFragment extends Fragment {
     private TextView numberStaff;
     private String token;
     private SearchView searchBar;
+    private SwipeRefreshLayout swipeUser;
     public StaffFragment() {
         // Required empty public constructor
     }
@@ -86,7 +88,19 @@ public class StaffFragment extends Fragment {
 //        userAdapter.setData(getListData());
         rcvUser.setAdapter(userAdapter);
         callApiGetAllStaff();
+        setUpSwipeUser(view);
         return view;
+    }
+
+    private void setUpSwipeUser(View view){
+        swipeUser =  view.findViewById(R.id.swipe_user);
+        swipeUser.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callApiGetAllStaff();
+                swipeUser.setRefreshing(false);
+            }
+        });
     }
     private void setUpSearch(View v){
         searchBar = v.findViewById(R.id.sv_user);

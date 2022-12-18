@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.api.CardAPI;
+import com.example.nfc_parking1_project.api.HistoryAPI;
 import com.example.nfc_parking1_project.api.MessageResponse;
 import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.model.History;
@@ -107,15 +108,24 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
             public void onClick(View view) {
                 TextView tvCardId = vehicleDialog.findViewById(R.id.tv_card_id);
                 TextView tvLicensePlate = vehicleDialog.findViewById(R.id.tv_license_plate);
-                TextView tvTimeIn = vehicleDialog.findViewById(R.id.tv_time_in);
                 TextView tvTimeOut = vehicleDialog.findViewById(R.id.tv_time_out);
+                TextView tvTimeIn = vehicleDialog.findViewById(R.id.tv_time_in);
                 TextView tvConfirmGetIn = vehicleDialog.findViewById(R.id.tv_staff_confirm_getin);
                 TextView tvConfirmGetOut = vehicleDialog.findViewById(R.id.tv_staff_confirm_getout);
+                TextView timeReportLost = vehicleDialog.findViewById(R.id.tv_time_report_lost);
                 Button btnReportCardLost = vehicleDialog.findViewById(R.id.btn_report_lost);
+                ImageView imgTimeReprot = vehicleDialog.findViewById(R.id.img_lost);
                 btnReportCardLost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        reportLostCard(history.getCardId(),history.getId());
+                        if(history.getLostCardStatus()==1)
+                        {
+                            confirmCheckoutLostCard(history.getId());
+                        }
+                        else
+                        {
+                            reportLostCard(history.getCardId(),history.getId());
+                        }
                     }
                 });
                 tvCardId.setText(history.getCardId());
@@ -133,6 +143,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
                     tvConfirmGetOut.setText("N/A");
                 }else {
                     tvConfirmGetOut.setText(history.getUserCheckout());
+                }
+                if(history.getLostCardStatus()==1){
+                    btnReportCardLost.setText("Confirm checkout");
+                    timeReportLost.setText(history.getReportLostTime());
+                    timeReportLost.setVisibility(View.VISIBLE);
+                    imgTimeReprot.setVisibility(View.VISIBLE);
+                }
+                else if(history.getLostCardStatus()==0)
+                {
+                    btnReportCardLost.setText("Report Lost");
+                    timeReportLost.setVisibility(View.INVISIBLE);
+                    imgTimeReprot.setVisibility(View.INVISIBLE);
                 }
                 vehicleDialog.show();
             }
@@ -232,4 +254,33 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
             }
         });
     }
+    private void confirmCheckoutLostCard(int historyId) {
+        HistoryAPI.historyApi.confirmCheckoutLostCard(token, historyId).enqueue(new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                try {
+                    if (response.code() == 200) {
+                        MessageResponse messageResponse = response.body();
+                        if (messageResponse.getSuccess()) {
+                            Toast.makeText(mContext, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(Detail_Info_Plate.this, MainActivity.class);
+//                            intent.putExtra("token",token);
+//                            startActivity(intent);
+                           vehicleDialog.cancel();
+                        } else {
+                            Toast.makeText(mContext, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.d("HistoryAdapter", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+                Log.d("HistoryAdapter", t.getMessage());
+            }
+        });
+    }
+
 }

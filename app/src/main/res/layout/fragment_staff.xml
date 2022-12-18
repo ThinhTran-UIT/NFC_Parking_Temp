@@ -59,15 +59,20 @@
             android:background="@drawable/search_view_bg"
             app:iconifiedByDefault="false"
             app:queryHint="Enter Full Name/Phone Number" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_staff"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sv_user"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentBottom="true"
-            android:padding="5dp"/>
+            android:layout_alignParentBottom="true">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_staff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface HistoryAPI {
@@ -38,4 +39,7 @@ public interface HistoryAPI {
 
     @POST("api/history/vehicleOut/{id}")
     Call<MessageResponse> vehicleOut(@Header("Authorization") String token, @Path("id") int id);
+
+    @PUT("api/history/lostCardCheckout/{id}")
+    Call<MessageResponse> confirmCheckoutLostCard(@Header("Authorization") String token,@Path("id")int id);
 }
