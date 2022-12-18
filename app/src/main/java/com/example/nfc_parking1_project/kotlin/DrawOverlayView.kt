@@ -3,9 +3,11 @@ package com.example.nfc_parking1_project.kotlin
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.nfc_parking1_project.R
+import com.example.nfc_parking1_project.helper.ConvertTextLicense
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.*
 import kotlin.math.max
@@ -58,20 +60,27 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
             val left = boundingBox.left * scaleFactor
             val right = boundingBox.right * scaleFactor
 
-            if(top >0 && bottom>0){
+            if (top > 0 && bottom > 0) {
                 val drawableRect = RectF(left, top, right, bottom)
                 canvas.drawRect(drawableRect, boxPaint)
-                drawableRect.top
                 // Create text to display alongside detected objects
-                val drawableText =
-                    result.categories[0].label + " " +
-                            String.format("%.2f", result.categories[0].score)
+                var drawableText = ""
+                if (ConvertTextLicense.isDetected) {
+                    drawableText = ConvertTextLicense.getTextRecognize();
+                    Log.d("DrawOverlay",drawableText);
 
-                // Draw rect behind display text
+                }
                 textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
                 val textWidth = bounds.width()
                 val textHeight = bounds.height()
-                canvas.clipRect(boundingBox);
+//                }
+//                val drawableText =
+//                    result.categories[0].label + " " +
+//                            String.format("%.2f", result.categories[0].score)
+
+                // Draw rect behind display text
+
+//                canvas.clipRect(boundingBox);
                 canvas.drawRect(
                     left,
                     top,
@@ -80,6 +89,7 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
                     textBackgroundPaint
                 )
 
+
                 // Draw text for detected object
                 canvas.drawText(drawableText, left, top + bounds.height(), textPaint)
             }
@@ -87,6 +97,7 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
 
         }
     }
+
     fun setResults(
         detectionResults: MutableList<Detection>,
         imageHeight: Int,
@@ -98,7 +109,8 @@ class DrawOverlayView(context: Context?, attrs: AttributeSet?) : View(context, a
         // the size that the captured images will be displayed.
         scaleFactor = max(width * 1f / imageWidth, height * 1f / imageHeight)
     }
+
     companion object {
-        private const val BOUNDING_RECT_TEXT_PADDING = 1
+        private const val BOUNDING_RECT_TEXT_PADDING = 8
     }
 }
