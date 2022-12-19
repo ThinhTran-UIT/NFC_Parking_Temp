@@ -21,6 +21,7 @@ import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.activity.RegisterStaff;
 import com.example.nfc_parking1_project.adapter.UserAdapter;
 import com.example.nfc_parking1_project.api.UserAPI;
+import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.kotlin.ScanActivityKotlin;
 import com.example.nfc_parking1_project.model.User;
 
@@ -38,7 +39,6 @@ public class StaffFragment extends Fragment {
     private RecyclerView rcvUser;
     private UserAdapter userAdapter;
     private TextView numberStaff;
-    private String token;
     private SearchView searchBar;
     private SwipeRefreshLayout swipeUser;
     public StaffFragment() {
@@ -48,16 +48,6 @@ public class StaffFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_staff, container, false);
-        //Get authorize token
-        Bundle bundle = this.getArguments();
-        try {
-            if (bundle != null) {
-                token = bundle.getString("token");
-            }
-            Log.d(TAG, token);
-        } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
-        }
         //Button Register user(staff)
         Button btnRegister = view.findViewById(R.id.btn_add_user);
         mainActivity = (MainActivity) getActivity();
@@ -65,7 +55,6 @@ public class StaffFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), RegisterStaff.class);
-                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -82,7 +71,7 @@ public class StaffFragment extends Fragment {
         });*/
         setUpSearch(view);
         rcvUser = (RecyclerView) view.findViewById(R.id.rcv_staff);
-        userAdapter = new UserAdapter(this.getContext(),token);
+        userAdapter = new UserAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
         rcvUser.setLayoutManager(linearLayoutManager);
 //        userAdapter.setData(getListData());
@@ -120,7 +109,7 @@ public class StaffFragment extends Fragment {
     }
 
     private void callApiGetAllStaff() {
-        UserAPI.userApi.getAllUser(token).enqueue(new Callback<List<User>>() {
+        UserAPI.userApi.getAllUser(Constant.TOKEN).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.code() == 200) {

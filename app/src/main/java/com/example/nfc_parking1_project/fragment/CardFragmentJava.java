@@ -1,25 +1,24 @@
 package com.example.nfc_parking1_project.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.nfc_parking1_project.R;
-import com.example.nfc_parking1_project.activity.AddCardActivity;
 import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.adapter.CardAdapter;
 import com.example.nfc_parking1_project.api.CardAPI;
+import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.model.Card;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CardFragment extends Fragment {
+public class CardFragmentJava extends Fragment {
 
     final static String TAG = "CardFragment";
     MainActivity mainActivity;
@@ -37,25 +36,21 @@ public class CardFragment extends Fragment {
     private CardAdapter cardAdapter;
     private List<Card> cardList;
     private TextView cardNumber;
-    private String token;
     private SwipeRefreshLayout swipeCard;
-    public CardFragment() {
+
+    public CardFragmentJava() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Get authorize token
-        Bundle bundle = this.getArguments();
-        try {
-            if (bundle != null) {
-                token = bundle.getString("token");
-            }
-            Log.d(TAG, token);
-        } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
-        }
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_card, null);
         cardList = new ArrayList<>();
@@ -91,7 +86,7 @@ public class CardFragment extends Fragment {
         });
     }
     private void callApiGetCard() {
-        CardAPI.cardApi.getCards(token).enqueue(new Callback<List<Card>>() {
+        CardAPI.cardApi.getCards(Constant.TOKEN).enqueue(new Callback<List<Card>>() {
             @Override
             public void onResponse(Call<List<Card>> call, Response<List<Card>> response) {
                 try {

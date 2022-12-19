@@ -46,10 +46,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private Context mContext;
     private List<User> mListUser;
     private List<User> mListUserOld;
-    private String token;
-    public UserAdapter(Context mContext,String token) {
+    public UserAdapter(Context mContext) {
         this.mContext = mContext;
-        this.token=token;
+
     }
 
     @NonNull
@@ -193,7 +192,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                         auth.setPhoneNumber(userPhoneNumber);
                         auth.setNewPassword(tvNewPassword.getText().toString());
                         Log.d("ResetPasswordDialog",auth.toString());
-                        Log.d("ResetPasswordDialog",token);
                         resetStaffPassword(auth);
                     }
                 }
@@ -204,7 +202,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private void resetStaffPassword(Auth auth)
     {
         try{
-            UserAPI.userApi.resetStaffPassword(token,auth).enqueue(new Callback<MessageResponse>() {
+            UserAPI.userApi.resetStaffPassword(Constant.TOKEN,auth).enqueue(new Callback<MessageResponse>() {
                 @Override
                 public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                     try

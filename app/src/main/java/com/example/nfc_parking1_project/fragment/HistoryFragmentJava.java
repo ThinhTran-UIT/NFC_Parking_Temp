@@ -4,8 +4,6 @@ package com.example.nfc_parking1_project.fragment;
 
 
 import android.app.Dialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +31,7 @@ import com.example.nfc_parking1_project.activity.MainActivity;
 import com.example.nfc_parking1_project.activity.MembershipActivity;
 import com.example.nfc_parking1_project.adapter.HistoryAdapter;
 import com.example.nfc_parking1_project.api.HistoryAPI;
+import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.model.History;
 
 import java.util.List;
@@ -41,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragmentJava extends Fragment {
 
     final static String TAG = "HistoryFragment";
     MainActivity mainActivity;
@@ -55,9 +54,8 @@ public class HistoryFragment extends Fragment {
     private HistoryAdapter vehicleAdapter;
     private TextView countHistory;
     private List<History> histories;
-    private String token;
     private SearchView searchBar;
-    public HistoryFragment() {
+    public HistoryFragmentJava() {
         // Required empty public constructor
     }
 
@@ -66,16 +64,6 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_history, null);
-        //Get authorize token
-        Bundle bundle = this.getArguments();
-        try {
-            if (bundle != null) {
-                token = bundle.getString("token");
-            }
-            Log.d(TAG, token);
-        } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
-        }
         Button btnMembership = root.findViewById(R.id.btn_membership);
         countHistory = root.findViewById(R.id.tv_first);
         mainActivity = (MainActivity) getActivity();
@@ -86,7 +74,6 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MembershipActivity.class);
-                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -105,7 +92,7 @@ public class HistoryFragment extends Fragment {
 
 
         rcvVehicle = (RecyclerView) root.findViewById(R.id.rcv_vehicle);
-        vehicleAdapter = new HistoryAdapter(this.getContext(),token);
+        vehicleAdapter = new HistoryAdapter(this.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false);
         rcvVehicle.setLayoutManager(linearLayoutManager);
         rcvVehicle.setAdapter(vehicleAdapter);
@@ -130,7 +117,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void callApiGetHistories() {
-        HistoryAPI.historyApi.getHistories(token).enqueue(new Callback<List<History>>() {
+        HistoryAPI.historyApi.getHistories(Constant.TOKEN).enqueue(new Callback<List<History>>() {
             @Override
             public void onResponse(Call<List<History>> call, Response<List<History>> response) {
                 Log.d("History Fragment", "On Response");
@@ -155,7 +142,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void getCurrentHistories() {
-        HistoryAPI.historyApi.getCurrentHistory(token).enqueue(new Callback<List<History>>() {
+        HistoryAPI.historyApi.getCurrentHistory(Constant.TOKEN).enqueue(new Callback<List<History>>() {
             @Override
             public void onResponse(Call<List<History>> call, Response<List<History>> response) {
                 if (response.code() == 200) {
@@ -256,7 +243,7 @@ public class HistoryFragment extends Fragment {
 
 
     private void getLostCardHistories() {
-        HistoryAPI.historyApi.getLostCardHistory(token).enqueue(new Callback<List<History>>() {
+        HistoryAPI.historyApi.getLostCardHistory(Constant.TOKEN).enqueue(new Callback<List<History>>() {
             @Override
             public void onResponse(Call<List<History>> call, Response<List<History>> response) {
                 if (response.code() == 200) {
