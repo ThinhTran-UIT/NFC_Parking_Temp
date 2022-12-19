@@ -67,32 +67,10 @@
             android:textSize="15sp" />
 
         <ImageView
-            android:id="@+id/img_lost"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_below="@id/img_watch_out"
-            android:layout_marginStart="12dp"
-            android:padding="2dp"
-            android:src="@drawable/icon_lost" />
-
-        <TextView
-            android:id="@+id/tv_time_report_lost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_time_out"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="13dp"
-            android:layout_toEndOf="@id/img_card"
-            android:fontFamily="@font/quicksand_medium"
-            android:text="Time report lost:"
-            android:textColor="@color/blue"
-            android:textSize="15sp" />
-
-        <ImageView
             android:id="@+id/img_card"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_below="@id/img_lost"
+            android:layout_below="@id/img_watch_out"
             android:layout_marginStart="12dp"
             android:src="@drawable/icon_nfc_card" />
 
@@ -100,7 +78,7 @@
             android:id="@+id/tv_card_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_time_report_lost"
+            android:layout_below="@id/tv_time_out"
             android:layout_marginStart="15dp"
             android:layout_marginTop="13dp"
             android:layout_toEndOf="@id/img_card"
@@ -123,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_card_id"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="17dp"
             android:layout_toEndOf="@+id/img_badge_in"
             android:fontFamily="@font/quicksand_medium"
             android:text="Confirm Get-In: Tran Duc Thinh"
@@ -151,11 +129,33 @@
             android:textColor="@color/blue"
             android:textSize="15sp" />
 
+        <ImageView
+            android:id="@+id/img_lost"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/img_badge_out"
+            android:layout_marginStart="12dp"
+            android:padding="2dp"
+            android:src="@drawable/icon_lost" />
+
+        <TextView
+            android:id="@+id/tv_time_report_lost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_staff_confirm_getout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@id/img_card"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="Time report lost:"
+            android:textColor="@color/blue"
+            android:textSize="15sp" />
+
         <Button
             android:id="@+id/btn_report_lost"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_staff_confirm_getout"
+            android:layout_below="@+id/tv_time_report_lost"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@drawable/button_bg_red"

@@ -62,10 +62,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_username"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/img_phone"
             android:fontFamily="@font/quicksand_medium"
-            android:text="" />
+            android:text=""
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_role"
@@ -75,7 +76,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/img_location"
-            android:text="" />
+            android:fontFamily="@font/quicksand_medium"
+            android:text=""
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btn_edit"
