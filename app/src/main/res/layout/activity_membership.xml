@@ -81,8 +81,8 @@
         android:id="@+id/rlt_time_visit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
+        android:layout_marginStart="15dp"
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_gift">
@@ -92,56 +92,64 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/icon_time_visit" />
+            android:background="@drawable/icon_time_visit"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <TextView
             android:id="@+id/tv_time_visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
             android:layout_toEndOf="@+id/img_time_visit"
             android:fontFamily="@font/quicksand_medium"
             android:text="Time visits:"
             android:textColor="@color/blue"
             android:textSize="17sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rlt_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="15dp"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rlt_time_visit">
+
         <ImageView
             android:id="@+id/img_point"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/medal" />
+            android:background="@drawable/medal"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="25dp"
+            android:layout_toEndOf="@+id/img_point"
             android:fontFamily="@font/quicksand_medium"
-            android:text="Points reward: "
+            android:text="Points reward: 3 points"
             android:textColor="@color/blue"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_toEndOf="@+id/img_point"
-            />
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/tv_point"
+            android:background="@drawable/icon_reset" />
     </RelativeLayout>
 
     <TextView
