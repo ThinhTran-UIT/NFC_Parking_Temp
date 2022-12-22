@@ -136,7 +136,7 @@
             android:layout_marginStart="25dp"
             android:layout_toEndOf="@+id/img_point"
             android:fontFamily="@font/quicksand_medium"
-            android:text="Points reward: 3 points"
+            android:text=""
             android:textColor="@color/blue"
             android:textSize="17sp"
             android:textStyle="bold"

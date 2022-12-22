@@ -55,6 +55,7 @@ public class ProfileFragment extends Fragment {
     private Button btnConfirmEdit;
     private String token;
     private int userId;
+    private static User user = new User();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -172,12 +173,13 @@ public class ProfileFragment extends Fragment {
 
 
     private void callApiGetProfile(String token) {
+        Log.d(TAG, "get profile");
         AuthAPI.authApi.getUserProfile(token).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 try {
                     if (response.code() == 200) {
-                        User user = response.body();
+                        user = response.body();
                         Log.d(TAG, user.toString());
                         userId = user.getId();
                         tvProfileName.setText(user.getName());
