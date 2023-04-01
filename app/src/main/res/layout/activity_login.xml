@@ -21,28 +21,21 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/top_background" />
 
-        <!--<ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/line2" />-->
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="Hi\nPlease Login"
+        android:layout_marginTop="170dp"
+        android:fontFamily="@font/quicksand_medium"
+        android:text="LOGIN"
+        android:textColor="@color/blue"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:fontFamily="@font/quicksand_medium"
-        android:textColor="@color/blue"
-        android:layout_marginTop="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -64,21 +57,22 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:elevation="5dp"
                 android:background="@drawable/white_corner_background"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_email"
+                    android:id="@+id/tv_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Email"
+                    android:text="Phone number"
                     android:textColor="@color/blue"/>
 
                 <EditText
-                    android:id="@+id/edt_email"
+                    android:id="@+id/edt_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
@@ -87,8 +81,8 @@
                     android:ems="10"
                     android:background="@drawable/edittext_bg_green"
                     android:paddingStart="10dp"
-                    android:hint="Enter email"
-                    android:inputType="textEmailAddress"
+                    android:hint="Enter phone number"
+                    android:inputType="phone"
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"/>
 
@@ -118,26 +112,33 @@
                     android:textColorHint="@color/white"/>
 
                 <TextView
-                    android:id="@+id/tv_forgot_pass"
+                    android:id="@+id/tv_login_notify"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Forgot Password ?"
-                    android:gravity="center_horizontal"/>
-
-                <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="24dp"
                     android:layout_marginTop="10dp"
-                    android:text="LOG IN"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/button_confirm_bg"/>
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textColor="@color/red" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginTop="10dp"
+                        android:text="LOG IN"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/button_confirm_bg"/>
+
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

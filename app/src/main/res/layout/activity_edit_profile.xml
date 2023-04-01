@@ -66,6 +66,7 @@
                 android:padding="10dp"
                 android:inputType="textPersonName"
                 android:hint="Enter your name"
+
                 android:textColor="@color/black"/>
 
             <TextView

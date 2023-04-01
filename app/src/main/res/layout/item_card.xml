@@ -29,34 +29,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/img_location"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="10dp"
-            android:text="Card ID: 1237498592"
+            android:text=""
             android:textStyle="bold"
             android:fontFamily="@font/quicksand_medium"/>
 
         <TextView
             android:id="@+id/tv_card_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/img_location"
-            android:layout_below="@+id/tv_card_id"
-            android:layout_marginStart="0dp"
-            android:text="Report Lost at: 15/9/2022 15:09:02"
-            android:textStyle="bold"
-            android:fontFamily="@font/quicksand_medium"/>
-
-        <Button
-            android:id="@+id/btn_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:padding="10dp"
             android:background="@drawable/button_bg_red"
-            android:text="Restore"
-            android:textSize="10dp"
+            android:text="Available"
+            android:textSize="12dp"
             android:fontFamily="@font/quicksand_medium"/>
     </RelativeLayout>
 

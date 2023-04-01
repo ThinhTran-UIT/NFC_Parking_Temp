@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".kotlin.ScanActivityKotlin" xmlns:tools="http://schemas.android.com/tools">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scan_activity">
+                <TextView
+                    android:id="@+id/tv_title_scan_page"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/primary_color"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:paddingTop="2dp"
+                    android:text="Scan License PLate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.camera.view.PreviewView
+                    android:orientation="horizontal"
+                    android:id="@+id/camera_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:scaleType="fillStart">
+
+                </androidx.camera.view.PreviewView>
+                <com.example.nfc_parking1_project.kotlin.DrawOverlayView
+                    android:id="@+id/overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="330dp"
+                    android:layout_height="480dp"
+                    android:alpha="0.15"
+                    android:background="@color/grey"
+                    app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_scan_page">
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="330dp"
+                    android:layout_height="480dp"
+                    android:src="@drawable/camera_focus"
+                    app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_scan_page"/>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="245dp"
+                    android:alpha="0.6"
+                    android:background="@color/grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
+                    tools:ignore="MissingConstraints">
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
+                    tools:ignore="MissingConstraints"
+                    android:paddingBottom="30dp">
+
+                        <TextView
+                            android:id="@+id/tv_notify_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/red"
+                            android:textStyle="bold"
+                            android:layout_marginTop="25dp"
+                            android:layout_centerHorizontal="true"/>
+
+                        <Button
+                            android:id="@+id/btn_rescan"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/icon_rescan"
+                            android:layout_marginStart="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/btn_rescan"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="RE-SCAN"
+                            android:textColor="@color/blue"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_plateId_result"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_notify_scan"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/rounded_corner2"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:gravity="center"
+                            android:text=""
+                            android:textSize="35sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_cardId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_below="@+id/tv_plateId_result"
+                            android:layout_centerHorizontal="true">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_toStartOf="@+id/tv_card_id"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@drawable/icon_nfc_card"/>
+
+                                <TextView
+                                    android:id="@+id/tv_card_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="31F2462D6A457F326A5"
+                                    android:layout_marginTop="1dp"
+                                    android:textColor="@color/orange"
+                                    android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_exit"
+                            android:layout_width="150dp"
+                            android:layout_height="55dp"
+                            android:layout_below="@+id/layout_cardId"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/button_exit_bg"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="EXIT"
+                            android:textColor="@color/blue"
+                            android:textSize="20sp" />
+
+                        <Button
+                            android:id="@+id/btn_confirm"
+                            android:layout_width="150dp"
+                            android:layout_height="55dp"
+                            android:layout_below="@+id/layout_cardId"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/button_confirm_bg"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="CONFIRM"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
