@@ -53,7 +53,6 @@ public class ProfileFragment extends Fragment {
     private TextView tvNotifySuccess;
     private Button btnConfirmChangePassword;
     private Button btnConfirmEdit;
-    private String token;
     private int userId;
     private static User user = new User();
 
@@ -98,14 +97,7 @@ public class ProfileFragment extends Fragment {
                 changePasswordDialog.show();
             }
         });
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            token = bundle.getString("token");
-        }
-        Log.d(TAG, token);
-        if (token != null) {
-            callApiGetProfile(token);
-        }
+
         return view;
     }
 
@@ -210,7 +202,7 @@ public class ProfileFragment extends Fragment {
 
 
     public void callApiEditProfile(int id, User user) {
-        UserAPI.userApi.updateUserInfo(token, id, user).enqueue(new Callback<MessageResponse>() {
+        UserAPI.userApi.updateUserInfo(Constant.TOKEN, id, user).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 try {
@@ -242,7 +234,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void changePassword(Auth request) {
-        UserAPI.userApi.changePassword(token, request).enqueue(new Callback<MessageResponse>() {
+        UserAPI.userApi.changePassword(Constant.TOKEN, request).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 if (response.code() == 200) {
@@ -266,7 +258,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logOut() {
-        AuthAPI.authApi.logOut(token).enqueue(new Callback<MessageResponse>() {
+        AuthAPI.authApi.logOut(Constant.TOKEN).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);

@@ -42,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this.getApplicationContext();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         setContentView(R.layout.activity_login);
         tvNotifyLogin = findViewById(R.id.tv_login_notify);
         tvPhoneNumber =  findViewById(R.id.edt_phone_number);
@@ -115,9 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         User user = authRespone.getUser();
                         Constant.CURRENT_ROLE=user.getRole();
-                        intent.putExtra("token", "Bearer " + authRespone.getToken());
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
+                        Constant.TOKEN = "Bearer "+ authRespone.getToken();
+                       startActivity(intent);
                         finish();
                     }
                     else{

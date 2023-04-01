@@ -1,7 +1,5 @@
 package com.example.nfc_parking1_project.activity;
 
-import static android.nfc.NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -11,54 +9,42 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.nfc.FormatException;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.nfc.TagLostException;
-import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.nfc_parking1_project.R;
 import com.example.nfc_parking1_project.api.CardAPI;
 import com.example.nfc_parking1_project.api.MessageResponse;
-import com.example.nfc_parking1_project.fragment.CardFragment;
-import com.example.nfc_parking1_project.fragment.HistoryFragment;
-import com.example.nfc_parking1_project.fragment.ProfileFragment;
-import com.example.nfc_parking1_project.fragment.StaffFragment;
+import com.example.nfc_parking1_project.helper.Constant;
 import com.example.nfc_parking1_project.helper.ConvertCardID;
 import com.example.nfc_parking1_project.kotlin.ScanActivityKotlin;
 import com.example.nfc_parking1_project.model.Card;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.GsonBuilder;
 
 import org.opencv.android.OpenCVLoader;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends FragmentActivity   {
+public class MainActivity extends AppCompatActivity {
     public static final String ERROR_DETECTED = "No NFC Detected";
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
@@ -66,11 +52,11 @@ public class MainActivity extends FragmentActivity   {
     BottomNavigationView bottomNavigationView;
     PendingIntent pendingIntent;
     Tag NfcTag;
-    String token;
+
     private String cardId;
     private Intent intentScan;
     private Intent intentOut;
-    private NfcAdapter nfcAdapter=null;
+    private NfcAdapter nfcAdapter = null;
     private String TAG = "MainActivity";
     private IntentFilter[] writeTagFilters;
     private Dialog addCardDialog;
@@ -80,18 +66,29 @@ public class MainActivity extends FragmentActivity   {
     private TextView tvCardStatusDialog;
     private Button btnExitAddCardDialog;
     private PendingIntent mPendingIntent;
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
     private Button btnRecovery;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // set up navigation
+
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        appBarConfiguration = new AppBarConfiguration.
+                Builder(R.id.navigation_card, R.id.navigation_history, R.id.navigation_staff, R.id.navigation_profile)
+                .build();
+        NavigationUI.setupWithNavController(bottomNavigationView,navController);
+        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
+
         ContextCompat.getMainExecutor(this);
-        try {
-            token = getIntent().getStringExtra("token");
-            Log.d(TAG, getIntent().getStringExtra("token"));
-        } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
         }
         //Set up diaglog add card
         setUpDialogAddCard();
@@ -121,41 +118,6 @@ public class MainActivity extends FragmentActivity   {
 //        pendingIntent.cancel();
         onNewIntent(getIntent());
         //Bottom Navigation Bar
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        Bundle bundle = new Bundle();
-        bundle.putString("token", token);
-        Fragment defaultFragment = new HistoryFragment();
-        defaultFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, defaultFragment).commit();
-        bottomNavigationView.setSelectedItemId(R.id.nav_history);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
-                switch (item.getItemId()) {
-                    case R.id.nav_history:
-                        fragment = new HistoryFragment();
-                        fragment.setArguments(bundle);
-                        break;
-                    case R.id.nav_card:
-                        fragment = new CardFragment();
-                        fragment.setArguments(bundle);
-                        break;
-                    case R.id.nav_staff:
-                        fragment = new StaffFragment();
-                        fragment.setArguments(bundle);
-                        break;
-                    case R.id.nav_profile:
-                        fragment = new ProfileFragment();
-                        fragment.setArguments(bundle);
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
-                return true;
-            }
-        });
-
-
     }
 
 
@@ -198,39 +160,36 @@ public class MainActivity extends FragmentActivity   {
         //nfcAdapter.enableForegroundDispatch(context,pendingIntent,
         //                                    intentFilterArray,
         //                                    techListsArray)
-        if(nfcAdapter!=null)
-        {
+        if (nfcAdapter != null) {
 //            nfcAdapter.enableReaderMode(this,
 //                    this,
 //                    NfcAdapter.FLAG_READER_NFC_A,
 //                    null);
 //            Log.d(TAG, "On Create enable Reader");
-            nfcAdapter.enableForegroundDispatch(this,pendingIntent,null,null);
+            nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
         }
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
         String action = intent.getAction();
-        try{
-            Log.e(TAG,action);
-        }catch (Exception e)
-        {
-            Log.e(TAG,e.getMessage());
+        try {
+            Log.e(TAG, action);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
 
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
-               || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
-                || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action))
-        {
+                || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             cardId = ConvertCardID.bytesToHex(tag.getId());
-            Log.d(TAG,cardId);
+            Log.d(TAG, cardId);
             callApiGetCard(cardId);
-        }
-        else{
-            Log.d(TAG,"Cannot detect");
+        } else {
+            Log.d(TAG, "Cannot detect");
         }
     }
 
@@ -250,7 +209,7 @@ public class MainActivity extends FragmentActivity   {
 
 
     public void callApiGetCard(String cardId) {
-        CardAPI.cardApi.getOneCard(token, cardId).enqueue(new Callback<Card>() {
+        CardAPI.cardApi.getOneCard(Constant.TOKEN, cardId).enqueue(new Callback<Card>() {
             @Override
             public void onResponse(Call<Card> call, Response<Card> response) {
                 try {
@@ -262,7 +221,7 @@ public class MainActivity extends FragmentActivity   {
                         Log.d(TAG, cardStatus);
                         Bundle bundle = new Bundle();
                         bundle.putString("cardId", cardId);
-                        bundle.putString("token", token);
+                        bundle.putString("token", Constant.TOKEN);
                         switch (cardStatus) {
                             case "AVAILABLE":
                                 intentScan = new Intent(MainActivity.this, ScanActivityKotlin.class);
@@ -385,8 +344,7 @@ public class MainActivity extends FragmentActivity   {
         });
     }
 
-    private void setUpDialogRestoreCard()
-    {
+    private void setUpDialogRestoreCard() {
         restoreCardDialog = new Dialog(this);
         restoreCardDialog.setContentView(R.layout.dialog_restore_card);
         restoreCardDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -399,42 +357,40 @@ public class MainActivity extends FragmentActivity   {
             }
         });
     }
-    private void recoveryCard(String cardId){
-        CardAPI.cardApi.recoveryCard(token,cardId).enqueue(new Callback<MessageResponse>() {
+
+    private void recoveryCard(String cardId) {
+        CardAPI.cardApi.recoveryCard(Constant.TOKEN, cardId).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                try{
-                    if(response.code()==200)
-                    {
+                try {
+                    if (response.code() == 200) {
                         MessageResponse messageResponse = response.body();
-                        if(messageResponse.getSuccess()){
+                        if (messageResponse.getSuccess()) {
                             Toast.makeText(getApplicationContext(), messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             restoreCardDialog.cancel();
-                        }  else{
+                        } else {
                             Toast.makeText(MainActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            Log.e(TAG,response.message());
+                            Log.e(TAG, response.message());
                         }
 
-                    }
-                    else{
+                    } else {
                         Toast.makeText(MainActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG,response.message());
+                        Log.e(TAG, response.message());
                     }
-                }catch (Exception e)
-                {
-                    Log.e(TAG,e.getMessage());
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-                Log.e(TAG,t.getMessage());
+                Log.e(TAG, t.getMessage());
             }
         });
     }
 
     private void addCard(Card card) {
-        CardAPI.cardApi.createCard(token, card).enqueue(new Callback<MessageResponse>() {
+        CardAPI.cardApi.createCard(Constant.TOKEN, card).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 if (response.code() == 200) {

@@ -21,6 +21,7 @@ public class Constant {
     public static String ROLE_STAFF = "EMP";
     public static String CURRENT_ROLE="";
     public static String CARD_STATUS_LOST = "LOST";
+    public static String TOKEN ="";
 }
 
 

@@ -43,11 +43,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
     Dialog vehicleDialog;
     private Context mContext;
     private List<History> histories;
-    private String token;
     private List<History> oldHistories;
-    public HistoryAdapter(Context mContext,String token) {
+    public HistoryAdapter(Context mContext) {
         this.mContext = mContext;
-        this.token = token;
     }
 
     @NonNull
@@ -221,7 +219,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
 
     private void reportLostCard(String id,int historyId)
     {
-        CardAPI.cardApi.reportLost(token,id,historyId).enqueue(new Callback<MessageResponse>() {
+        CardAPI.cardApi.reportLost(Constant.TOKEN,id,historyId).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 try {
@@ -255,7 +253,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VehicleV
         });
     }
     private void confirmCheckoutLostCard(int historyId) {
-        HistoryAPI.historyApi.confirmCheckoutLostCard(token, historyId).enqueue(new Callback<MessageResponse>() {
+        HistoryAPI.historyApi.confirmCheckoutLostCard(Constant.TOKEN, historyId).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 try {
